@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>计算机眼中世界 - Hexo</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Hexo"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Hexo"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="计算机眼中的数字  二进制数的换算  通常再生活中我们所使用的是十进制数，数字都是0~9这十个数字，除开数学领域外，普通人几乎不会涉及到其他进制的应用，正因为十进制在生活中的使用的快捷性和实用性，人类对其的应用非常广泛。 而对于计算机来说，它认识哪些东西呢？ 相信大家都知道，计算机中的一切数据其实都是由1和0组成的，也就是说计算机所认识的数字只有1和0，与我们习惯使用十进制数一样，"><meta property="og:type" content="blog"><meta property="og:title" content="计算机眼中世界"><meta property="og:url" content="http://icarus.xinsong.xyz/2022/12/07/1.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9C%BC%E4%B8%AD%E7%9A%84%E4%B8%96%E7%95%8C/"><meta property="og:site_name" content="Hexo"><meta property="og:description" content="计算机眼中的数字  二进制数的换算  通常再生活中我们所使用的是十进制数，数字都是0~9这十个数字，除开数学领域外，普通人几乎不会涉及到其他进制的应用，正因为十进制在生活中的使用的快捷性和实用性，人类对其的应用非常广泛。 而对于计算机来说，它认识哪些东西呢？ 相信大家都知道，计算机中的一切数据其实都是由1和0组成的，也就是说计算机所认识的数字只有1和0，与我们习惯使用十进制数一样，"><meta property="og:locale" content="en_US"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021541789.png"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021542000.png"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021542154.png"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021542736.png"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021542468.png"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021542024.png"><meta property="article:published_time" content="2022-12-07T14:41:53.000Z"><meta property="article:modified_time" content="2022-12-07T14:59:52.781Z"><meta property="article:author" content="NcPhoton"><meta property="article:tag" content="c"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021541789.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://icarus.xinsong.xyz/2022/12/07/1.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9C%BC%E4%B8%AD%E7%9A%84%E4%B8%96%E7%95%8C/"},"headline":"计算机眼中世界","image":["https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021541789.png","https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021542000.png","https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021542154.png","https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021542736.png","https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021542468.png","https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021542024.png"],"datePublished":"2022-12-07T14:41:53.000Z","dateModified":"2022-12-07T14:59:52.781Z","author":{"@type":"Person","name":"NcPhoton"},"publisher":{"@type":"Organization","name":"Hexo","logo":{"@type":"ImageObject","url":"http://icarus.xinsong.xyz/img/logo.svg"}},"description":"计算机眼中的数字  二进制数的换算  通常再生活中我们所使用的是十进制数，数字都是0~9这十个数字，除开数学领域外，普通人几乎不会涉及到其他进制的应用，正因为十进制在生活中的使用的快捷性和实用性，人类对其的应用非常广泛。 而对于计算机来说，它认识哪些东西呢？ 相信大家都知道，计算机中的一切数据其实都是由1和0组成的，也就是说计算机所认识的数字只有1和0，与我们习惯使用十进制数一样，"}</script><link rel="canonical" href="http://icarus.xinsong.xyz/2022/12/07/1.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9C%BC%E4%B8%AD%E7%9A%84%E4%B8%96%E7%95%8C/"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const $tabMenu = document.querySelector(`a[href="${location.hash}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(location.hash);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.svg" alt="Hexo" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2022-12-07T14:41:53.000Z" title="2022/12/7 22:41:53">2022-12-07</time></span><span class="level-item">Updated&nbsp;<time dateTime="2022-12-07T14:59:52.781Z" title="2022/12/7 22:59:52">2022-12-07</time></span><span class="level-item"><a class="link-muted" href="/categories/c/">c</a></span><span class="level-item">24 minutes read (About 3527 words)</span></div></div><h1 class="title is-3 is-size-4-mobile">计算机眼中世界</h1><div class="content"><h2 id="计算机眼中的数字"><a href="#计算机眼中的数字" class="headerlink" title="计算机眼中的数字"></a>计算机眼中的数字</h2><p><img src="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021541789.png" alt="image-20220518225401943"></p>
+<ul>
+<li>二进制数的换算</li>
+</ul>
+<p>通常再生活中我们所使用的是十进制数，数字都是0~9这十个数字，除开数学领域外，普通人几乎不会涉及到其他进制的应用，正因为十进制在生活中的使用的快捷性和实用性，人类对其的应用非常广泛。</p>
+<p><strong>而对于计算机来说，它认识哪些东西呢？</strong></p>
+<p>相信大家都知道，计算机中的一切数据其实都是由1和0组成的，也就是说计算机所认识的数字只有1和0，与我们习惯使用十进制数一样， <span id="more"></span>计算机所使用的数字也与计算机的组成息息相关。电路可以说是计算机最重要的元件，而每一条电路都只有两种状态：开或者关，两种状态恰好与1和0相对应，这也就解释了计算机使用二进制的原因。</p>
+<h3 id="二进制数的换算"><a href="#二进制数的换算" class="headerlink" title="二进制数的换算"></a>二进制数的换算</h3><p>我们如果想将二进制数与十进制数互相转换，那该如何实现呢？</p>
+<p>下面我会用例子给大家说明<br>例：二进制数 ‘1010’ 如果转化为十进制数是多少呢？</p>
+<p>运用类比思想 ，我们可以想：十进制数例如 ‘121’</p>
+<p>个位上1的权重为10的零次方<br>十位上的权重为10的一次方<br>百位上的权重为10的二次方，于是可以表示为<br>1*10^2^+2 *10^1^+1 *10^0^ 运算结果是 121。</p>
+<p>所以对于‘1010’<br>最低为为第一位，则第n位的权重位2的n-1次方，于是可表示为<br>1 *2^3^+0 *2^2^+1 *2^1^ +0 *2^0^运算结果是 10。<br>即等于十进制的10.<br>而对于二进制数的各种运算就不做详细阐述了，运用类比的思想，将十进制数的运算方法照搬过来，其实也就是二进制数的运算方式了。</p>
+<h2 id="计算机的内存"><a href="#计算机的内存" class="headerlink" title="计算机的内存"></a>计算机的内存</h2><h3 id="内存的基本单位bit"><a href="#内存的基本单位bit" class="headerlink" title="内存的基本单位bit"></a>内存的基本单位bit</h3><p><strong>通常我们的电脑有32位计算机和64位计算机，而这里的‘位’到底是什么呢？</strong></p>
+<p>这里所说的位数其实是计算机的地址线根数，而我们知道每根地址线会存在两种状态，即正和负，这些所有的地址线的状态则可以表示为很多个二进制数。<br>在高中数学中我们学习过排列组合，因此不难知道，假如地址线有x根，则这些地址线状态总共就有2的x次方种（每一根有两种，x根的组合）.</p>
+<p>这里我们以32位计算机为例子：</p>
+<blockquote>
+<p>00000000000000000000000000000000<br>这里有32个0，代表32根地址线都处于负</p>
+</blockquote>
+<p>我们一直对其进行加1的操作</p>
+<blockquote>
+<p>00000000000000000000000000000000<br>(+1)<br>00000000000000000000000000000010<br>(+1)<br>                        …………<br>……<br>…<br>(+1)<br>11111111111111111111111111111111</p>
+<p>最终变成了32个1组成的二进制数<br>那这个数为多少呢？<br>根据排列组合的知识很容易的出其值为<br>2的32次方-1&#x3D;4294967295.</p>
+</blockquote>
+<h3 id="内存大小的换算"><a href="#内存大小的换算" class="headerlink" title="内存大小的换算"></a>内存大小的换算</h3><p>仍然以32位计算机为例，可以知道32位计算机可以表示从0到4294967295这么多的数字。</p>
+<p>在日常生活中，每户人都有属于自己的街道名称，门牌号等住址信息，这样就方便了我们寻找一个地址。</p>
+<p>计算机也是这样，计算机中的数据也会有一个自己的”地盘“，并且拥有明确的编号，像下面这样每一个编号都代表着一块空间，于是内存就被分配了编号和大小。</p>
+<table>
+<thead>
+<tr>
+<th>00000000000000000000000000000000</th>
+<th>0</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>00000000000000000000000000000001</td>
+<td>1</td>
+</tr>
+<tr>
+<td>00000000000000000000000000000010</td>
+<td>2</td>
+</tr>
+<tr>
+<td>…</td>
+<td>–</td>
+</tr>
+<tr>
+<td>11111111111111111111111111111110</td>
+<td>4294967294</td>
+</tr>
+<tr>
+<td>11111111111111111111111111111111</td>
+<td>4294967295</td>
+</tr>
+<tr>
+<td>–</td>
+<td>–</td>
+</tr>
+<tr>
+<td>而这里的每一个编号所代表的空间的大小就为1个byte（字节）</td>
+<td></td>
+</tr>
+<tr>
+<td>不同内存大小的换算如下：</td>
+<td></td>
+</tr>
+<tr>
+<td>1pb&#x3D;1024tb</td>
+<td></td>
+</tr>
+<tr>
+<td>1tb&#x3D;1024gb</td>
+<td></td>
+</tr>
+<tr>
+<td>1gb&#x3D;1024mb</td>
+<td></td>
+</tr>
+<tr>
+<td>1mb&#x3D;1024kb</td>
+<td></td>
+</tr>
+<tr>
+<td>1kb&#x3D;1024byte</td>
+<td></td>
+</tr>
+<tr>
+<td>1byte&#x3D;8bit</td>
+<td></td>
+</tr>
+<tr>
+<td>通过这样的计算方法也可以计算出32位计算机的内存大小约为4GB.</td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id="C语言是什么"><a href="#C语言是什么" class="headerlink" title="C语言是什么"></a>C语言是什么</h2><h3 id="一门语言"><a href="#一门语言" class="headerlink" title="一门语言"></a>一门语言</h3><p>既然是一门语言，那么如同日语、英语一样，是供人们之间交流的。</p>
+<p>计算机语言就是人和计算机交流的媒介，它使得我们可以命令计算机处理执行一些我们想让他做的事。</p>
+<h3 id="main函数-程序的入口"><a href="#main函数-程序的入口" class="headerlink" title="main函数-程序的入口"></a>main函数-程序的入口</h3><p>1.main函数一定要有<br>2.main函数在一个程序中有且只有一个<br>框架：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>接下来我们在VS2019环境下证实一下</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021542000.png" alt="image-20220518225416580"></p>
+<blockquote>
+<p>调试后直接跳到了主函数内部的第一个位置。</p>
+<p>据此，我们可以证明main函数的确是程序的入口。</p>
+</blockquote>
+<h2 id="常见数据类型"><a href="#常见数据类型" class="headerlink" title="常见数据类型"></a>常见数据类型</h2><p>如果我们想表示一个人的年龄，那么可以用一个整数来表示，那如果想表示一本书的价格呢？那是不是就该用一个小数来表示了呢？于是浮点型和整型的数据类型便诞生了。</p>
+<h3 id="整型"><a href="#整型" class="headerlink" title="整型"></a>整型</h3><table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>int</td>
+<td>整型</td>
+</tr>
+<tr>
+<td>char</td>
+<td>字符</td>
+</tr>
+<tr>
+<td>short</td>
+<td>短整型</td>
+</tr>
+<tr>
+<td>long</td>
+<td>长整型</td>
+</tr>
+<tr>
+<td>longlong</td>
+<td>超长整型</td>
+</tr>
+</tbody></table>
+<h3 id="浮点型"><a href="#浮点型" class="headerlink" title="浮点型"></a>浮点型</h3><table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>float</td>
+<td>单精度浮点型</td>
+</tr>
+<tr>
+<td>double</td>
+<td>双精度浮点型</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>注意：双精度浮点型精度更高</p>
+</blockquote>
+<h3 id="变量的定义方式"><a href="#变量的定义方式" class="headerlink" title="变量的定义方式"></a>变量的定义方式</h3><blockquote>
+<p>通常定义一个变量的方式为： 数据类型+变量名；</p>
+<p>以int为例，我们来定义一个名字为i的变量。</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> i=<span class="number">0</span>;<span class="comment">//使用int类型创建了一个变量i，</span></span><br><span class="line"><span class="comment">//i向内存申请了一块空间，空间名叫i</span></span><br><span class="line">i=<span class="number">10</span>;<span class="comment">//向i空间内放入整型10</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>于是一个类型为int，名称为i的变量就创建好并被赋值啦。</p>
+</blockquote>
+<blockquote>
+<p><strong>注意：C语言没有字符串类型</strong></p>
+</blockquote>
+<h2 id="常量和变量"><a href="#常量和变量" class="headerlink" title="常量和变量"></a>常量和变量</h2><h3 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h3><p><strong>常量即为不能改变的量</strong></p>
+<ul>
+<li>字面常量</li>
+<li>常变量</li>
+<li>标识符常量</li>
+<li>枚举常量</li>
+</ul>
+<h4 id="字面常量"><a href="#字面常量" class="headerlink" title="字面常量"></a>字面常量</h4><ul>
+<li>字面常量就是直接写出来的数</li>
+</ul>
+<blockquote>
+<p>例如：10，99等这样的数字</p>
+</blockquote>
+<h4 id="常变量"><a href="#常变量" class="headerlink" title="常变量"></a>常变量</h4><blockquote>
+<ul>
+<li><pre><code>常变量即被const修饰的变量
+</code></pre>
+ 例如：const int i&#x3D;9；&#x2F;&#x2F;  i 就不能再被赋予其他值了，我们来尝试一下：</li>
+</ul>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//const-常属性</span></span><br><span class="line">    <span class="type">const</span> <span class="type">int</span> i = <span class="number">9</span>;</span><br><span class="line">    i = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到这里已经报错了</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021542154.png" alt="image-20220518225426764"></p>
+<p>值得一提的是该定义方式下的变量为常变量，之所以叫常变量，是因为虽然不能再被赋值，但是 i 仍为变量，只不过具有了常属性，所以叫常变量。</p>
+<ul>
+<li>注意：这里的 i 不能作为定义数组时的数组元素个数[i]</li>
+</ul>
+<h4 id="标识符常量"><a href="#标识符常量" class="headerlink" title="标识符常量"></a>标识符常量</h4><ul>
+<li>标识符常量是由#define定义的常量</li>
+</ul>
+<blockquote>
+<p>例如：#define  MAX  10<br>即定义了MAX为常数 10 ，在程序中遇到MAX后会直接将MAX替换为10</p>
+<p>接下来我们来试试：</p>
+</blockquote>
+ <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAX 10</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, MAX);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>运行结果如下：</p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021542736.png" alt="image-20220518225434165"></p>
+<blockquote>
+<p>注意：这里的 a 能作为定义数组时的数组元素个数[a]</p>
+</blockquote>
+<h4 id="枚举常量"><a href="#枚举常量" class="headerlink" title="枚举常量"></a>枚举常量</h4><p>字面意思就可以知道”枚举“就是一一列举，并且由关键字enum修饰。</p>
+<p>接下来举一个例子：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">sex</span>        //枚举关键</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    MALE,		<span class="comment">//表示枚举出来的可能值</span></span><br><span class="line">    FEMALE,</span><br><span class="line">    neutrality</span><br><span class="line">&#125;;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="class"><span class="keyword">enum</span> <span class="title">sex</span> <span class="title">a</span> =</span> MALE;		<span class="comment">//给相应的变量赋值</span></span><br><span class="line">    <span class="class"><span class="keyword">enum</span> <span class="title">sex</span> <span class="title">b</span> =</span> FEMALE;</span><br><span class="line">    <span class="class"><span class="keyword">enum</span> <span class="title">sex</span> <span class="title">c</span> =</span> neutrality;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;a=%d\n&quot;</span>, a);		<span class="comment">//依次打印出变量的值</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;b=%d\n&quot;</span>, b);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;c=%d\n&quot;</span>, c);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>输出为：<br>a&#x3D;0<br>b&#x3D;1<br>c&#x3D;2<br>表明在枚举时系统会按照顺序依次从0开始对枚举出来的MALE&#x2F;FEMALE&#x2F;neutrality的赋值</p>
+</blockquote>
+<blockquote>
+<p>如果我们稍稍改变一下上面的代码，来看看它如何对枚举常量赋值。</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">sex</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    MALE,</span><br><span class="line">    FEMALE=<span class="number">2</span>,</span><br><span class="line">    neutrality</span><br><span class="line">&#125;;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="class"><span class="keyword">enum</span> <span class="title">sex</span> <span class="title">a</span> =</span> MALE;</span><br><span class="line">    <span class="class"><span class="keyword">enum</span> <span class="title">sex</span> <span class="title">b</span> =</span> FEMALE;</span><br><span class="line">    <span class="class"><span class="keyword">enum</span> <span class="title">sex</span> <span class="title">c</span> =</span> neutrality;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;a=%d\n&quot;</span>, a);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;b=%d\n&quot;</span>, b);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;c=%d\n&quot;</span>, c);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>输出依次为：<br>a&#x3D;0<br>b&#x3D;2<br>c&#x3D;3</p>
+</blockquote>
+<blockquote>
+<p>可以看出其赋值是依次递增1的，如果人为的给其赋值，则下一个仍然是递增一个1</p>
+</blockquote>
+<h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><ul>
+<li>全局变量</li>
+<li>局部变量</li>
+<li>变量的使用</li>
+</ul>
+<blockquote>
+<p>代码块— { }</p>
+</blockquote>
+<h4 id="全局变量"><a href="#全局变量" class="headerlink" title="全局变量"></a>全局变量</h4><p>全局变量—定义在块之外的变量</p>
+<h4 id="局部变量"><a href="#局部变量" class="headerlink" title="局部变量"></a>局部变量</h4><p>局部变量—定义在块之内的变量</p>
+<h4 id="变量的使用"><a href="#变量的使用" class="headerlink" title="变量的使用"></a>变量的使用</h4><blockquote>
+<p>接下来举一个例子来更好的认识全局变量和局部变量</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> a = <span class="number">0</span>;</span><br><span class="line"><span class="type">int</span> b = <span class="number">0</span>;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> x = <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> y = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>a和b是定义在{ }之外的叫做全局变量</p>
+<p>x和y是定义在{ }之内的叫做局部变量</p>
+</blockquote>
+<blockquote>
+<p>C语言规定：定义变量必须在当前代码块的最前面（C99之前）</p>
+</blockquote>
+<h4 id="变量的作用域和生命周期"><a href="#变量的作用域和生命周期" class="headerlink" title="变量的作用域和生命周期"></a>变量的作用域和生命周期</h4><p>生命周期大家都知道指的是事物的存在时间，人的生命周期是从出生到死亡，而在我们活着的这段时间里我们可以做很多事情，而当我们的生命周期结束——即死亡后，便彻底消失在了这世界上。因此，我们所创建的变量在内存中也有它的生命周期。</p>
+<blockquote>
+<p>在创建一个变量时就会占用一部分内存，这个变量的生命周期开始，而内存时有限的，我们不能只向内存索取，而不给予内存空间反馈，这样最终内存会耗尽。因此，在变量使用结束后我们会销毁这个变量，并将空间还给操作系统，这样，一个变量的生命周期就结束了</p>
+</blockquote>
+<p><strong>作用域</strong></p>
+<p>我仍然使用人来作为例子，在人处于生命周期内，也就是活着的时候，我们可以做很多事情，旅游、学习，甚至时改变世界，因此我们活着时，所处的世界就是我们的作用域……</p>
+<p>而当我们的生命结束，便无法对这个世界再产生影响，也就是脱离了我们的作用域了。</p>
+<blockquote>
+<p>局部变量也是这样，变量的作用域就是其所在的块内，在它的块内时，它处于生命周期中，并且可以发挥作用。</p>
+<p>因此局部变量的作用域：其所在的块内。</p>
+</blockquote>
+<blockquote>
+<p>全局变量就如同长生不老的神一般，世界创世之初就存在，只有这个世界消失了，它才会跟着消失。而对于全局变量来说它所处的世界就是一个工程。</p>
+<p>因此，全局变量作用域是整个工程。</p>
+<p><strong>总结：</strong></p>
+<p>1、局部变量的生命周期：进入作用域开始，出作用域结束<br>2、全局变量的作用域：整个工程</p>
+</blockquote>
+<h2 id="字符与字符串"><a href="#字符与字符串" class="headerlink" title="字符与字符串"></a>字符与字符串</h2><ul>
+<li>字符</li>
+<li>字符串</li>
+</ul>
+<h3 id="字符"><a href="#字符" class="headerlink" title="字符"></a>字符</h3><blockquote>
+<p>&#x3D;&#x3D;字符&#x3D;&#x3D;：被<font color =red>‘ ’</font>括起来的一个&#x3D;&#x3D;字母&#x3D;&#x3D;、&#x3D;&#x3D;数字&#x3D;&#x3D;或者是&#x3D;&#x3D;符号&#x3D;&#x3D;。<br>例：‘a’，’c’，‘#’ 这些都是字符</p>
+<ul>
+<li>可我们之前说了计算机只认识0和1两个数字，那么字符在计算机中是如何存储的呢？</li>
+</ul>
+</blockquote>
+<p>我们从计算机的数据的存储方式来说：</p>
+<blockquote>
+<p>数据在计算机上存储的时候，存储的是二进制的数，因此需要存储字符时，实际存储的是某一个数，也就是ASCII码值。</p>
+</blockquote>
+<h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h3><blockquote>
+<p>被<font color =red>” “</font>括起来的&#x3D;&#x3D;一串字符&#x3D;&#x3D;。</p>
+<p>例如：”hello world！“就是一个字符串。</p>
+<p>接下来我将会使用一个代码讲述字符串一个很容易忽视的细节</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">char</span> arr[] = <span class="string">&quot;hello&quot;</span>;</span><br><span class="line">    <span class="type">char</span> arr1[] = &#123; <span class="string">&#x27;h&#x27;</span>,<span class="string">&#x27;e&#x27;</span>,<span class="string">&#x27;l&#x27;</span>,<span class="string">&#x27;l&#x27;</span>,<span class="string">&#x27;o&#x27;</span> &#125;;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, <span class="keyword">sizeof</span>(arr));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, <span class="keyword">sizeof</span>(arr1));</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>运行结果输出为：</p>
+<p>6</p>
+<p>5</p>
+</blockquote>
+<blockquote>
+<p>通过上运行结果可看出可以看出，arr和arr1的大小是不同的。</p>
+<p>表面上看好像上面两个数组中存放的都是 ‘h’ ’e‘ ’l‘  ’l‘ ’o’ ，但我们通过调试可以看到：</p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021542468.png" alt="image-20220715212020205"></p>
+<blockquote>
+<p>arr比arr1这里多了一个’\0‘（终止字符)</p>
+</blockquote>
+<blockquote>
+<p>也就是说在字符串“hello”中实际在末尾还有一个’\0‘作为字符串结束的标志。</p>
+<p>那么就能解释在用sizeof对两个数组求大小时出现的大小不同的情况了。</p>
+</blockquote>
+<p>除此以外还有一种情况让我们值得思考：</p>
+<p>strlen函数是用于求出字符串的长度，并且不包括’\0‘，知道即可，目前不必深究。</p>
+<p>那就是利用strlen函数求出arr和arr1的字符串长度，代码如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">char</span> arr[] = <span class="string">&quot;hello&quot;</span>;</span><br><span class="line">    <span class="type">char</span> arr1[] = &#123; <span class="string">&#x27;h&#x27;</span>,<span class="string">&#x27;e&#x27;</span>,<span class="string">&#x27;l&#x27;</span>,<span class="string">&#x27;l&#x27;</span>,<span class="string">&#x27;o&#x27;</span>&#125;;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, <span class="built_in">strlen</span>(arr));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, <span class="built_in">strlen</span>(arr1));</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>运行结果输出为：</p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021542024.png" alt="image-20220518225450663"></p>
+<blockquote>
+<p>这里又是为什么呢？明明strlen求的是字符串的长度，与’\0‘无关了，为什么还会得出一个相差如此大的结果呢？</p>
+<p>这就要从strlen的实现来解释了，strlen函数是从字符串的第一个字符开始，每跳过一个一个字符计数器count就会+1，直到遇到字符串结束标志为止。而arr1在内存中的位置是随机的，无法确定arr1后面遇到的第一个’\0‘在哪里，所以strlen（arr1）是个随机值。</p>
+<p>如果将上面的代码改为：</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">char</span> arr[] = <span class="string">&quot;hello&quot;</span>;</span><br><span class="line">    <span class="type">char</span> arr1[] = &#123; <span class="string">&#x27;h&#x27;</span>,<span class="string">&#x27;e&#x27;</span>,<span class="string">&#x27;l&#x27;</span>,<span class="string">&#x27;l&#x27;</span>,<span class="string">&#x27;o&#x27;</span>,<span class="string">&#x27;\0&#x27;</span>&#125;;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, <span class="keyword">sizeof</span>(arr));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, <span class="keyword">sizeof</span>(arr1));</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>输出结果为：</p>
+<p>6</p>
+<p>6<br>就符合我们的预期了！</p>
+<p>同时上述写法中arr和arr1是完全相同的，并无差异。</p>
+</blockquote>
+</div><div class="article-licensing box"><div class="licensing-title"><p>计算机眼中世界</p><p><a href="http://icarus.xinsong.xyz/2022/12/07/1.计算机眼中的世界/">http://icarus.xinsong.xyz/2022/12/07/1.计算机眼中的世界/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>NcPhoton</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>2022-12-07</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>2022-12-07</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/c/">c</a></div><div class="notification is-danger">You need to set <code>install_url</code> to use ShareThis. Please set it in <code>_config.yml</code>.</div></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">Like this article? Support the author with</h3><div class="buttons is-centered"><a class="button donate" href="/" target="_blank" rel="noopener" data-type="afdian"><span class="icon is-small"><i class="fas fa-charging-station"></i></span><span>Afdian.net</span></a><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>Alipay</span><span class="qrcode"><img src="/" alt="Alipay"></span></a><a class="button donate" href="/" target="_blank" rel="noopener" data-type="buymeacoffee"><span class="icon is-small"><i class="fas fa-coffee"></i></span><span>Buy me a coffee</span></a><a class="button donate" href="/" target="_blank" rel="noopener" data-type="patreon"><span class="icon is-small"><i class="fab fa-patreon"></i></span><span>Patreon</span></a><div class="notification is-danger">You forgot to set the <code>business</code> or <code>currency_code</code> for Paypal. Please set it in <code>_config.yml</code>.</div><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>Wechat</span><span class="qrcode"><img src="/" alt="Wechat"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2022/12/07/hello-world/"><span class="level-item">Hello World</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">Comments</h3><div class="notification is-danger">You forgot to set the <code>shortname</code> for Disqus. Please set it in <code>_config.yml</code>.</div></div></div></div><!--!--><div class="column column-right is-4-tablet is-4-desktop is-4-widescreen  order-3 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">Catalogue</h3><ul class="menu-list"><li><a class="level is-mobile" href="#计算机眼中的数字"><span class="level-left"><span class="level-item">1</span><span class="level-item">计算机眼中的数字</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#二进制数的换算"><span class="level-left"><span class="level-item">1.1</span><span class="level-item">二进制数的换算</span></span></a></li></ul></li><li><a class="level is-mobile" href="#计算机的内存"><span class="level-left"><span class="level-item">2</span><span class="level-item">计算机的内存</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#内存的基本单位bit"><span class="level-left"><span class="level-item">2.1</span><span class="level-item">内存的基本单位bit</span></span></a></li><li><a class="level is-mobile" href="#内存大小的换算"><span class="level-left"><span class="level-item">2.2</span><span class="level-item">内存大小的换算</span></span></a></li></ul></li><li><a class="level is-mobile" href="#C语言是什么"><span class="level-left"><span class="level-item">3</span><span class="level-item">C语言是什么</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#一门语言"><span class="level-left"><span class="level-item">3.1</span><span class="level-item">一门语言</span></span></a></li><li><a class="level is-mobile" href="#main函数-程序的入口"><span class="level-left"><span class="level-item">3.2</span><span class="level-item">main函数-程序的入口</span></span></a></li></ul></li><li><a class="level is-mobile" href="#常见数据类型"><span class="level-left"><span class="level-item">4</span><span class="level-item">常见数据类型</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#整型"><span class="level-left"><span class="level-item">4.1</span><span class="level-item">整型</span></span></a></li><li><a class="level is-mobile" href="#浮点型"><span class="level-left"><span class="level-item">4.2</span><span class="level-item">浮点型</span></span></a></li><li><a class="level is-mobile" href="#变量的定义方式"><span class="level-left"><span class="level-item">4.3</span><span class="level-item">变量的定义方式</span></span></a></li></ul></li><li><a class="level is-mobile" href="#常量和变量"><span class="level-left"><span class="level-item">5</span><span class="level-item">常量和变量</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#常量"><span class="level-left"><span class="level-item">5.1</span><span class="level-item">常量</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#字面常量"><span class="level-left"><span class="level-item">5.1.1</span><span class="level-item">字面常量</span></span></a></li><li><a class="level is-mobile" href="#常变量"><span class="level-left"><span class="level-item">5.1.2</span><span class="level-item">常变量</span></span></a></li><li><a class="level is-mobile" href="#标识符常量"><span class="level-left"><span class="level-item">5.1.3</span><span class="level-item">标识符常量</span></span></a></li><li><a class="level is-mobile" href="#枚举常量"><span class="level-left"><span class="level-item">5.1.4</span><span class="level-item">枚举常量</span></span></a></li></ul></li><li><a class="level is-mobile" href="#变量"><span class="level-left"><span class="level-item">5.2</span><span class="level-item">变量</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#全局变量"><span class="level-left"><span class="level-item">5.2.1</span><span class="level-item">全局变量</span></span></a></li><li><a class="level is-mobile" href="#局部变量"><span class="level-left"><span class="level-item">5.2.2</span><span class="level-item">局部变量</span></span></a></li><li><a class="level is-mobile" href="#变量的使用"><span class="level-left"><span class="level-item">5.2.3</span><span class="level-item">变量的使用</span></span></a></li><li><a class="level is-mobile" href="#变量的作用域和生命周期"><span class="level-left"><span class="level-item">5.2.4</span><span class="level-item">变量的作用域和生命周期</span></span></a></li></ul></li></ul></li><li><a class="level is-mobile" href="#字符与字符串"><span class="level-left"><span class="level-item">6</span><span class="level-item">字符与字符串</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#字符"><span class="level-left"><span class="level-item">6.1</span><span class="level-item">字符</span></span></a></li><li><a class="level is-mobile" href="#字符串"><span class="level-left"><span class="level-item">6.2</span><span class="level-item">字符串</span></span></a></li></ul></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.svg" alt="Hexo" height="28"></a><p class="is-size-7"><span>&copy; 2022 NcPhoton</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "This website uses cookies to improve your experience.",
+          dismiss: "Got it!",
+          allow: "Allow cookies",
+          deny: "Decline",
+          link: "Learn more",
+          policy: "Cookie Policy",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script></body></html>
