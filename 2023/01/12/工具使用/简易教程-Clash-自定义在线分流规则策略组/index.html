@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>简易教程-Clash-自定义在线分流规则策略组 - Nico&#039;s Blog</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Nico&#039;s Blog"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Nico&#039;s Blog"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="转载自：简易教程 | Clash | 自定义在线分流规则策略组 - Yatta漫游小镇  简介Clash for Windows（CFW）应该是目前Windows和macOS上最好用的基于规则的跨平台代理工具软件，允许用户可视化操作和支持主流SS&amp;#x2F;V2ray&amp;#x2F;Trojan多协议。Clash.Net在此基础上对UI进行了美化，也推荐使用。 已经上手Clash的用户大都是在用AC"><meta property="og:type" content="blog"><meta property="og:title" content="简易教程-Clash-自定义在线分流规则策略组"><meta property="og:url" content="http://icarus.xinsong.xyz/2023/01/12/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/%E7%AE%80%E6%98%93%E6%95%99%E7%A8%8B-Clash-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9C%A8%E7%BA%BF%E5%88%86%E6%B5%81%E8%A7%84%E5%88%99%E7%AD%96%E7%95%A5%E7%BB%84/"><meta property="og:site_name" content="Nico&#039;s Blog"><meta property="og:description" content="转载自：简易教程 | Clash | 自定义在线分流规则策略组 - Yatta漫游小镇  简介Clash for Windows（CFW）应该是目前Windows和macOS上最好用的基于规则的跨平台代理工具软件，允许用户可视化操作和支持主流SS&amp;#x2F;V2ray&amp;#x2F;Trojan多协议。Clash.Net在此基础上对UI进行了美化，也推荐使用。 已经上手Clash的用户大都是在用AC"><meta property="og:locale" content="en_US"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021500375.png"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021500300.png"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021500081.png"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021500270.png"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021501190.png"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021501870.png"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021501299.png"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021501953.png"><meta property="article:published_time" content="2023-01-12T15:55:46.000Z"><meta property="article:modified_time" content="2023-01-12T16:08:25.537Z"><meta property="article:author" content="NcPhoton"><meta property="article:tag" content="clash"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021500375.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://icarus.xinsong.xyz/2023/01/12/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/%E7%AE%80%E6%98%93%E6%95%99%E7%A8%8B-Clash-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9C%A8%E7%BA%BF%E5%88%86%E6%B5%81%E8%A7%84%E5%88%99%E7%AD%96%E7%95%A5%E7%BB%84/"},"headline":"简易教程-Clash-自定义在线分流规则策略组","image":["https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021500375.png","https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021500300.png","https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021500081.png","https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021500270.png","https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021501190.png","https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021501870.png","https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021501299.png","https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021501953.png"],"datePublished":"2023-01-12T15:55:46.000Z","dateModified":"2023-01-12T16:08:25.537Z","author":{"@type":"Person","name":"NcPhoton"},"publisher":{"@type":"Organization","name":"Nico's Blog","logo":{"@type":"ImageObject","url":"http://icarus.xinsong.xyz/img/logo.svg"}},"description":"转载自：简易教程 | Clash | 自定义在线分流规则策略组 - Yatta漫游小镇  简介Clash for Windows（CFW）应该是目前Windows和macOS上最好用的基于规则的跨平台代理工具软件，允许用户可视化操作和支持主流SS&#x2F;V2ray&#x2F;Trojan多协议。Clash.Net在此基础上对UI进行了美化，也推荐使用。 已经上手Clash的用户大都是在用AC"}</script><link rel="canonical" href="http://icarus.xinsong.xyz/2023/01/12/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/%E7%AE%80%E6%98%93%E6%95%99%E7%A8%8B-Clash-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9C%A8%E7%BA%BF%E5%88%86%E6%B5%81%E8%A7%84%E5%88%99%E7%AD%96%E7%95%A5%E7%BB%84/"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.svg" alt="Nico&#039;s Blog" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2023-01-12T15:55:46.000Z" title="2023/1/12 23:55:46">2023-01-12</time></span><span class="level-item">Updated&nbsp;<time dateTime="2023-01-12T16:08:25.537Z" title="2023/1/13 00:08:25">2023-01-13</time></span><span class="level-item"><a class="link-muted" href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/">工具使用</a></span><span class="level-item">18 minutes read (About 2690 words)</span></div></div><h1 class="title is-3 is-size-4-mobile">简易教程-Clash-自定义在线分流规则策略组</h1><div class="content"><blockquote>
+<p>转载自：<a target="_blank" rel="noopener" href="https://yattazen.com/tutorial/clash-custom-config.html">简易教程 | Clash | 自定义在线分流规则策略组 - Yatta漫游小镇</a></p>
+</blockquote>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Clash for Windows（CFW）应该是目前Windows和macOS上最好用的基于规则的跨平台代理工具软件，允许用户可视化操作和支持主流SS&#x2F;V2ray&#x2F;Trojan多协议。Clash.Net在此基础上对UI进行了美化，也推荐使用。</p>
+<p>已经上手Clash的用户大都是在用ACL4SSR或其他大佬的维护的分流策略，他们的规则策略其实已经能满足绝大部分用户的使用场景，但是还有一小撮用户（比如我）由于工作或者个人使用习惯的差异，有些分流没有包含这些差异在内，这时统一使用Final（漏网之鱼）来回切换就比较麻烦，因此这种情况下，制作属于自己的分流规则策略组还是很有必要的。</p>
+<p>将折腾过后得出的方法分享给大家，少走点弯路。本教程理论上适用于所有Clash内核的代理工具，如Clash X Pro，Clash for Android（CFA）以及路由器版的OpenClash。</p>
+<span id="more"></span>
+
+<p>👇🏼 <strong>教程整体逻辑</strong> 👇🏼</p>
+<p>→ <strong><code>制作线上分流规则和策略组文件</code></strong><br>→ <strong><code>转码托管机场订阅和分流策略组文件地址</code></strong><br>→ <strong><code>将转码后的分流策略组文件地址正确放入订阅转换API链接中</code></strong><br>→ <strong><code>导入最终配置文件链接到CFW</code></strong></p>
+<hr>
+<h2 id="制作线上分流规则和策略组"><a href="#制作线上分流规则和策略组" class="headerlink" title="制作线上分流规则和策略组"></a>制作线上分流规则和策略组</h2><p>这一步是为了创建符合你使用习惯的分流规则 <strong><code>.list</code></strong> 和策略组 <strong><code>.ini</code></strong> 文件。原则上只要有一个可以线上读写维护的库就可以，这里推荐Github库和VPS，本文仅以Github版教程抛砖引玉，VPS版就是现在本地写好再传到服务器就好了。</p>
+<p>一般情况下，并不是所有分流规则完全都要自己写，大部分可以使用大佬维护的分流规则，然后写自己需要的分流规则，最后整理出自用分流策略组文件。</p>
+<h3 id="分流规则库推荐"><a href="#分流规则库推荐" class="headerlink" title="分流规则库推荐"></a>分流规则库推荐</h3><blockquote>
+<p>👉🏼 注册一个<a target="_blank" rel="noopener" href="https://github.com/">Github</a>账号，有邮箱就能注册。（已有跳过这步）</p>
+</blockquote>
+<blockquote>
+<p>获取正确Github链接地址：点开所需文件，在右上方点 **<code>Raw</code>**，然后完整拷贝浏览器 <strong><code>raw.githubusercontent</code></strong> 开头的链接地址。</p>
+</blockquote>
+<p><strong>ACL4SSR的库</strong>:<a target="_blank" rel="noopener" href="https://github.com/ACL4SSR/ACL4SSR/tree/master/Clash">https://github.com/ACL4SSR/ACL4SSR/tree/master/Clash</a></p>
+<p><strong>blackmatrix7的库</strong>:<a target="_blank" rel="noopener" href="https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash">https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash</a></p>
+<p><strong>神机规则库</strong>:<a target="_blank" rel="noopener" href="https://github.com/DivineEngine/Profiles/tree/master/Clash/RuleSet">https://github.com/DivineEngine/Profiles/tree/master/Clash/RuleSet</a></p>
+<ul>
+<li>分流规则参考使用 <strong><code>.list</code></strong> 后缀文件。</li>
+<li>如果参考的分流规则是 <strong><code>.yaml</code></strong> 后缀文件，建议先只选取部分需要的规则，然后复制转移或 <strong><code>fork</code></strong> 该规则到个人Github库中，把 <strong><code>-</code></strong> 字段用全部替换的方式删掉，再重命名为 <strong><code>.list</code></strong> 后缀文件。</li>
+</ul>
+<h3 id="制作自用分流规则"><a href="#制作自用分流规则" class="headerlink" title="制作自用分流规则"></a>制作自用分流规则</h3><blockquote>
+<p><strong>命名</strong>：文件命名随意，但是一定是英文+以 <strong><code>.list</code></strong> 结尾。</p>
+</blockquote>
+<blockquote>
+<p>英文的 <strong><code>;</code></strong> 和 <strong><code>#</code></strong> 都是常用的注释符号，表示该行代码不会生效，常用于代码前的分类和备注。</p>
+</blockquote>
+<p>👉 <strong>常用规则写法参考</strong>:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 表示包含xxx.com域名后缀下的所有网站链接</span><br><span class="line">DOMAIN-SUFFIX,xxx.com</span><br><span class="line"></span><br><span class="line"># 表示包含这个xxxx域名关键词的所有网站链接</span><br><span class="line">DOMAIN-KEYWORD,xxxx</span><br></pre></td></tr></table></figure>
+
+<p>👉 <strong>以PayPal分流规则为例</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># PayPal</span><br><span class="line">DOMAIN-SUFFIX,paypal.com</span><br><span class="line">DOMAIN-SUFFIX,paypal.me</span><br><span class="line">DOMAIN-SUFFIX,paypalobjects.com</span><br><span class="line">DOMAIN-KEYWORD,paypal</span><br></pre></td></tr></table></figure>
+
+<p>👇 <strong>更多写法可以参考Clash文档</strong> 👇</p>
+<p><a target="_blank" rel="noopener" href="https://docs.cfw.lbyczf.com/contents/ui/profiles/rules.html">https://docs.cfw.lbyczf.com/contents/ui/profiles/rules.html</a></p>
+<h3 id="制作分流策略组"><a href="#制作分流策略组" class="headerlink" title="制作分流策略组"></a>制作分流策略组</h3><blockquote>
+<p><strong>命名</strong>：文件命名随意，但是一定是英文+以 <strong><code>.ini</code></strong> 结尾。</p>
+</blockquote>
+<blockquote>
+<p><strong><code>.ini</code></strong> 配置文件中：<br><strong><code>ruleset</code></strong> 指的是配配置中包含的分流规则，<br><strong><code>custom_proxy_group</code></strong> 指的是最终在Clash中呈现的分流策略组及其排序。</p>
+</blockquote>
+<blockquote>
+<p><strong><code>ruleset</code></strong> 排序原则：<br>重要直连分流规则 &gt; 去广告规则 &gt; 小分流 &gt; 国内外大分流 &gt; 补充规则。</p>
+</blockquote>
+<p>策略组的排序非常重要，因为分流策略组的匹配是按照至上而下收录，匹配到了就停止不再往下，比如YouTube规则要放在国外媒体前面，而完整的国外媒体规则包含了YouTube, Netflix, Pornhub等等，所以分流规则较大要放在YouTube小分流规则后面。</p>
+<p>👉 <strong>分流策略组模板参考</strong>：</p>
+<p><strong>ACL4SSR的配置文件</strong>：<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Full.ini">https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Full.ini</a></p>
+<p>👉 <strong>分流策略组文件说明</strong>：</p>
+<ol>
+<li>一般情况下，只需要对 <strong><code>ruleset</code></strong> 和 <strong><code>custom_proxy_group</code></strong> 进行修改即可，其他地方不懂就不改。</li>
+<li><strong><code>ruleset</code></strong> 和 <strong><code>custom_proxy_group</code></strong> 中分流规则和策略组自定义命名要完全对应，但是可以几个<strong>同命名而不同地址</strong>的 <strong><code>.list</code></strong> 分流规则对应一个策略组。</li>
+</ol>
+<blockquote>
+<p>📌 举个例子：我创建3条 <strong><code>ruleset</code></strong> 分流规则并链接到Github的地址，且全部都命名 <strong><code>全球直连</code></strong> ，那在 <strong><code>custom_proxy_group</code></strong> 中命名为 <strong><code>全球直连</code></strong> 策略组会全部应用上面三条分流规则。</p>
+</blockquote>
+<p>👉 <strong>Ruleset说明</strong>：<br>逗号前的红框位置为该分流规则的命名，逗号后为该分流规则<code>.list</code>后缀的地址链接，如果规则同名最终会共同叠加生效。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021500375.png" alt="image-20221202150029335"></p>
+<p>👉 <strong>Custom_proxy_group说明</strong>：<br>这个分组为在CFW图形界面最终呈现的策略组排序。**<code>Select</code>** 后面有多少 <strong><code>[]XXXX</code></strong> 代表该策略组有多少种规则可以选，可以自定义，一般用 <strong><code>上飘点</code></strong> 分隔，最后一项后不需要加 **<code>上飘点</code>**。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021500300.png" alt="image-20221202150036248"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 以下代码是CFW默认自带的，不用特意再写，结合上图，按需设置策略组的选项</span><br><span class="line">→ DIRECT: 直连 </span><br><span class="line">→ REJECT: 该规则下不走网络活动，常用于广告拦截</span><br><span class="line">→ .*: 表示加入你订阅中所有节点 </span><br><span class="line">→ url-test: 表示有该代码下的节点会自动测速 </span><br><span class="line"></span><br><span class="line"># 自动归类节点 - 以图片中香港节点策略组为例</span><br><span class="line">→ (港|HK|Hong Kong)</span><br><span class="line">代表具有&quot;港&quot;，&quot;HK&quot;，&quot;HongKong&quot;关键词的节点会归类到香港节点这个策略组中，</span><br><span class="line">测速以 http://www.gstatic.com/generate_204`300,,50为准。</span><br></pre></td></tr></table></figure>
+
+<h3 id="提交上传配置文件"><a href="#提交上传配置文件" class="headerlink" title="提交上传配置文件"></a>提交上传配置文件</h3><blockquote>
+<p>⚠️<strong>温馨提示</strong>⚠️</p>
+<p>在GitHub上面几步改好的 <strong><code>.list</code></strong> 和 <strong><code>.ini</code></strong> 文件，要点 <strong><code>Commit Change</code></strong> 提交，再去拷贝 <strong><code>Raw</code></strong> 文件链接。</p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021500081.png" alt="image-20221202150043992"></p>
+<hr>
+<h2 id="转码托管-机场订阅和策略组"><a href="#转码托管-机场订阅和策略组" class="headerlink" title="转码托管 - 机场订阅和策略组"></a>转码托管 - 机场订阅和策略组</h2><p>这里只要用到两种链接，一种是你的机场订阅链接，另一种则是你先前编辑好 <strong><code>.ini</code></strong> 分流策略组配置的链接。</p>
+<h3 id="转码托管机场链接"><a href="#转码托管机场链接" class="headerlink" title="转码托管机场链接"></a>转码托管机场链接</h3><p>这一步是利用开源订阅转换API转码你的机场订阅链接，如果有网易云解锁节点链接也可以加入一并转换。</p>
+<p>一般情况下，这些订阅转换API转码不会保存你的节点信息。通俗来说，只是把你的字符转换成另外一种计算机语言，并套进对应的代理工具软件配置参数的链接中，不放心且有能力的也可以自己搭建API。</p>
+<p>🔗<strong>订阅转换托管API推荐</strong>：</p>
+<p><a target="_blank" rel="noopener" href="https://acl4ssr-sub.github.io/">ACL4SSR 在线订阅转换</a></p>
+<p><a target="_blank" rel="noopener" href="https://bianyuan.xyz/">边缘@订阅转换API</a></p>
+<p>👉 <strong>转换托管步骤</strong></p>
+<ol>
+<li>输入的订阅&#x2F;节点链接，选择生成类型，这里我们默认选 **<code>Clash</code>**（也有叫Clash新参数的）</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021500270.png" alt="image-20221202150055111"></p>
+<ol start="2">
+<li>点生成订阅链接，获得转码后的链接地址，下面是按照图内的地址转码后得到的结果：</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 温馨提示：往右拖动还有内容</span><br><span class="line"># 该配置文件地址还没有嵌入策略组地址信息</span><br><span class="line"># 这里以我截图乱填的一个个订阅地址为例</span><br><span class="line">https://pub-api-1.bianyuan.xyz/sub?target=clash&amp;url=https%3A%2F%2Fcate.com&amp;insert=false</span><br><span class="line"></span><br><span class="line"># 预留一下策略组配置文件地址位置，在上面链接的基础上合并下面这串代码</span><br><span class="line">&amp;insert=false&amp;config=peizhiwenjian&amp;emoji=true&amp;list=false&amp;udp=false&amp;tfo=false&amp;scv=false&amp;fdn=false&amp;sort=false</span><br><span class="line"></span><br><span class="line"># 如果订阅支持udp, tfo就把这两项后面的false改成true，默认为false，加完后完整链接为：</span><br><span class="line">https://pub-api-1.bianyuan.xyz/sub?target=clash&amp;url=https%3A%2F%2Fcate.com&amp;insert=false&amp;config=peizhiwenjian&amp;emoji=true&amp;list=false&amp;udp=false&amp;tfo=false&amp;scv=false&amp;fdn=false&amp;sort=false</span><br></pre></td></tr></table></figure>
+
+<h3 id="转码分流策略组"><a href="#转码分流策略组" class="headerlink" title="转码分流策略组"></a>转码分流策略组</h3><p>先前我们已经编辑好我们自定义的 <strong>.ini</strong> 后缀的分流策略组配置文件，在Github上，我们要拷贝这个文件的 <strong><code>Raw</code></strong> 地址，这个地址才是文件的源地址。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021501190.png" alt="image-20221202150102998"></p>
+<p>上图页面并不是**.ini**文件的地址，实际上此文件是存储在<code>Raw</code>地址的：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021501870.png" alt="image-20221202150110699"></p>
+<p>👉 <strong>转换策略组步骤</strong></p>
+<ol>
+<li>在<a target="_blank" rel="noopener" href="https://www.urlencoder.org/">https://www.urlencoder.org/</a> 上转码，按照下图步骤。</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021501299.png" alt="image-20221202150123165"></p>
+<ol start="2">
+<li>把转码后链接地址粘贴在下方链接中 <strong><code>peizhiwenjian</code></strong> 处即可成功获得最终的配置文件。</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 温馨提示：往右拖动还有内容</span><br><span class="line"># &amp;insert 前为先前通过`api.dler.io`转换后的订阅地址</span><br><span class="line"># peizhiwenjian 替换成你转码后配置文件地址，一定是.ini结尾的</span><br><span class="line"></span><br><span class="line">https://pub-api-1.bianyuan.xyz/sub?target=clash&amp;url=https%3A%2F%2Fcate.com&amp;insert=false&amp;config=peizhiwenjian&amp;emoji=true&amp;list=false&amp;udp=false&amp;tfo=false&amp;scv=false&amp;fdn=false&amp;sort=false</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="导入配置文件地址到Clash"><a href="#导入配置文件地址到Clash" class="headerlink" title="导入配置文件地址到Clash"></a>导入配置文件地址到Clash</h2><p>按照图示导入最终的配置文件到 <strong><code>CFW</code></strong> 或 **<code>Clash.Net</code>**，完结撒花！</p>
+<ul>
+<li>API有可能会被墙，建议在编辑自用分流规则时加入你使用的订阅转换API域名。</li>
+<li>每次Github的配置文件修改后，由于缓存的原因，CFW建议过一两分钟再点更新配置文件。</li>
+<li>使用托管API得到的链接，更新时会偶尔套用失效，应该是服务器问题，等待一两分钟再次更新就好了。</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021501953.png" alt="image-20221202150135842"></p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>简易教程-Clash-自定义在线分流规则策略组</p><p><a href="http://icarus.xinsong.xyz/2023/01/12/工具使用/简易教程-Clash-自定义在线分流规则策略组/">http://icarus.xinsong.xyz/2023/01/12/工具使用/简易教程-Clash-自定义在线分流规则策略组/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>NcPhoton</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>2023-01-12</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>2023-01-13</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/clash/">clash</a></div><div class="notification is-danger">You need to set <code>install_url</code> to use ShareThis. Please set it in <code>_config.yml</code>.</div></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">Like this article? Support the author with</h3><div class="buttons is-centered"><a class="button donate" href="/" target="_blank" rel="noopener" data-type="afdian"><span class="icon is-small"><i class="fas fa-charging-station"></i></span><span>Afdian.net</span></a><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>Alipay</span><span class="qrcode"><img src="/" alt="Alipay"></span></a><a class="button donate" href="/" target="_blank" rel="noopener" data-type="buymeacoffee"><span class="icon is-small"><i class="fas fa-coffee"></i></span><span>Buy me a coffee</span></a><a class="button donate" href="/" target="_blank" rel="noopener" data-type="patreon"><span class="icon is-small"><i class="fab fa-patreon"></i></span><span>Patreon</span></a><div class="notification is-danger">You forgot to set the <code>business</code> or <code>currency_code</code> for Paypal. Please set it in <code>_config.yml</code>.</div><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>Wechat</span><span class="qrcode"><img src="/" alt="Wechat"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2023/01/12/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/%E4%BD%A0%E7%9A%84%E7%94%B5%E8%84%91%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%83%BD%E7%9C%8B4K%20Netflix/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">你的电脑为什么不能看4K Netflix</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2023/01/12/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/WordPress%E5%9B%BA%E5%AE%9A%E9%93%BE%E6%8E%A5(%E4%BC%AA%E9%9D%99%E6%80%81)%E7%9A%84%E8%AE%BE%E7%BD%AE%E6%96%B9%E6%B3%95%E5%8F%8A%E5%BB%BA%E8%AE%AE%E8%AE%BE%E7%BD%AE/"><span class="level-item">WordPress固定链接(伪静态)的设置方法及建议设置</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">Comments</h3><div class="notification is-danger">You forgot to set the <code>shortname</code> for Disqus. Please set it in <code>_config.yml</code>.</div></div></div></div><!--!--><div class="column column-right is-4-tablet is-4-desktop is-4-widescreen  order-3 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">Catalogue</h3><ul class="menu-list"><li><a class="level is-mobile" href="#简介"><span class="level-left"><span class="level-item">1</span><span class="level-item">简介</span></span></a></li><li><a class="level is-mobile" href="#制作线上分流规则和策略组"><span class="level-left"><span class="level-item">2</span><span class="level-item">制作线上分流规则和策略组</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#分流规则库推荐"><span class="level-left"><span class="level-item">2.1</span><span class="level-item">分流规则库推荐</span></span></a></li><li><a class="level is-mobile" href="#制作自用分流规则"><span class="level-left"><span class="level-item">2.2</span><span class="level-item">制作自用分流规则</span></span></a></li><li><a class="level is-mobile" href="#制作分流策略组"><span class="level-left"><span class="level-item">2.3</span><span class="level-item">制作分流策略组</span></span></a></li><li><a class="level is-mobile" href="#提交上传配置文件"><span class="level-left"><span class="level-item">2.4</span><span class="level-item">提交上传配置文件</span></span></a></li></ul></li><li><a class="level is-mobile" href="#转码托管-机场订阅和策略组"><span class="level-left"><span class="level-item">3</span><span class="level-item">转码托管 - 机场订阅和策略组</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#转码托管机场链接"><span class="level-left"><span class="level-item">3.1</span><span class="level-item">转码托管机场链接</span></span></a></li><li><a class="level is-mobile" href="#转码分流策略组"><span class="level-left"><span class="level-item">3.2</span><span class="level-item">转码分流策略组</span></span></a></li></ul></li><li><a class="level is-mobile" href="#导入配置文件地址到Clash"><span class="level-left"><span class="level-item">4</span><span class="level-item">导入配置文件地址到Clash</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.svg" alt="Nico&#039;s Blog" height="28"></a><p class="is-size-7"><span>&copy; 2023 NcPhoton</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "This website uses cookies to improve your experience.",
+          dismiss: "Got it!",
+          allow: "Allow cookies",
+          deny: "Decline",
+          link: "Learn more",
+          policy: "Cookie Policy",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><script src="/live2d-widget/autoload.js"></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script></body></html>

@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>操作系统 - Nico&#039;s Blog</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Nico&#039;s Blog"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Nico&#039;s Blog"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="计算机的诞生传统的技术发展 技术进步是要花钱的，钱从哪里来？那么只有国家给，但是国家却无法从中获利，技术没有稳定的资金来源，因此技术进步是受阻并且缓慢的。 技术商业化 技术人员：搞技术。 搞技术需要资金，那么商业化的公司投资，获得其技术的授权和专利。 于是产生了intel，apple等公司用技术孵化出民用级的产品，于是将技术变现卖给老百姓。"><meta property="og:type" content="blog"><meta property="og:title" content="操作系统"><meta property="og:url" content="http://icarus.xinsong.xyz/2023/01/12/Linux/1.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"><meta property="og:site_name" content="Nico&#039;s Blog"><meta property="og:description" content="计算机的诞生传统的技术发展 技术进步是要花钱的，钱从哪里来？那么只有国家给，但是国家却无法从中获利，技术没有稳定的资金来源，因此技术进步是受阻并且缓慢的。 技术商业化 技术人员：搞技术。 搞技术需要资金，那么商业化的公司投资，获得其技术的授权和专利。 于是产生了intel，apple等公司用技术孵化出民用级的产品，于是将技术变现卖给老百姓。"><meta property="og:locale" content="en_US"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021634181.png"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021635452.png"><meta property="article:published_time" content="2023-01-12T14:20:07.000Z"><meta property="article:modified_time" content="2023-01-13T03:37:49.849Z"><meta property="article:author" content="NcPhoton"><meta property="article:tag" content="linux"><meta property="article:tag" content="操作系统"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021634181.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://icarus.xinsong.xyz/2023/01/12/Linux/1.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"},"headline":"操作系统","image":["https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021634181.png","https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021635452.png"],"datePublished":"2023-01-12T14:20:07.000Z","dateModified":"2023-01-13T03:37:49.849Z","author":{"@type":"Person","name":"NcPhoton"},"publisher":{"@type":"Organization","name":"Nico's Blog","logo":{"@type":"ImageObject","url":"http://icarus.xinsong.xyz/img/logo.svg"}},"description":"计算机的诞生传统的技术发展 技术进步是要花钱的，钱从哪里来？那么只有国家给，但是国家却无法从中获利，技术没有稳定的资金来源，因此技术进步是受阻并且缓慢的。 技术商业化 技术人员：搞技术。 搞技术需要资金，那么商业化的公司投资，获得其技术的授权和专利。 于是产生了intel，apple等公司用技术孵化出民用级的产品，于是将技术变现卖给老百姓。"}</script><link rel="canonical" href="http://icarus.xinsong.xyz/2023/01/12/Linux/1.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.svg" alt="Nico&#039;s Blog" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2023-01-12T14:20:07.000Z" title="2023/1/12 22:20:07">2023-01-12</time></span><span class="level-item">Updated&nbsp;<time dateTime="2023-01-13T03:37:49.849Z" title="2023/1/13 11:37:49">2023-01-13</time></span><span class="level-item"><a class="link-muted" href="/categories/Linux/">Linux</a></span><span class="level-item">8 minutes read (About 1218 words)</span></div></div><h1 class="title is-3 is-size-4-mobile">操作系统</h1><div class="content"><h3 id="计算机的诞生"><a href="#计算机的诞生" class="headerlink" title="计算机的诞生"></a>计算机的诞生</h3><p><strong>传统的技术发展</strong></p>
+<p>技术进步是要花钱的，钱从哪里来？那么只有国家给，但是国家却无法从中获利，技术没有稳定的资金来源，因此技术进步是受阻并且缓慢的。</p>
+<p><strong>技术商业化</strong></p>
+<p>技术人员：搞技术。</p>
+<p>搞技术需要资金，那么商业化的公司投资，获得其技术的授权和专利。</p>
+<p>于是产生了intel，apple等公司用技术孵化出民用级的产品，于是将技术变现卖给老百姓。</p>
+<span id="more"></span>
+
+<h3 id="操作系统发展"><a href="#操作系统发展" class="headerlink" title="操作系统发展"></a>操作系统发展</h3><p><strong>为什么诞生了操作系统？</strong></p>
+<p>在计算机被发明之初，只是一堆硬件，其使用成本是非常高的，通常只能是专业的科学家。</p>
+<p>有人开始研发计算机上的软件，于是由肯汤普森使用汇编语言编写的Unix诞生，开始进入高校和各种实验室。</p>
+<p>丹尼斯里奇和肯汤普森又使用C语言编写了Unix，与此同时：</p>
+<ul>
+<li><p>授权了IBM等公司使用，至此大型公司也开始使用计算机。</p>
+</li>
+<li><p>微软等公司相继诞生，计算机开始进入普通家庭。</p>
+</li>
+<li><p>linux诞生，开源并不断有工程师给出改进方案。</p>
+</li>
+</ul>
+<h3 id="操作系统是什么"><a href="#操作系统是什么" class="headerlink" title="操作系统是什么"></a>操作系统是什么</h3><p>要知道操作系统是什么，就要先清楚两个问题：</p>
+<ol>
+<li>为什么要有操作系统？</li>
+</ol>
+<p>​		答：单纯的硬件操作效率地下，难度大。</p>
+<ol start="2">
+<li>操作系统和硬件的关系？</li>
+</ol>
+<p>​		移动端 （手机、平板）和桌面端设备，OS图示：</p>
+<img src="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021634181.png" alt="image-20220817161728113" style="zoom: 50%;" />
+
+
+
+<p>更为详细的：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021635452.png" alt="image-20220817163202176"></p>
+<ul>
+<li><strong>用户层</strong>：包括图形化界面，各种应用程序，各种库。</li>
+<li><strong>OS kernel</strong>：<strong>对上</strong>给用户提供良好高效的运行环境，<strong>对下</strong>管理好下层的软硬件资源，管理各种资源，包括：<ol>
+<li>进程管理</li>
+<li>文件管理</li>
+<li>内存管理</li>
+<li>驱动管理</li>
+</ol>
+</li>
+<li><strong>驱动层</strong>：一般，每一个硬件都有厂商提供的驱动，一些基础的硬件（鼠标，键盘，显示器）驱动由OS自动安装，<strong>对上</strong>提供访问硬件的接口，帮上层实现对硬件的基本访问，<strong>对下</strong>可以操作硬件。</li>
+<li><strong>硬件层</strong>：我们熟悉的硬件有CPU，显卡，显示器，鼠标，硬盘等等。</li>
+</ul>
+<p><strong>总结</strong>：<strong>OS</strong>是一款软件，是用于对软硬件资源进行管理的软件，是上层用户和下层硬件的媒介。</p>
+<p><strong>例如</strong>：显示器是我们使用时感知最明显的硬件，而如果我们想在显示器上使用printf或者cout向显示器上打印，本质就是像硬件写入数据，而对硬件写入数据的具体过程不需要我们关心，我们只需要告诉操作系统我们的需求，操作系统会完成对硬件的访问和操作，这样就大大提高了效率。</p>
+<h3 id="简单概括"><a href="#简单概括" class="headerlink" title="简单概括"></a>简单概括</h3><p><strong>内核</strong></p>
+<p>内核主要目的是为了应用程序提供一个稳定良好的运行程序，其要干的五件事情：</p>
+<ol>
+<li>内存管理</li>
+<li>虚拟文件</li>
+<li>系统进程调度</li>
+<li>网络接口</li>
+<li>进程间通信</li>
+</ol>
+<p>从编程的角度看：</p>
+<p><strong>Linux内核就是一个调用库，应用程序通过调用Linux提供的API函数来实现操作，Linux内核通过与驱动通信实现对硬件的有效管理</strong>。</p>
+<p><strong>驱动程序</strong></p>
+<p>驱动程序属于内核的一部分，<strong>是内核的扩展组件</strong>，用来帮助内核实现硬件的连接和操控，不包含驱动的内核也叫内核。内核通过提供统一的驱动操作接口供用户层使用，驱动就是在这层统一的接口下实现硬件的操控的中间层。</p>
+<p><strong>操作系统</strong></p>
+<p>操作系统，在内核的基础上有延伸，包括了<strong>提供基础服务的系统组件</strong>。操作系统是用户和硬件之间的一层媒介程序，为上提供编程接口，为下调用资源，管理驱动，以使用硬件。不管是Linux还是Windows或者安卓、iOS，它的主要功能有两点：</p>
+<ol>
+<li><p>有效管理硬件。</p>
+</li>
+<li><p>方便用户操作。</p>
+</li>
+</ol>
+<p><strong>驱动与操作系统的关系</strong>：</p>
+<p>驱动程序实现了操作系统对硬件的有效管理，是操作系统管理硬件的一个途径。</p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>操作系统</p><p><a href="http://icarus.xinsong.xyz/2023/01/12/Linux/1.操作系统/">http://icarus.xinsong.xyz/2023/01/12/Linux/1.操作系统/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>NcPhoton</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>2023-01-12</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>2023-01-13</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/linux/">linux</a><a class="link-muted mr-2" rel="tag" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></div><div class="notification is-danger">You need to set <code>install_url</code> to use ShareThis. Please set it in <code>_config.yml</code>.</div></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">Like this article? Support the author with</h3><div class="buttons is-centered"><a class="button donate" href="/" target="_blank" rel="noopener" data-type="afdian"><span class="icon is-small"><i class="fas fa-charging-station"></i></span><span>Afdian.net</span></a><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>Alipay</span><span class="qrcode"><img src="/" alt="Alipay"></span></a><a class="button donate" href="/" target="_blank" rel="noopener" data-type="buymeacoffee"><span class="icon is-small"><i class="fas fa-coffee"></i></span><span>Buy me a coffee</span></a><a class="button donate" href="/" target="_blank" rel="noopener" data-type="patreon"><span class="icon is-small"><i class="fab fa-patreon"></i></span><span>Patreon</span></a><div class="notification is-danger">You forgot to set the <code>business</code> or <code>currency_code</code> for Paypal. Please set it in <code>_config.yml</code>.</div><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>Wechat</span><span class="qrcode"><img src="/" alt="Wechat"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2023/01/12/Linux/2.%E5%85%B3%E4%BA%8ELinux/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">关于Linux</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2023/01/12/Linux/0.%E5%BC%80%E6%BA%90%E6%98%AF%E4%BB%80%E4%B9%88/"><span class="level-item">开源是什么</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">Comments</h3><div class="notification is-danger">You forgot to set the <code>shortname</code> for Disqus. Please set it in <code>_config.yml</code>.</div></div></div></div><!--!--><div class="column column-right is-4-tablet is-4-desktop is-4-widescreen  order-3 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">Catalogue</h3><ul class="menu-list"><li><a class="level is-mobile" href="#计算机的诞生"><span class="level-left"><span class="level-item">1</span><span class="level-item">计算机的诞生</span></span></a></li><li><a class="level is-mobile" href="#操作系统发展"><span class="level-left"><span class="level-item">2</span><span class="level-item">操作系统发展</span></span></a></li><li><a class="level is-mobile" href="#操作系统是什么"><span class="level-left"><span class="level-item">3</span><span class="level-item">操作系统是什么</span></span></a></li><li><a class="level is-mobile" href="#简单概括"><span class="level-left"><span class="level-item">4</span><span class="level-item">简单概括</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.svg" alt="Nico&#039;s Blog" height="28"></a><p class="is-size-7"><span>&copy; 2023 NcPhoton</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "This website uses cookies to improve your experience.",
+          dismiss: "Got it!",
+          allow: "Allow cookies",
+          deny: "Decline",
+          link: "Learn more",
+          policy: "Cookie Policy",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><script src="/live2d-widget/autoload.js"></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script></body></html>

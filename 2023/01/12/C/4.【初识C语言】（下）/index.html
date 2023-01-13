@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>初识C语言下 - Nico&#039;s Blog</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Nico&#039;s Blog"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Nico&#039;s Blog"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="💦常见关键字   关键字 作用    auto 由auto修饰的自动变量   break 跳出循环和switch分支语句   case 分支语句   const 由const修饰的常变量   continue 跳过本次循环体开始下一次循环   default 默认分支语句   enum 枚举关键   extern 引入外部符号   goto 改变函数内代码的执行顺序,跳转到函数内指定的标签地方运"><meta property="og:type" content="blog"><meta property="og:title" content="初识C语言下"><meta property="og:url" content="http://icarus.xinsong.xyz/2023/01/12/C/4.%E3%80%90%E5%88%9D%E8%AF%86C%E8%AF%AD%E8%A8%80%E3%80%91%EF%BC%88%E4%B8%8B%EF%BC%89/"><meta property="og:site_name" content="Nico&#039;s Blog"><meta property="og:description" content="💦常见关键字   关键字 作用    auto 由auto修饰的自动变量   break 跳出循环和switch分支语句   case 分支语句   const 由const修饰的常变量   continue 跳过本次循环体开始下一次循环   default 默认分支语句   enum 枚举关键   extern 引入外部符号   goto 改变函数内代码的执行顺序,跳转到函数内指定的标签地方运"><meta property="og:locale" content="en_US"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021552723.png"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021552841.png"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021552189.png"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021553425.png"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021553746.png"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021553344.png"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021553331.png"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021553859.png"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021554619.png"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021554841.png"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021554179.png"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021554071.png"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021554803.png"><meta property="article:published_time" content="2023-01-12T13:24:48.000Z"><meta property="article:modified_time" content="2023-01-13T03:34:58.632Z"><meta property="article:author" content="NcPhoton"><meta property="article:tag" content="c"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021552723.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://icarus.xinsong.xyz/2023/01/12/C/4.%E3%80%90%E5%88%9D%E8%AF%86C%E8%AF%AD%E8%A8%80%E3%80%91%EF%BC%88%E4%B8%8B%EF%BC%89/"},"headline":"初识C语言下","image":["https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021552723.png","https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021552841.png","https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021552189.png","https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021553425.png","https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021553746.png","https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021553344.png","https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021553331.png","https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021553859.png","https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021554619.png","https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021554841.png","https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021554179.png","https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021554071.png","https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021554803.png"],"datePublished":"2023-01-12T13:24:48.000Z","dateModified":"2023-01-13T03:34:58.632Z","author":{"@type":"Person","name":"NcPhoton"},"publisher":{"@type":"Organization","name":"Nico's Blog","logo":{"@type":"ImageObject","url":"http://icarus.xinsong.xyz/img/logo.svg"}},"description":"💦常见关键字   关键字 作用    auto 由auto修饰的自动变量   break 跳出循环和switch分支语句   case 分支语句   const 由const修饰的常变量   continue 跳过本次循环体开始下一次循环   default 默认分支语句   enum 枚举关键   extern 引入外部符号   goto 改变函数内代码的执行顺序,跳转到函数内指定的标签地方运"}</script><link rel="canonical" href="http://icarus.xinsong.xyz/2023/01/12/C/4.%E3%80%90%E5%88%9D%E8%AF%86C%E8%AF%AD%E8%A8%80%E3%80%91%EF%BC%88%E4%B8%8B%EF%BC%89/"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.svg" alt="Nico&#039;s Blog" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2023-01-12T13:24:48.000Z" title="2023/1/12 21:24:48">2023-01-12</time></span><span class="level-item">Updated&nbsp;<time dateTime="2023-01-13T03:34:58.632Z" title="2023/1/13 11:34:58">2023-01-13</time></span><span class="level-item"><a class="link-muted" href="/categories/C%E8%AF%AD%E8%A8%80/">C语言</a></span><span class="level-item">19 minutes read (About 2815 words)</span></div></div><h1 class="title is-3 is-size-4-mobile">初识C语言下</h1><div class="content"><h2 id="💦常见关键字"><a href="#💦常见关键字" class="headerlink" title="💦常见关键字"></a>💦常见关键字</h2><table>
+<thead>
+<tr>
+<th>关键字</th>
+<th align="left">作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>auto</td>
+<td align="left">由auto修饰的自动变量</td>
+</tr>
+<tr>
+<td>break</td>
+<td align="left">跳出循环和switch分支语句</td>
+</tr>
+<tr>
+<td>case</td>
+<td align="left">分支语句</td>
+</tr>
+<tr>
+<td>const</td>
+<td align="left">由const修饰的常变量</td>
+</tr>
+<tr>
+<td>continue</td>
+<td align="left">跳过本次循环体开始下一次循环</td>
+</tr>
+<tr>
+<td>default</td>
+<td align="left">默认分支语句</td>
+</tr>
+<tr>
+<td>enum</td>
+<td align="left">枚举关键</td>
+</tr>
+<tr>
+<td>extern</td>
+<td align="left">引入外部符号</td>
+</tr>
+<tr>
+<td>goto</td>
+<td align="left">改变函数内代码的执行顺序,跳转到函数内指定的标签地方运行,goto不能跨函数代码块跳转</td>
+</tr>
+<tr>
+<td>register</td>
+<td align="left">寄存器</td>
+</tr>
+<tr>
+<td>unsigned</td>
+<td align="left">无符号数</td>
+</tr>
+<tr>
+<td>struct</td>
+<td align="left">创建结构体类型</td>
+</tr>
+<tr>
+<td>switch</td>
+<td align="left">分支语句</td>
+</tr>
+<tr>
+<td>typedef</td>
+<td align="left">类型重定义</td>
+</tr>
+<tr>
+<td>union</td>
+<td align="left">创建联合体</td>
+</tr>
+<tr>
+<td>void</td>
+<td align="left">空</td>
+</tr>
+<tr>
+<td>volatile</td>
+<td align="left">用volatile声明的变量表示该变量随时可能发生变化，与该变量有关的运算，不要进行编译优化，以免出错</td>
+</tr>
+<tr>
+<td>…</td>
+<td align="left">…</td>
+</tr>
+</tbody></table>
+<span id="more"></span>
+
+<h3 id="关键字typedf"><a href="#关键字typedf" class="headerlink" title="关键字typedf"></a>关键字typedf</h3><blockquote>
+<p>typedef顾名思义是类型重定义，也可以理解为类型重命名。</p>
+</blockquote>
+<p>说得再通俗一点就是给一个类型重新起个名字。<br>比如：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="comment">//将unsigned重新命名为unsin，所以unsin也是一个类型名</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">unsigned</span> <span class="type">int</span> unsind;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//观察a和b，这两个变量的类型是一样的</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span> a = <span class="number">0</span>;</span><br><span class="line">    unsind b = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="关键字static"><a href="#关键字static" class="headerlink" title="关键字static"></a>关键字static</h3><blockquote>
+<p>在C语言中，static是用来修饰变量和函数的</p>
+</blockquote>
+<ul>
+<li>修饰局部变量-称为<strong>静态局部变量</strong>。</li>
+<li>修饰全局变量-称为<strong>静态全局变量</strong>。</li>
+<li>修饰函数-称为<strong>静态函数</strong>。</li>
+</ul>
+<p>static修饰局部变量那究竟有什么作用呢？来对比下面两个代码。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="comment">//代码1</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">test</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> i = <span class="number">0</span>;</span><br><span class="line">    i++;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>, i);</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        test();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021552723.png" alt="image-20220518223255717"></p>
+<p>在屏幕上输出了10个1. </p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="comment">//代码2</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">test</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//这里将i用static修饰</span></span><br><span class="line">    <span class="type">static</span> <span class="type">int</span> i = <span class="number">0</span>;</span><br><span class="line">    i++;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>, i);</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        test();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021552841.png" alt="image-20220518223304083"></p>
+<p>输出了从1~10的数字。</p>
+<p>对比代码1和代码2的效果理解static修饰局部变量的意义。</p>
+<p>代码1：在没有static修饰的<font color=green>局部变量 i </font>中，执行程序一旦离开其被创建的那个块内，就自动销毁。</p>
+<p>代码2：static修饰的<font color=green>局部变量 i </font> ,在程序运行到 i 所在的块时，不再重新创建，而是使用上一次保留的变量值，执行程序离开了块后也不会销毁，仍然保留，供下一次使用。</p>
+<ul>
+<li>静态局部变量生命周期：一个工程中从第一次被创建开始，一直到最后一次被调用为止，且每次调用函数时的静态变量不再初始化。</li>
+</ul>
+<p><strong>小结：static修饰局部变量改变了变量的生命周期，让静态局部变量出了作用域依然存在，到程序结束，生命周期才结束</strong>。</p>
+<p>代码3：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="comment">//代码3</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">test</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//这里将i用static修饰</span></span><br><span class="line">    <span class="type">static</span> <span class="type">int</span> i = <span class="number">1</span>;</span><br><span class="line">    i++;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>, i);</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        test();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021552189.png" alt="image-20220518223314707"></p>
+<p>有意思的是，通过调试我们可以看到：</p>
+<p>在程序还没执行到test函数时，只要进入了该函数的函数体，static修饰的 i 就已经为1了，就像是一进来这个块，i 就已经被创建了，而不是等到 程序走到 <code>static int i = 1</code>时才被创建，事实上可以认为赋值语句从来没有执行过。（如果静态变量没有初始化语句，则默认为0.）</p>
+<p><strong>小结：static修饰局部变量，一直存在于块内，不随着出作用域而消失，与全局变量有些相似之处</strong></p>
+<ul>
+<li><strong>static修饰全局变量</strong><br>作用：改变了全局变量的作用域，让静态的全局变量只能在自己的源文件内使用，而无法在本源文件外部使用。全局变量<strong>作用域是整个工程</strong>，被static修饰后作用域就只是此源文件内部了。</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021553425.png" alt="image-20220518223322070"></p>
+<p>上图是&#x3D;&#x3D;global.c&#x3D;&#x3D;源文件创建的全局变量。</p>
+<p>工程中另一个&#x3D;&#x3D;test.c&#x3D;&#x3D;源文件代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//test.c</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="keyword">extern</span> n;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, n);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021553746.png" alt="image-20220518223328525"></p>
+<p>可见全局变量n已经无法使用。</p>
+<p><strong>static修饰外部函数</strong></p>
+<p>作用：改变了函数的外部链接属性。<br>普通函数具有外部链接属性，而静态函数<strong>没有外部连接属性</strong>。<br>也就是static修饰的函数也只能在所在的源文件内部使用。</p>
+<p>add.c</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">Add</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> x + y;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>以上为static修饰的外部函数。</p>
+<p>代码：</p>
+<p>main.c</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span>  <span class="title function_">Add</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y)</span>;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> x = <span class="number">3</span>;</span><br><span class="line">    <span class="type">int</span> y = <span class="number">5</span>;</span><br><span class="line">    <span class="type">int</span> sum = Add(x, y);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot; %d&quot;</span>, sum);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021553344.png" alt="image-20220518223350717"></p>
+<p>可以看到这里是已经报错了。</p>
+<p><strong>最后对static的三条作用做一句话总结：首先static的最主要功能是隐藏，其次因为static变量存放在静态存储区，所以它具备持久性和默认值0。</strong></p>
+<hr>
+<h2 id="💦-define定义常量和宏"><a href="#💦-define定义常量和宏" class="headerlink" title="💦#define定义常量和宏"></a>💦#define定义常量和宏</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="comment">//#define定义标识符常量</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAX 100</span></span><br><span class="line"><span class="comment">//#define定义宏</span></span><br><span class="line"><span class="meta"># <span class="keyword">define</span> BIG(x,y) (x&gt;y?x:y)</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> max = BIG(<span class="number">2</span>, <span class="number">3</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot; %d &quot;</span>, MAX);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot; %d &quot;</span>, max);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>宏本质是使用标识符和参数进行替换。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021553331.png" alt="image-20220518223357197"></p>
+<p><strong>注意</strong>：这里与函数的使用方式比较类似，注意区分。</p>
+<h2 id="💦指针"><a href="#💦指针" class="headerlink" title="💦指针"></a>💦指针</h2><h3 id="内存"><a href="#内存" class="headerlink" title="内存"></a>内存</h3><blockquote>
+<p>内存是电脑上特别重要的存储器，计算机中程序的运行都是在内存中进行的 。</p>
+<p>为了有效的使用内存，就把内存划分成一个个小的内存单元，每个内存单元的大小是1个<font color=purple>字节</font>。</p>
+<p>为了能够有效的访问到内存的每个单元，就给内存单元进行了编号，这些编号被称为该内存单元的地址。</p>
+</blockquote>
+<p>如图：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021553859.png" alt="image-20220714225227375"></p>
+<p>变量是储存在内存中的（在内存中分配空间)，每个内存单元都有地址，所以变量也有地址。<br>取出变量地址如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//创建变量</span></span><br><span class="line">    <span class="type">int</span> i = <span class="number">1</span>;</span><br><span class="line">    <span class="comment">//&amp;是取地址操作符，&amp;i就是i的地址</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%p&quot;</span>, &amp;i);<span class="comment">//%p是以地址的方式打印</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021554619.png" alt="image-20220518223411717"></p>
+<p><font color=purple>注意：地址是以16进制输出的，这里的 i 占四个字节，每个字节都有地址，取出的第一个字节的地址(较小的地址)。</font></p>
+<h3 id="指针变量"><a href="#指针变量" class="headerlink" title="指针变量"></a>指针变量</h3><p>顾名思义：指针就是指向某一块<font color=green>内存空间</font>的。</p>
+<p>那么有了地址，地址如何储存，需要定义指针变量。</p>
+<p>代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> num = <span class="number">10</span>;</span><br><span class="line">    <span class="type">int</span>* p;<span class="comment">//p为一个整型变量的指针</span></span><br><span class="line">    p = &amp;num;<span class="comment">//赋值</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>通过指针间接访问变量</strong></p>
+<p>实例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> num = <span class="number">10</span>;</span><br><span class="line">    <span class="type">int</span>* p = &amp;num;<span class="comment">//通过*p找到num的空间</span></span><br><span class="line">    *p = <span class="number">20</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot; num=%d &quot;</span>, num);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;*p=%d&quot;</span>, *p);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021554841.png" alt="image-20220518223424504"></p>
+<p><strong>p和num在内存中的分布：</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021554179.png" alt="image-20220714225932844"></p>
+<p>以整型为例子，拓展在其他类型.</p>
+<p>代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">char</span> ch = <span class="string">&#x27;a&#x27;</span>;</span><br><span class="line">    <span class="type">char</span>* pc = &amp;ch;</span><br><span class="line">    *pc = <span class="string">&#x27;h&#x27;</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;ch= %c &quot;</span>, ch);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;*pc= %c &quot;</span>, *pc);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021554071.png" alt="image-20220518223436876"></p>
+<p><strong>小结：指针指向什么类型的变量，就定义什么类型的指针去接受该变量的地址</strong>。</p>
+<p><strong>指针变量的大小</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line">    <span class="comment">//指针变量的大小取决于地址的大小</span></span><br><span class="line">    <span class="comment">//32为平台上地址的大小是32bit</span></span><br><span class="line">    <span class="comment">//64位平台上地址的大小是64bit</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot; int*大小=%d\n&quot;</span>, <span class="keyword">sizeof</span>(<span class="type">int</span>*));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot; char*大小=%d\n&quot;</span>, <span class="keyword">sizeof</span>(<span class="type">char</span>*));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot; double*大小=%d\n&quot;</span>, <span class="keyword">sizeof</span>(<span class="type">double</span>*));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot; short*大小=%d\n&quot;</span>, <span class="keyword">sizeof</span>(<span class="type">short</span>*));</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>牢记：指针的大小和类型无关，只与平台有关</strong>。</p>
+<p><strong>小结：在32位平台上是4个byte，在64位平台上是8个byte</strong>。</p>
+<h3 id="数组名：指针常量"><a href="#数组名：指针常量" class="headerlink" title="数组名：指针常量"></a>数组名：指针常量</h3><p><strong>指针常量</strong></p>
+<p>指针是形容词，常量是名词。这回是以常量为中心的一个偏正结构短语。那么，指针常量的本质是一个常量，而用指针修饰它，那么说明这个常量的值应该是一个指针，意为：指针中的<font color=darkred>常量</font>。</p>
+<p>通常这样声明：</p>
+<blockquote>
+<p>int* const p ;</p>
+<p>因为const修饰的是指针p，即指针常量，<font color=purple>在声明的时候一定要给它赋初始值</font>。一旦赋值，以后这个常量再也<font color=purple>不能指向别的地址</font>。</p>
+</blockquote>
+<p><strong>数组名与指针常量类似</strong></p>
+<p>虽然指针常量的值也就是指向不能变，可是它指向的对象是可变的，因为我们并没有限制它指向的对象是常量。</p>
+<p>下面的操作是可以的。</p>
+<blockquote>
+<p>例：  a[0] &#x3D; ‘x’; &#x2F;&#x2F; 我们并没有限制a为常量指针（指向常量的指针）</p>
+</blockquote>
+<p>或者</p>
+<blockquote>
+<p>c[0] &#x3D; ‘x’ &#x2F;&#x2F; 与上面的操作一致</p>
+</blockquote>
+<p><strong>注意</strong>：指针常量和常量指针是不同概念。</p>
+<p><strong>常量指针</strong></p>
+<p><font color=purple>常量</font>是形容词，<font color=midnightblue>指针</font>是名词，以指针为中心的一个偏正结构短语。这样看，常量指针本质是指针，<font color=purple>常量</font>修饰它，表示这个<font color=midnightblue>指针</font>乃是一个指向<font color=purple>常量</font>的指针（变量）。<br>简而言之：一个<font color=purple>常量</font>的<font color=midnightblue>指针</font>。</p>
+<p>常量指针的声明：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="type">const</span>* p;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span>* p;</span><br></pre></td></tr></table></figure>
+
+<p>这两种方式效果相同。</p>
+<p>常量指针变量该变量的指向是可变的，但是无法通过指针改变指向的内容；</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">const</span> <span class="type">int</span>* p = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="type">int</span> num = <span class="number">0</span>;</span><br><span class="line">    p = &amp;num; <span class="comment">//p的值是可以改变的</span></span><br><span class="line">    *p = <span class="number">20</span>; <span class="comment">//无法修改*p的值，即num的值</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面的代码是无法通过的；</p>
+<hr>
+<h2 id="💦结构体"><a href="#💦结构体" class="headerlink" title="💦结构体"></a>💦结构体</h2><p>结构体是C语言中特别重要的知识点，结构体使得C语言有能力描述复杂类型。</p>
+<p>比如描述学生，学生包含：</p>
+<blockquote>
+<p> 名字+年龄+性别+学号</p>
+</blockquote>
+<p>这几项信息,只用一个变量来描述显然不行。</p>
+<p>这里只能使用结构体来描述了</p>
+<p> 例如：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="comment">//创建结构体类型</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">student</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">char</span> name[<span class="number">20</span>];<span class="comment">//名字</span></span><br><span class="line">    <span class="type">int</span> age;<span class="comment">//年龄</span></span><br><span class="line">    <span class="type">char</span> sex[<span class="number">10</span>];<span class="comment">//性别</span></span><br><span class="line">    <span class="type">char</span> id[<span class="number">10</span>];<span class="comment">//学号</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">student</span> <span class="title">a</span> =</span> &#123; <span class="string">&quot;张三&quot;</span>,<span class="number">20</span>,<span class="string">&quot;男&quot;</span>,<span class="string">&quot;2020088&quot;</span> &#125;;<span class="comment">//初始化结构体变量</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">student</span>* <span class="title">pa</span> =</span> &amp;a;<span class="comment">//将变量a的地址给结构体指针变量</span></span><br><span class="line">    <span class="comment">//使用.操作符访问结构成员，//打印结构体信息</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot; %s %d %s %s\n&quot;</span>, a.name, a.age, a.sex, a.id);</span><br><span class="line">    <span class="comment">//-&gt;操作符，//打印结构体信息</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot; %s %d %s %s\n&quot;</span>, pa-&gt;name, pa-&gt;age, pa-&gt;sex, pa-&gt;id);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021554803.png" alt="image-20220518223504204"></p>
+<p><strong>总结：结构体是用来描述一个复杂变量的</strong>。</p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>初识C语言下</p><p><a href="http://icarus.xinsong.xyz/2023/01/12/C/4.【初识C语言】（下）/">http://icarus.xinsong.xyz/2023/01/12/C/4.【初识C语言】（下）/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>NcPhoton</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>2023-01-12</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>2023-01-13</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/c/">c</a></div><div class="notification is-danger">You need to set <code>install_url</code> to use ShareThis. Please set it in <code>_config.yml</code>.</div></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">Like this article? Support the author with</h3><div class="buttons is-centered"><a class="button donate" href="/" target="_blank" rel="noopener" data-type="afdian"><span class="icon is-small"><i class="fas fa-charging-station"></i></span><span>Afdian.net</span></a><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>Alipay</span><span class="qrcode"><img src="/" alt="Alipay"></span></a><a class="button donate" href="/" target="_blank" rel="noopener" data-type="buymeacoffee"><span class="icon is-small"><i class="fas fa-coffee"></i></span><span>Buy me a coffee</span></a><a class="button donate" href="/" target="_blank" rel="noopener" data-type="patreon"><span class="icon is-small"><i class="fab fa-patreon"></i></span><span>Patreon</span></a><div class="notification is-danger">You forgot to set the <code>business</code> or <code>currency_code</code> for Paypal. Please set it in <code>_config.yml</code>.</div><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>Wechat</span><span class="qrcode"><img src="/" alt="Wechat"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2023/01/12/C/5.%E3%80%90C%E8%AF%AD%E8%A8%80%E8%AF%A6%E8%A7%A3%E3%80%91%E5%88%86%E6%94%AF%E4%B8%8E%E5%BE%AA%E7%8E%AF/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">C语言分支与循环</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2023/01/12/C/3.%E3%80%90%E5%88%9D%E8%AF%86C%E8%AF%AD%E8%A8%80%E3%80%91%EF%BC%88%E4%B8%8A%EF%BC%89/"><span class="level-item">初识C语言上</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">Comments</h3><div class="notification is-danger">You forgot to set the <code>shortname</code> for Disqus. Please set it in <code>_config.yml</code>.</div></div></div></div><!--!--><div class="column column-right is-4-tablet is-4-desktop is-4-widescreen  order-3 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">Catalogue</h3><ul class="menu-list"><li><a class="level is-mobile" href="#💦常见关键字"><span class="level-left"><span class="level-item">1</span><span class="level-item">💦常见关键字</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#关键字typedf"><span class="level-left"><span class="level-item">1.1</span><span class="level-item">关键字typedf</span></span></a></li><li><a class="level is-mobile" href="#关键字static"><span class="level-left"><span class="level-item">1.2</span><span class="level-item">关键字static</span></span></a></li></ul></li><li><a class="level is-mobile" href="#💦-define定义常量和宏"><span class="level-left"><span class="level-item">2</span><span class="level-item">💦#define定义常量和宏</span></span></a></li><li><a class="level is-mobile" href="#💦指针"><span class="level-left"><span class="level-item">3</span><span class="level-item">💦指针</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#内存"><span class="level-left"><span class="level-item">3.1</span><span class="level-item">内存</span></span></a></li><li><a class="level is-mobile" href="#指针变量"><span class="level-left"><span class="level-item">3.2</span><span class="level-item">指针变量</span></span></a></li><li><a class="level is-mobile" href="#数组名：指针常量"><span class="level-left"><span class="level-item">3.3</span><span class="level-item">数组名：指针常量</span></span></a></li></ul></li><li><a class="level is-mobile" href="#💦结构体"><span class="level-left"><span class="level-item">4</span><span class="level-item">💦结构体</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.svg" alt="Nico&#039;s Blog" height="28"></a><p class="is-size-7"><span>&copy; 2023 NcPhoton</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "This website uses cookies to improve your experience.",
+          dismiss: "Got it!",
+          allow: "Allow cookies",
+          deny: "Decline",
+          link: "Learn more",
+          policy: "Cookie Policy",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><script src="/live2d-widget/autoload.js"></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script></body></html>

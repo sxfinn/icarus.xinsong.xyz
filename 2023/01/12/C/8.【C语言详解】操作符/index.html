@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>C语言操作符 - Nico&#039;s Blog</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Nico&#039;s Blog"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Nico&#039;s Blog"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="操作符分类 算术操作符 移位操作符 位操作符 赋值操作符 单目操作符 关系操作符 逻辑操作符 条件操作符 逗号表达式 下标引用、函数调用和结构成员"><meta property="og:type" content="blog"><meta property="og:title" content="C语言操作符"><meta property="og:url" content="http://icarus.xinsong.xyz/2023/01/12/C/8.%E3%80%90C%E8%AF%AD%E8%A8%80%E8%AF%A6%E8%A7%A3%E3%80%91%E6%93%8D%E4%BD%9C%E7%AC%A6/"><meta property="og:site_name" content="Nico&#039;s Blog"><meta property="og:description" content="操作符分类 算术操作符 移位操作符 位操作符 赋值操作符 单目操作符 关系操作符 逻辑操作符 条件操作符 逗号表达式 下标引用、函数调用和结构成员"><meta property="og:locale" content="en_US"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021603009.png"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021603389.png"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021603546.png"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021603455.png"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021603290.png"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021603913.png"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021604252.png"><meta property="article:published_time" content="2023-01-12T13:28:25.000Z"><meta property="article:modified_time" content="2023-01-13T03:35:18.112Z"><meta property="article:author" content="NcPhoton"><meta property="article:tag" content="c"><meta property="article:tag" content="操作符"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021603009.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://icarus.xinsong.xyz/2023/01/12/C/8.%E3%80%90C%E8%AF%AD%E8%A8%80%E8%AF%A6%E8%A7%A3%E3%80%91%E6%93%8D%E4%BD%9C%E7%AC%A6/"},"headline":"C语言操作符","image":["https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021603009.png","https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021603389.png","https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021603546.png","https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021603455.png","https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021603290.png","https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021603913.png","https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021604252.png"],"datePublished":"2023-01-12T13:28:25.000Z","dateModified":"2023-01-13T03:35:18.112Z","author":{"@type":"Person","name":"NcPhoton"},"publisher":{"@type":"Organization","name":"Nico's Blog","logo":{"@type":"ImageObject","url":"http://icarus.xinsong.xyz/img/logo.svg"}},"description":"操作符分类 算术操作符 移位操作符 位操作符 赋值操作符 单目操作符 关系操作符 逻辑操作符 条件操作符 逗号表达式 下标引用、函数调用和结构成员"}</script><link rel="canonical" href="http://icarus.xinsong.xyz/2023/01/12/C/8.%E3%80%90C%E8%AF%AD%E8%A8%80%E8%AF%A6%E8%A7%A3%E3%80%91%E6%93%8D%E4%BD%9C%E7%AC%A6/"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.svg" alt="Nico&#039;s Blog" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2023-01-12T13:28:25.000Z" title="2023/1/12 21:28:25">2023-01-12</time></span><span class="level-item">Updated&nbsp;<time dateTime="2023-01-13T03:35:18.112Z" title="2023/1/13 11:35:18">2023-01-13</time></span><span class="level-item"><a class="link-muted" href="/categories/C%E8%AF%AD%E8%A8%80/">C语言</a></span><span class="level-item">35 minutes read (About 5244 words)</span></div></div><h1 class="title is-3 is-size-4-mobile">C语言操作符</h1><div class="content"><h3 id="操作符分类"><a href="#操作符分类" class="headerlink" title="操作符分类"></a>操作符分类</h3><blockquote>
+<p>算术操作符</p>
+<p>移位操作符</p>
+<p>位操作符</p>
+<p>赋值操作符</p>
+<p>单目操作符</p>
+<p>关系操作符</p>
+<p>逻辑操作符</p>
+<p>条件操作符</p>
+<p>逗号表达式</p>
+<p>下标引用、函数调用和结构成员</p>
+</blockquote>
+<span id="more"></span>
+
+<h3 id="算术操作符"><a href="#算术操作符" class="headerlink" title="算术操作符"></a>算术操作符</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+    -	*	 /	%</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>% 为取余也叫模，它的操作数只能是整数，而其他的操作符的操作数既可以为整数也可以为浮点数。</li>
+<li>操作数有浮点数时，则进行算术转换进行浮点数运算。</li>
+</ol>
+<h3 id="移位操作符"><a href="#移位操作符" class="headerlink" title="移位操作符"></a>移位操作符</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">左移操作符    &lt;&lt;	</span><br><span class="line">右移操作符    &gt;&gt;</span><br></pre></td></tr></table></figure>
+
+<p>移位操作符对应的是在计算机种的存储形式：<strong style="color:#7030a0;">补码</strong> （因此移位操作符的操作数仅仅只能是整数。）</p>
+<h4 id="左移操作符"><a href="#左移操作符" class="headerlink" title="左移操作符"></a>左移操作符</h4><blockquote>
+<p>对相应的二进制数进行操作。</p>
+</blockquote>
+<p>规则：高位舍去，低位补零。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021603009.png" alt="image-20220518224626323"></p>
+<blockquote>
+<p>拓展</p>
+</blockquote>
+<p>左移意味着每一个二进制位的权重会增加1</p>
+<p>例如：整形char</p>
+<blockquote>
+<p>假设一个char类型的数据为 6</p>
+</blockquote>
+<p>那么它的二进制表示为</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">    <span class="number">00000110</span>  	<span class="comment">//6</span></span><br><span class="line">左移一位后：</span><br><span class="line">    <span class="number">00001100</span>	<span class="comment">//12</span></span><br></pre></td></tr></table></figure>
+
+<p>显然任何二进制数都可以表示为：</p>
+<p>$Σ|\sum\limits_{i&#x3D;0}^{n}$​ k * 2^i^</p>
+<p>(k为0或者1)</p>
+<p>那么左移一位后，在没有高位溢出的情况下，每一位的权重都增加了1</p>
+<p>那么做简单变形：</p>
+<p>$Σ|\sum\limits_{i&#x3D;1}^{n+1}$ k * 2^i^  根据分配律可得：$Σ|\sum\limits_{i&#x3D;0}^{n}$​ (k * 2^i^ ) * 2</p>
+<p>即乘2操作;</p>
+<p><strong style="color:#7030a0;"><strong>注意：仅仅是在无溢出的情况下</strong></strong></p>
+<h4 id="右移操作符"><a href="#右移操作符" class="headerlink" title="右移操作符"></a>右移操作符</h4><p>移位规则：</p>
+<ul>
+<li>算数右移</li>
+</ul>
+<p>左边用符号位填充，右边舍弃。</p>
+<ul>
+<li>逻辑右移</li>
+</ul>
+<p>左边用0填充，右边舍弃。</p>
+<p><strong>一般来说我们只针对逻辑右移来讨论：</strong></p>
+<p>与左移不同的是，右移操作符在移位的过程中会经常低位非零而被舍弃的情况。</p>
+<p>例如：将3右移1位</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//逻辑右移</span></span><br><span class="line"><span class="number">00000011</span></span><br><span class="line"><span class="number">3</span> &gt;&gt; <span class="number">1</span></span><br><span class="line"><span class="number">00000001</span></span><br></pre></td></tr></table></figure>
+
+<p>假设 char a &#x3D; n (n为任何数)</p>
+<p>我们准备将 a 右移 k 个位置，可以将其分解为 k 次向右移动一个位置（二进制位）</p>
+<p>那么每次分为两种情况</p>
+<ol>
+<li>最低位为1</li>
+<li>最低位为0</li>
+</ol>
+<p>最低位为1，即先舍去最低位，那么对应到二进制数则可通过 -1操作来完成，然后在移位。</p>
+<p>最低位为0，那么则直接移位，不涉及舍弃有效数问题</p>
+<p>通过归纳总结：</p>
+<p>可以得到 右移操作：</p>
+<ol>
+<li><p>如果操作数为<span style="background:#bbffff;">奇数</span> 则先 -1 ，再右移。</p>
+</li>
+<li><p>如果为<span style="background:#bbffff;">偶数</span>，则直接右移。</p>
+</li>
+</ol>
+<p>通过左移操作的推到同理可得，右移可以是 除以2的操作，即与除以2的结果取整等效。</p>
+<p>则<strong>右移与整除相同</strong>，都是<strong>结果取整</strong>。</p>
+<blockquote>
+<p>如果是对负数进行移位操作呢？</p>
+</blockquote>
+<p>在数据未溢出的情况下，结论是相同的。</p>
+<p>左移 &lt;&#x3D;&#x3D;&gt; 乘2</p>
+<p>右移 &lt;&#x3D;&#x3D;&gt; 除以2（整除）</p>
+<blockquote>
+<p>思考：如果对-1，进行右移 n 位那么结果如何？</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">11111111111111111111111111111111</span></span><br><span class="line">    <span class="comment">//右移1位</span></span><br><span class="line"><span class="number">11111111111111111111111111111111</span></span><br></pre></td></tr></table></figure>
+
+<p>可以看到是未变化的，通过上面得出的结论：</p>
+<p>实际上 -1 右移可看作如下步骤：</p>
+<ol>
+<li>-1为奇数，因此先-1得到-2；</li>
+<li>进行除以2的操作得到 -1</li>
+</ol>
+<p>重复上述过程。</p>
+<p><strong>注意：</strong>对于移位运算符，移动负数位是标准为定义的。</p>
+<h3 id="位操作符"><a href="#位操作符" class="headerlink" title="位操作符"></a>位操作符</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">    &amp;	按位与</span><br><span class="line">    |	按位或</span><br><span class="line">    ^	按位异或	</span><br><span class="line">    </span><br><span class="line">注意：操作数必须为整数</span><br></pre></td></tr></table></figure>
+
+<p>位操作符可以做很多有趣的事情。</p>
+<p>对于位操作，我们通常只用进行某一位上对应的二进制值，来获得规律；</p>
+<p>异或记住口诀：</p>
+<p>相同为0， 相异为1.</p>
+<p>可以试想两个个极端情况：</p>
+<ol>
+<li>一个数二进制全为0</li>
+<li>两个数二进制相同</li>
+</ol>
+<p>其中一个数全为0的情况：</p>
+<blockquote>
+<p>0 ^ 1 -&gt; 1</p>
+</blockquote>
+<blockquote>
+<p>0 ^ 0 -&gt; 0</p>
+</blockquote>
+<p>非零数的每一个二进制都没变</p>
+<p><strong>那么可以轻松得出异或的值还是等于另一个非零的值</strong></p>
+<p>两个数完全一样的情况：</p>
+<blockquote>
+<p>0 ^ 0 -&gt; 0</p>
+</blockquote>
+<blockquote>
+<p>1 ^ 1 -&gt; 0</p>
+</blockquote>
+<p>无论如何，最终二进制位全为0，</p>
+<p>即两个相同值异或会得到 0 。</p>
+<blockquote>
+<p>利用这个特性：</p>
+</blockquote>
+<p><strong>思考：如何不使用第三个变量交换两个变量的值。</strong></p>
+<p>通常我们会写出如下代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">swap</span><span class="params">(<span class="type">int</span>* num1, <span class="type">int</span>* num2)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> tmp = *num1;</span><br><span class="line">    *num1 = *num2;</span><br><span class="line">    *num2 = tmp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>但是这是不符合题意的，但通过位运算，我们可以做到。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">swap</span><span class="params">(<span class="type">int</span>* n1, <span class="type">int</span>* n2)</span></span><br><span class="line">&#123;</span><br><span class="line">    *n1 = *n1 ^ *n2;</span><br><span class="line">    *n2 = *n1 ^ *n2;</span><br><span class="line">    *n1 = *n1 ^ *n2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>拿a和b来举例：</p>
+<p>设未经过任何修改的a，b的值分别等于_a, _b的值</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> a = <span class="number">10</span>;</span><br><span class="line">    <span class="type">int</span> b = <span class="number">20</span>;</span><br><span class="line">    a = a ^ b; <span class="comment">//(1)</span></span><br><span class="line">    b = a ^ b; <span class="comment">//(2)</span></span><br><span class="line">    a = a ^ b; <span class="comment">//(3)</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;a = %d b = %d\n&quot;</span>, a, b);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>经过(1)后，a的值实际上是 _a ^ _b</p>
+<p>经过(2)后，b的值实际上是 _a ^ _b ^ _b &#x3D;&#x3D; _a</p>
+<p>经过(3)后，a的值实际上是 _a ^ _b ^ _a &#x3D;&#x3D; _b</p>
+<p>显然目的已经达成。</p>
+<blockquote>
+<p>思考：如何统计一个数它的二进制位的1 的个数</p>
+</blockquote>
+<p>试想，如果有一种操作可以每次消除掉一个二进制的1，消除n次，那么这个n就为1的个数</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">numof1</span><span class="params">(<span class="type">int</span> k)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (k)</span><br><span class="line">    &#123;</span><br><span class="line">        k = k &amp; (k - <span class="number">1</span>);<span class="comment">//消除二进制最后一位1</span></span><br><span class="line">        ++cnt;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> cnt;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="赋值操作符"><a href="#赋值操作符" class="headerlink" title="赋值操作符"></a>赋值操作符</h3><blockquote>
+<p>+&#x3D;</p>
+<p>-&#x3D;</p>
+<p>*&#x3D;</p>
+<p>&#x2F;&#x3D;</p>
+<p>%&#x3D;</p>
+<p>&gt;&gt;&#x3D;</p>
+<p>&lt;&lt;&#x3D;</p>
+<p>&amp;&#x3D;</p>
+<p>|&#x3D;</p>
+<p>^&#x3D;</p>
+</blockquote>
+<p>很简单，&#x3D;不再是数学种的判断，而是赋值。</p>
+<p>而像这样 +&#x3D; 的复合操作符，可以写成：</p>
+<p>例如：</p>
+<p>a &#x3D; a + b  &lt;&#x3D;&#x3D;&gt; a +&#x3D; b;</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> a = <span class="number">10</span>;</span><br><span class="line">    a += <span class="number">20</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, a);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="单目操作符"><a href="#单目操作符" class="headerlink" title="单目操作符"></a>单目操作符</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">!      逻辑反操作</span><br><span class="line">-      负值</span><br><span class="line">+      正值</span><br><span class="line">&amp;      取地址</span><br><span class="line"><span class="keyword">sizeof</span>    操作数的类型长度（以字节为单位）</span><br><span class="line">~      对一个数的二进制按位取反</span><br><span class="line">--      前置、后置--</span><br><span class="line">++      前置、后置++</span><br><span class="line">*      间接访问操作符(解引用操作符)</span><br><span class="line">(类型)    强制类型转换</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> a = <span class="number">10</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, a++);</span><br><span class="line">    a = <span class="number">10</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, ++a);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="前置和后置"><a href="#前置和后置" class="headerlink" title="前置和后置++"></a>前置和后置++</h4><p>++a称作前置加加，a++称作后置加加。</p>
+<p>简单记忆：</p>
+<p>前置先++再使用，后置先使用再++。</p>
+<p>实质上这里的前后置++在C++中是可以通过函数重载来完成的，前置++返回的是加1后的值，而后置++是返回的加一前的值的一份拷贝。</p>
+<h4 id="sizeof"><a href="#sizeof" class="headerlink" title="sizeof"></a>sizeof</h4><p>sizeof实际也是操作符，类型为size_t，可以是计算类型的大小，也可以是变量。</p>
+<p>注意：sizeof(表达式)，表达式种的值不会真的去执行，可以看作sizeof是去推导表达式的最终类型，而不会去执行表达式的内容。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> a = <span class="number">10</span>;</span><br><span class="line">    a += <span class="number">1.1</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, <span class="keyword">sizeof</span>(a += <span class="number">1</span>));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, a);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021603389.png" alt="image-20220518224653566"></p>
+<blockquote>
+<p>思考：int a &#x3D; 10; a +&#x3D; 1.1;最终a的值为多少？类型呢？</p>
+</blockquote>
+<p>a +&#x3D; 1.1;   &lt;&#x3D;&#x3D;&gt;  a &#x3D; a + 1.1;</p>
+<p>a + 1.1实际上会进行算数转换，a会产生一个类型为double临时拷贝，因此计算结果是 double的11.1，但是在赋值给a时，进行隐式类型转换为int类型，得到11,赋值给a。</p>
+<p>前置 – 和后置 – 同理。</p>
+<p>如何验证呢？</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> a = <span class="number">10</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;字节数：%d\n&quot;</span>, <span class="keyword">sizeof</span>(a += <span class="number">1.1</span>));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;a:%d&quot;</span>, a);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021603546.png" alt="image-20220518224706074"></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> a = <span class="number">10</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;字节数：%d\n&quot;</span>, <span class="keyword">sizeof</span>(a + <span class="number">1.1</span>));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;a:%d&quot;</span>, a);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021603455.png" alt="image-20220518224713707"></p>
+<p>可以看到，这里验证了上面所说的情况。</p>
+<p>a的值并没有变，并且 a + 1.1的结果时double类型占有8个字节。</p>
+<h3 id="数组-和-sizeof"><a href="#数组-和-sizeof" class="headerlink" title="数组 和 sizeof"></a>数组 和 sizeof</h3><p>数组名普遍被认为是一个指针，可情况实际如此吗？</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> arr[<span class="number">10</span>] = &#123; <span class="number">0</span> &#125;;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, <span class="keyword">sizeof</span>(arr));</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果arr是个指针，那么输出应该为 4 或者 8</p>
+<p>输出：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021603290.png" alt="image-20220518224719786"></p>
+<p>输出结果是40，显然不是我们预想的。</p>
+<p>实际上，数组名是一个<strong>数组类型</strong>。</p>
+<p>例如：int arr[10] &#x3D; {0};</p>
+<p>那么arr的类型实际上是 int[10];</p>
+<p>我们通过typedef来验证一下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">A</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">int</span> a;</span><br><span class="line">&#125;Type[<span class="number">10</span>];</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    Type a;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, <span class="keyword">sizeof</span>(Type));</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>输出为：40</p>
+</blockquote>
+<p>这里的Type就是基于struct A[10]复合类型所定义出的一个新类型。</p>
+<p>它的类型和我们struct A arr[10]创建出来的数组是同一个类型，与Type arr等效。</p>
+<p>可以看出这里的arr实际上是Type类型，即struct A [10]类型。</p>
+<p><strong>所以，虽然通常情况下我们把数组名当作指针来使用，但实际上它的类型并不是指针。</strong></p>
+<p><strong>目前我们经常接触到的只有两个场景是将数组名当作一个数组类型而不是指针。</strong></p>
+<ol>
+<li>sizeof(arr)</li>
+<li>&amp;arr</li>
+</ol>
+<p>其他的情况我们视作其为指针是没问题的。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">test</span><span class="params">(<span class="type">int</span> arr[<span class="number">10</span>])</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;传参后：%d\n&quot;</span>, <span class="keyword">sizeof</span>(arr));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> arr[<span class="number">10</span>] = &#123; <span class="number">0</span> &#125;;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;传参前：%d\n&quot;</span>, <span class="keyword">sizeof</span>(arr));</span><br><span class="line">    test(arr);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021603913.png" alt="image-20220518224727197"></p>
+<p>怎么数组名作为实参传递至函数大小就不同了呢？</p>
+<p>虽然我们的形参形式写的是 int arr[10],但是其本质是int*类型，试想如果函数传参拷贝每次都传一整个数组，那太浪费资源了，因此数组名传参，实际上形参是一个指针，指向数组首元素。</p>
+<p>这也印证了上面所说的两种情况下，数组名是数组类型外，其他时候都视作为指针。</p>
+<h3 id="关系操作符"><a href="#关系操作符" class="headerlink" title="关系操作符"></a>关系操作符</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;</span><br><span class="line">&gt;=</span><br><span class="line">&lt;</span><br><span class="line">&lt;=</span><br><span class="line">!=  用于测试“不相等”</span><br><span class="line">==    用于测试“相等”</span><br></pre></td></tr></table></figure>
+
+<p>这些关系运算符比较简单，没什么可讲的，但是我们要注意一些运算符使用时候的陷阱。</p>
+<p>注意：</p>
+<p>在编程的过程中&#x3D;&#x3D; 和&#x3D;不小心写错，导致的错误。</p>
+<h3 id="逻辑操作符"><a href="#逻辑操作符" class="headerlink" title="逻辑操作符"></a>逻辑操作符</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&amp;&amp;    逻辑与</span><br><span class="line">||    逻辑或</span><br></pre></td></tr></table></figure>
+
+<p>牢记：</p>
+<p>&amp;&amp; 只要有一个为假，结果就为假。</p>
+<p>||只要有一个为真，结果就为真。</p>
+<p>并且一旦可以推断出结果真假，就不再执行后面的逻辑表达式。（短路）</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> a = <span class="number">0</span>, b = <span class="number">2</span>, c = <span class="number">3</span>;</span><br><span class="line">    <span class="type">int</span> i = <span class="number">0</span>;</span><br><span class="line">    i = a++ &amp;&amp; b++ &amp;&amp; ++c; （<span class="number">1</span>）</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;i==%d a==%d c==%d d==%d\n&quot;</span>, i, a, b, c);</span><br><span class="line">    a = <span class="number">0</span>, b = <span class="number">2</span>, c = <span class="number">3</span>;</span><br><span class="line">    i = a++ || b++ || ++c; （<span class="number">2</span>）</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;i==%d a==%d c==%d d==%d\n&quot;</span>, i, a, b, c);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021604252.png" alt="image-20220518224735932"></p>
+<p>两组测试c的值并不同，实际上是因为在（1）中，a++的值为假，就不在继续执行后续表达式。</p>
+<p>而d的值相同，则是在（2）中b++的值已经为真了，因此不再继续执行后续表达式。</p>
+<h3 id="三目操作符"><a href="#三目操作符" class="headerlink" title="三目操作符"></a>三目操作符</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exp1 ? exp2 : exp3</span><br></pre></td></tr></table></figure>
+
+<p>例如：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> a = <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> ret = a == <span class="number">0</span> ? <span class="number">10</span> : <span class="number">100</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, ret);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>简言之就是如果exp1为真则执行exp2，否则执行exp3.</p>
+<p>等效于：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> a = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> (a == <span class="number">0</span>)</span><br><span class="line">        ret = <span class="number">10</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        ret = <span class="number">100</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们可以利用三目操作符写出简洁的取两数较大值的代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> ret = a &lt; b ? b : a;</span><br></pre></td></tr></table></figure>
+
+<h3 id="逗号表达式"><a href="#逗号表达式" class="headerlink" title="逗号表达式"></a>逗号表达式</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exp1, exp2, exp3, …expN</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> a = <span class="number">1</span>;</span><br><span class="line">    <span class="type">int</span> b = <span class="number">2</span>;</span><br><span class="line">    <span class="type">int</span> c = (a &gt; b, a = b + <span class="number">10</span>, a, b = a + <span class="number">1</span>);<span class="comment">//逗号表达式</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>c的值为13</p>
+</blockquote>
+<p>逗号表达式，就是用逗号隔开的多个表达式。</p>
+<p>逗号表达式，<span style="background:#BBFFBB;">从左向右</span>依次执行。整个表达式的结果是<span style="background:#FF9999;">最后一个表达式</span>的结果。</p>
+<h3 id="下标引用、函数调用和结构成员"><a href="#下标引用、函数调用和结构成员" class="headerlink" title="下标引用、函数调用和结构成员"></a>下标引用、函数调用和结构成员</h3><ol>
+<li>[]下标引用操作符</li>
+</ol>
+<p>其为双目操作符，操作数为一个整形索引值和一个数组名或指针。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> arr[<span class="number">10</span>] = &#123; <span class="number">0</span> &#125;;</span><br><span class="line">    arr[<span class="number">9</span>];</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>arr[9] &#x3D;&#x3D;  *(arr+9)&#x3D;&#x3D; *(9 + arr) &#x3D;&#x3D; 9[arr];</p>
+<p>很奇怪的写法，但确实存在。</p>
+<ol start="2">
+<li>( ) 函数调用操作符<br>接受一个或者多个操作数：第一个操作数是函数名，剩余的操作数就是传递给函数的参数。</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">Add</span><span class="params">(<span class="type">int</span> n1, <span class="type">int</span> n2)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> n1 + n2;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> a = <span class="number">1</span>, b = <span class="number">2</span>;</span><br><span class="line">    Add(a, b);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>操作数为Add和n1，n2.</p>
+<ol start="3">
+<li>访问一个结构的成员<br>. 结构体.成员名<br>-&gt; 结构体指针-&gt;成员名</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Stu</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">char</span> name[<span class="number">10</span>];</span><br><span class="line">    <span class="type">int</span> age;</span><br><span class="line">    <span class="type">char</span> sex[<span class="number">5</span>];</span><br><span class="line">    <span class="type">double</span> score;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="type">void</span> <span class="title function_">set_age1</span><span class="params">(<span class="keyword">struct</span> Stu stu)</span></span><br><span class="line">&#123;</span><br><span class="line">    stu.age = <span class="number">18</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">void</span> <span class="title function_">set_age2</span><span class="params">(<span class="keyword">struct</span> Stu* pStu)</span></span><br><span class="line">&#123;</span><br><span class="line">    pStu-&gt;age = <span class="number">18</span>;<span class="comment">//结构成员访问</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Stu</span> <span class="title">stu</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Stu</span>* <span class="title">pStu</span> =</span> &amp;stu;<span class="comment">//结构成员访问</span></span><br><span class="line">    stu.age = <span class="number">20</span>;<span class="comment">//结构成员访问</span></span><br><span class="line">    set_age1(stu);</span><br><span class="line">    pStu-&gt;age = <span class="number">20</span>;<span class="comment">//结构成员访问</span></span><br><span class="line">    set_age2(pStu);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="表达式求值"><a href="#表达式求值" class="headerlink" title="表达式求值"></a>表达式求值</h3><p>表达式求值的顺序一部分是由操作符的优先级和结合性决定。同样，有些表达式的操作数在求值的过程中可能需要转换为其他类型。</p>
+<h4 id="隐式类型转换"><a href="#隐式类型转换" class="headerlink" title="隐式类型转换"></a>隐式类型转换</h4><p>C的整型算术运算总是至少以缺省整型类型的精度来进行的。</p>
+<p>为了获得这个精度，表达式中的字符和短整型操作数在使用之前被转换为普通整型，这种转换称为<strong>整型提升</strong>。</p>
+<p>为什么有整形提升？</p>
+<blockquote>
+<p>表达式的整型运算要在CPU的相应运算器件内执行，CPU内整型运算器(ALU)的操作数的字节长度一般就是int的字节长度，同时也是CPU的通用寄存器的长度。因此，即使两个char类型的相加，在CPU执行时实际上也要先转换为CPU内整型操作数的标准长度。</p>
+<p>通用CPU（general-purpose CPU）是难以直接实现两个8比特字节直接相加运算（虽然机器指令中可能有这种字节相加指令）。所以，表达式中各种长度可能<strong style="color:#c00000;">小于</strong>int长度的整型值，都必须先转换为int或unsigned int，然后才能送入CPU去执行运算。</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">char</span> a, b = <span class="number">2</span>, c = <span class="number">3</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, <span class="keyword">sizeof</span>(b + c));</span><br><span class="line">    a = b + c;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, <span class="keyword">sizeof</span>(a));</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>输出：</p>
+<p>4</p>
+<p>1</p>
+</blockquote>
+<p>b + c的大小为4个字节，即int的大小，而a为char。</p>
+<p>过程：b和c的值被提升为普通整型，然后再执行加法运算，得到结果后将被截断为char存储到a。</p>
+<p><strong>如何进行整型提升</strong></p>
+<blockquote>
+<p>整形提升是按照变量的数据类型的符号位来提升的</p>
+</blockquote>
+<ol>
+<li><p>有符号数</p>
+<p>整型提升高位补充符号位</p>
+</li>
+</ol>
+<ul>
+<li>正数 高位补0</li>
+<li>负数 高位补1</li>
+</ul>
+<ol start="2">
+<li>无符号数</li>
+</ol>
+<p>​		高位直接补0</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//负数的整形提升</span></span><br><span class="line"><span class="type">char</span> c1 = <span class="number">-1</span>;</span><br><span class="line">变量c1的二进制位(补码)中只有<span class="number">8</span>个比特位：</span><br><span class="line"><span class="number">1111111</span></span><br><span class="line">因为 <span class="type">char</span> 为有符号的 <span class="type">char</span></span><br><span class="line">所以整形提升的时候，高位补充符号位，即为<span class="number">1</span></span><br><span class="line">提升之后的结果是：</span><br><span class="line"><span class="number">11111111111111111111111111111111</span></span><br><span class="line"><span class="comment">//正数的整形提升</span></span><br><span class="line"><span class="type">char</span> c2 = <span class="number">1</span>;</span><br><span class="line">变量c2的二进制位(补码)中只有<span class="number">8</span>个比特位：</span><br><span class="line"><span class="number">00000001</span></span><br><span class="line">因为 <span class="type">char</span> 为有符号的 <span class="type">char</span></span><br><span class="line">所以整形提升的时候，高位补充符号位，即为<span class="number">0</span></span><br><span class="line">提升之后的结果是：</span><br><span class="line"><span class="number">00000000000000000000000000000001</span></span><br><span class="line"><span class="comment">//无符号整形提升，高位补0</span></span><br></pre></td></tr></table></figure>
+
+<p>例子：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">char</span> a = <span class="number">0xb6</span>;</span><br><span class="line">    <span class="type">short</span> b = <span class="number">0xb600</span>;</span><br><span class="line">    <span class="type">int</span> c = <span class="number">0xb6000000</span>;</span><br><span class="line">    <span class="keyword">if</span> (a == <span class="number">0xb6</span>)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;a&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span> (b == <span class="number">0xb600</span>)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;b&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span> (c == <span class="number">0xb6000000</span>)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;c&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>先转换为二进制位：</p>
+<p>a：1011 0110 整形提升–》1111 1111 1111 1111 1111 1111 1011 0110</p>
+<p>b：1011 0110 0000 0000 整型提升–》1111 1111 1111 1111 1011 0110 0000 0000</p>
+<p>c：1011 0110 0000 0000 0000 0000 0000 0000 无需整形提升。</p>
+<p>a,b整形提升之后,变成了负数,所以表达式 a &#x3D;&#x3D; 0xb6 , b &#x3D;&#x3D; 0xb600 的结果是假,但是c不发生整形提升,则表达式 c&#x3D;&#x3D;0xb6000000 的结果是真.</p>
+<p>因此整型提升后：a !&#x3D; 0xb6, b !&#x3D; 0xb600</p>
+<p><strong>只要参与运算就会尝试整型提升。</strong></p>
+<p><strong>判断赋值等一切操作都被当做运算。</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">char</span> c = <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%u\n&quot;</span>, <span class="keyword">sizeof</span>(c));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%u\n&quot;</span>, <span class="keyword">sizeof</span>(+c));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%u\n&quot;</span>, <span class="keyword">sizeof</span>(-c));</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>输出：</p>
+<p>1</p>
+<p>4</p>
+<p>4</p>
+</blockquote>
+<p><strong>因为+c和-c也被认为是执行了运算。</strong></p>
+<p>c只要参与表达式运算,就会发生整形提升,表达式 +c ,就会发生提升,所以 sizeof(+c) 是4个字节.</p>
+<p>表达式 -c 也会发生整形提升,所以 sizeof(-c) 是4个字节,但是 sizeof(c) ,就是1个字节.</p>
+<h4 id="算术转换"><a href="#算术转换" class="headerlink" title="算术转换"></a>算术转换</h4><p>如果某个操作符的各个操作数属于不同的类型，那么除非其中一个操作数的转换为另一个操作数的类型，否则操作就无法进行。下面的层次体系称为<strong>寻常算术转换</strong>。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">long</span> <span class="type">double</span></span><br><span class="line"><span class="type">double</span></span><br><span class="line"><span class="type">float</span></span><br><span class="line"><span class="type">unsigned</span> <span class="type">long</span> <span class="type">int</span></span><br><span class="line"><span class="type">long</span> <span class="type">int</span></span><br><span class="line"><span class="type">unsigned</span> <span class="type">int</span></span><br><span class="line"><span class="type">int</span></span><br></pre></td></tr></table></figure>
+
+<p>一般来说按照上表<strong>从下至上</strong>进行转换（向精度更高的类型去转换）</p>
+<p>如：1 + 1.1 则这里的1会被转换成double类型。</p>
+<p>但是算术转换要合理，要不然会有一些潜在的问题。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">float</span> f = <span class="number">3.14</span>;<span class="comment">//赋值也是一种运算</span></span><br><span class="line"><span class="type">int</span> num = f;<span class="comment">//隐式转换，会有精度丢失</span></span><br></pre></td></tr></table></figure>
+
+<p>其实像这样的转换是不太合理但又不可避免的，通常会伴随着精度的丢失，相当于强制转换为了精度较低的类型。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">size_t</span> a = <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> b = <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">if</span> (b &lt; a)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;&lt;&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;&gt;&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>输出：</p>
+<p>&gt;</p>
+</blockquote>
+<p>-1 &gt; 0，这显然不是这道题的解释。</p>
+<p>注意到 a为无符号整形，判断 b &lt; a时 a会算术转换为 size_t；</p>
+<p>-1的补码为全1，而当其被当作无符号整形时就是一个非常大的数，然后再与0进行比较。</p>
+<p>其实在整形家族的类型转换中，无非就是符号位的不同识别方式，以及各种截断，而浮点数类型想要和整形互相转换，那么由于存储的方式的巨大差异，编译器就不仅仅是截断或者改变识别方式那么简单了，而是涉及一些复杂的处理，当然我们不必关心。</p>
+<h4 id="操作符的属性"><a href="#操作符的属性" class="headerlink" title="操作符的属性"></a>操作符的属性</h4><p>复杂表达式的求值有三个影响的因素。</p>
+<ol>
+<li><p>操作符的优先级</p>
+</li>
+<li><p>操作符的结合性（优先级相同，决定从左向右运算还是从右向左）</p>
+</li>
+<li><p>是否控制求值顺序。（&amp;&amp; ， || ， ？ ：，以及逗号表达式）</p>
+</li>
+</ol>
+<p>  两个相邻的操作符先执行哪个？取决于他们的优先级。如果两者的优先级相同，取决于他们的结合性。</p>
+<p>先看优先级，只有相邻的操作符间才能通过优先级确定计算顺序。</p>
+<p>操作符优先级</p>
+<p>优先级不建议背，可以使用括号解决优先级顺序问题。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//表达式的求值部分由操作符的优先级决定。</span></span><br><span class="line"><span class="comment">//表达式1</span></span><br><span class="line">a*b + c*d + e*f</span><br></pre></td></tr></table></figure>
+
+<p>计算上表达式时，由于 * 比+的优先级高，只能保证* 的计算是比+早，但是优先级并不能决定第三个*比第一个+早执行。</p>
+<p>所以表达式的执行顺序可能是：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">a*b</span><br><span class="line">c*d</span><br><span class="line">a*b + c*d</span><br><span class="line">e*f</span><br><span class="line">a*b + c*d + e*f</span><br><span class="line">或者：</span><br><span class="line">a*b</span><br><span class="line">c*d</span><br><span class="line">e*f</span><br><span class="line">a*b + c*d</span><br><span class="line">a*b + c*d + e*f</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//表达式2</span></span><br><span class="line">c + --c;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注释：同上，操作符的优先级只能决定自减–的运算在+的运算的前面，但是我们并没有办法得知，+操作符的左操作数的获取在右操作数取值之前还是之后，所以结果是不可预测的，是有歧义的。</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//代码3-非法表达式</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> i = <span class="number">10</span>;</span><br><span class="line">    i = i-- - --i * (i = <span class="number">-3</span>) * i++ + ++i;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;i = %d\n&quot;</span>, i);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>表达式3在不同编译器中测试结果：非法表达式程序的结果.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//代码4</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">fun</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">static</span> <span class="type">int</span> count = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> ++count;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> answer;</span><br><span class="line">    answer = fun() - fun() * fun();</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, answer);<span class="comment">//输出多少？</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>虽然在大多数的编译器上求得结果都是相同的。</p>
+<p>但是上述代码 <code>answer = fun() - fun() * fun();</code> 中我们只能通过操作符的优先级得知：先算乘法，再算减法。</p>
+<p>函数的调用先后顺序无法通过操作符的优先级确定,也就是说操作数的确定顺序和操作符优先级无关。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//代码5</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> i = <span class="number">1</span>;</span><br><span class="line">    <span class="type">int</span> ret = (++i) + (++i) + (++i);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, ret);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, i);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>看看同样的代码产生了不同的结果，这是为什么？</p>
+<p>简单看一下汇编代码， 就可以分析清楚.</p>
+<p>这段代码中的第一个 + 在执行的时候，第三个++是否执行，这个是不确定的，因为依靠操作符的优先级和结合性是无法决定第一个 + 和第三个前置 ++ 的先后顺序。</p>
+<p><strong>总结：我们写出的表达式如果不能通过操作符的属性确定唯一的计算路径，那这个表达式就是存在问题的。</strong></p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>C语言操作符</p><p><a href="http://icarus.xinsong.xyz/2023/01/12/C/8.【C语言详解】操作符/">http://icarus.xinsong.xyz/2023/01/12/C/8.【C语言详解】操作符/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>NcPhoton</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>2023-01-12</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>2023-01-13</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/c/">c</a><a class="link-muted mr-2" rel="tag" href="/tags/%E6%93%8D%E4%BD%9C%E7%AC%A6/">操作符</a></div><div class="notification is-danger">You need to set <code>install_url</code> to use ShareThis. Please set it in <code>_config.yml</code>.</div></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">Like this article? Support the author with</h3><div class="buttons is-centered"><a class="button donate" href="/" target="_blank" rel="noopener" data-type="afdian"><span class="icon is-small"><i class="fas fa-charging-station"></i></span><span>Afdian.net</span></a><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>Alipay</span><span class="qrcode"><img src="/" alt="Alipay"></span></a><a class="button donate" href="/" target="_blank" rel="noopener" data-type="buymeacoffee"><span class="icon is-small"><i class="fas fa-coffee"></i></span><span>Buy me a coffee</span></a><a class="button donate" href="/" target="_blank" rel="noopener" data-type="patreon"><span class="icon is-small"><i class="fab fa-patreon"></i></span><span>Patreon</span></a><div class="notification is-danger">You forgot to set the <code>business</code> or <code>currency_code</code> for Paypal. Please set it in <code>_config.yml</code>.</div><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>Wechat</span><span class="qrcode"><img src="/" alt="Wechat"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2023/01/12/C/9.%E3%80%90C%E8%AF%AD%E8%A8%80%E8%AF%A6%E8%A7%A3%E3%80%91%E6%8C%87%E9%92%88/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">C语言指针</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2023/01/12/C/7.%E3%80%90C%E8%AF%AD%E8%A8%80%E8%AF%A6%E8%A7%A3%E3%80%91%E6%95%B0%E7%BB%84/"><span class="level-item">C语言数组</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">Comments</h3><div class="notification is-danger">You forgot to set the <code>shortname</code> for Disqus. Please set it in <code>_config.yml</code>.</div></div></div></div><!--!--><div class="column column-right is-4-tablet is-4-desktop is-4-widescreen  order-3 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">Catalogue</h3><ul class="menu-list"><li><a class="level is-mobile" href="#操作符分类"><span class="level-left"><span class="level-item">1</span><span class="level-item">操作符分类</span></span></a></li><li><a class="level is-mobile" href="#算术操作符"><span class="level-left"><span class="level-item">2</span><span class="level-item">算术操作符</span></span></a></li><li><a class="level is-mobile" href="#移位操作符"><span class="level-left"><span class="level-item">3</span><span class="level-item">移位操作符</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#左移操作符"><span class="level-left"><span class="level-item">3.1</span><span class="level-item">左移操作符</span></span></a></li><li><a class="level is-mobile" href="#右移操作符"><span class="level-left"><span class="level-item">3.2</span><span class="level-item">右移操作符</span></span></a></li></ul></li><li><a class="level is-mobile" href="#位操作符"><span class="level-left"><span class="level-item">4</span><span class="level-item">位操作符</span></span></a></li><li><a class="level is-mobile" href="#赋值操作符"><span class="level-left"><span class="level-item">5</span><span class="level-item">赋值操作符</span></span></a></li><li><a class="level is-mobile" href="#单目操作符"><span class="level-left"><span class="level-item">6</span><span class="level-item">单目操作符</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#前置和后置"><span class="level-left"><span class="level-item">6.1</span><span class="level-item">前置和后置++</span></span></a></li><li><a class="level is-mobile" href="#sizeof"><span class="level-left"><span class="level-item">6.2</span><span class="level-item">sizeof</span></span></a></li></ul></li><li><a class="level is-mobile" href="#数组-和-sizeof"><span class="level-left"><span class="level-item">7</span><span class="level-item">数组 和 sizeof</span></span></a></li><li><a class="level is-mobile" href="#关系操作符"><span class="level-left"><span class="level-item">8</span><span class="level-item">关系操作符</span></span></a></li><li><a class="level is-mobile" href="#逻辑操作符"><span class="level-left"><span class="level-item">9</span><span class="level-item">逻辑操作符</span></span></a></li><li><a class="level is-mobile" href="#三目操作符"><span class="level-left"><span class="level-item">10</span><span class="level-item">三目操作符</span></span></a></li><li><a class="level is-mobile" href="#逗号表达式"><span class="level-left"><span class="level-item">11</span><span class="level-item">逗号表达式</span></span></a></li><li><a class="level is-mobile" href="#下标引用、函数调用和结构成员"><span class="level-left"><span class="level-item">12</span><span class="level-item">下标引用、函数调用和结构成员</span></span></a></li><li><a class="level is-mobile" href="#表达式求值"><span class="level-left"><span class="level-item">13</span><span class="level-item">表达式求值</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#隐式类型转换"><span class="level-left"><span class="level-item">13.1</span><span class="level-item">隐式类型转换</span></span></a></li><li><a class="level is-mobile" href="#算术转换"><span class="level-left"><span class="level-item">13.2</span><span class="level-item">算术转换</span></span></a></li><li><a class="level is-mobile" href="#操作符的属性"><span class="level-left"><span class="level-item">13.3</span><span class="level-item">操作符的属性</span></span></a></li></ul></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.svg" alt="Nico&#039;s Blog" height="28"></a><p class="is-size-7"><span>&copy; 2023 NcPhoton</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "This website uses cookies to improve your experience.",
+          dismiss: "Got it!",
+          allow: "Allow cookies",
+          deny: "Decline",
+          link: "Learn more",
+          policy: "Cookie Policy",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><script src="/live2d-widget/autoload.js"></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script></body></html>

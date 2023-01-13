@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>Clash-API一键订阅链接转换 - Nico&#039;s Blog</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Nico&#039;s Blog"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Nico&#039;s Blog"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="简介Clash for Windows（CFW）应该是目前Windows上最好用的基于规则的跨平台代理工具软件，允许用户可视化操作和支持主流SS&amp;#x2F;V2ray&amp;#x2F;Trojan协议，Clash.Net在此基础上对UI进行了美化，比较推荐使用。 转码托管 - 机场订阅和策略组网络上有许多转码托管API，只需要用到一个你的机场订阅链接，就能自动生成转码后的链接地址，通过嵌套在线规则策略组"><meta property="og:type" content="blog"><meta property="og:title" content="Clash-API一键订阅链接转换"><meta property="og:url" content="http://icarus.xinsong.xyz/2023/01/12/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/Clash-API%E4%B8%80%E9%94%AE%E8%AE%A2%E9%98%85%E9%93%BE%E6%8E%A5%E8%BD%AC%E6%8D%A2/"><meta property="og:site_name" content="Nico&#039;s Blog"><meta property="og:description" content="简介Clash for Windows（CFW）应该是目前Windows上最好用的基于规则的跨平台代理工具软件，允许用户可视化操作和支持主流SS&amp;#x2F;V2ray&amp;#x2F;Trojan协议，Clash.Net在此基础上对UI进行了美化，比较推荐使用。 转码托管 - 机场订阅和策略组网络上有许多转码托管API，只需要用到一个你的机场订阅链接，就能自动生成转码后的链接地址，通过嵌套在线规则策略组"><meta property="og:locale" content="en_US"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021516706.png"><meta property="article:published_time" content="2023-01-12T15:59:18.000Z"><meta property="article:modified_time" content="2023-01-12T16:08:09.079Z"><meta property="article:author" content="NcPhoton"><meta property="article:tag" content="clash"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021516706.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://icarus.xinsong.xyz/2023/01/12/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/Clash-API%E4%B8%80%E9%94%AE%E8%AE%A2%E9%98%85%E9%93%BE%E6%8E%A5%E8%BD%AC%E6%8D%A2/"},"headline":"Clash-API一键订阅链接转换","image":["https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021516706.png"],"datePublished":"2023-01-12T15:59:18.000Z","dateModified":"2023-01-12T16:08:09.079Z","author":{"@type":"Person","name":"NcPhoton"},"publisher":{"@type":"Organization","name":"Nico's Blog","logo":{"@type":"ImageObject","url":"http://icarus.xinsong.xyz/img/logo.svg"}},"description":"简介Clash for Windows（CFW）应该是目前Windows上最好用的基于规则的跨平台代理工具软件，允许用户可视化操作和支持主流SS&#x2F;V2ray&#x2F;Trojan协议，Clash.Net在此基础上对UI进行了美化，比较推荐使用。 转码托管 - 机场订阅和策略组网络上有许多转码托管API，只需要用到一个你的机场订阅链接，就能自动生成转码后的链接地址，通过嵌套在线规则策略组"}</script><link rel="canonical" href="http://icarus.xinsong.xyz/2023/01/12/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/Clash-API%E4%B8%80%E9%94%AE%E8%AE%A2%E9%98%85%E9%93%BE%E6%8E%A5%E8%BD%AC%E6%8D%A2/"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.svg" alt="Nico&#039;s Blog" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2023-01-12T15:59:18.000Z" title="2023/1/12 23:59:18">2023-01-12</time></span><span class="level-item">Updated&nbsp;<time dateTime="2023-01-12T16:08:09.079Z" title="2023/1/13 00:08:09">2023-01-13</time></span><span class="level-item"><a class="link-muted" href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/">工具使用</a></span><span class="level-item">21 minutes read (About 3118 words)</span></div></div><h1 class="title is-3 is-size-4-mobile">Clash-API一键订阅链接转换</h1><div class="content"><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p><strong>Clash for Windows</strong>（CFW）应该是目前Windows上最好用的基于规则的跨平台代理工具软件，允许用户可视化操作和支持主流SS&#x2F;V2ray&#x2F;Trojan协议，Clash.Net在此基础上对UI进行了美化，比较推荐使用。</p>
+<h2 id="转码托管-机场订阅和策略组"><a href="#转码托管-机场订阅和策略组" class="headerlink" title="转码托管 - 机场订阅和策略组"></a>转码托管 - 机场订阅和策略组</h2><p>网络上有许多转码托管API，只需要用到一个你的机场订阅链接，就能自动生成转码后的链接地址，通过嵌套在线规则策略组的链接，从而能够应用各种分流规则和策略组，最终API会返回一个链接地址，我们导入此链接地址至客户端，就能按照指定嵌套的规则分流了。</p>
+<h3 id="转码托管机场链接"><a href="#转码托管机场链接" class="headerlink" title="转码托管机场链接"></a>转码托管机场链接</h3><p>一般情况下，这些订阅转换API转码不会保存你的节点信息。通俗来说，只是把你的字符转换成另外一种计算机语言，并套进对应的代理工具软件配置参数的链接中，有顾虑的可以自己搭建API。</p>
+<span id="more"></span>
+
+<p>🔗<strong>订阅转换托管API推荐</strong>：</p>
+<p><a target="_blank" rel="noopener" href="https://acl4ssr-sub.github.io/">ACL4SSR 在线订阅转换</a>（用的人数很多，后端比较稳定）</p>
+<p><a target="_blank" rel="noopener" href="https://bianyuan.xyz/">边缘@订阅转换API</a>（比较稳定）</p>
+<p><a target="_blank" rel="noopener" href="https://sub.v1.mk/">在线订阅转换工具</a>（魔改版后端，全网功能最全！站点界面很特殊）</p>
+<p>这些API中一般会有相应分流规则的选项，接下来我们介绍直接采用ACL4SSR等大佬维护的分流规则，他们的规则策略其实已经能满足绝大部分用户的使用场景。</p>
+<p>我们就以转换为最常见的<strong>Clash</strong>为例，<strong>Clash</strong>相比其他的客户端有一个特殊之处也需要特别说明：<strong>新版内核出现后，新旧订阅不能互相兼容</strong>。</p>
+<p><strong>进入API，有两种模式</strong>：</p>
+<ol>
+<li>基础模式；</li>
+</ol>
+<p>​		<strong>使用场景</strong>例如：当机场提供的 Surge 配置足以满足需求，但额外需要使用 Clash 订阅时，此时可以使用基础方式进行转换。</p>
+<p>​		基础模式直接生成的话，就是使用<strong>默认规则并启用clash新参数的转换</strong>，对于最新版的原版clash可以直接使用，旧版clash无法使用。</p>
+<ol start="2">
+<li>进阶模式；</li>
+</ol>
+<p>​		<strong>使用场景</strong>：即对 <code>调用地址</code> 甚至程序目录下的 <code>配置文件</code> 进行个性化的编辑以满足不同的需求。</p>
+<p>​		进阶模式中，是否启用clash新参数的开关在右下角的“更多选项”里，并且支持选择分流规则和策略组。</p>
+<p>​		</p>
+<p>由于基础模式的局限性，我们使用<strong>进阶模式</strong>转换订阅链接。</p>
+<p>👉 <strong>转换托管步骤</strong></p>
+<ol>
+<li>输入的订阅&#x2F;节点链接（有多个需要分行写）。</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021516706.png" alt="image-20220801195425903"></p>
+<ol start="2">
+<li>选择客户端，这里选择Clash。</li>
+<li>选择后端地址，留空或者默认即可。</li>
+<li>选择远程配置，<strong>远程配置</strong>即clash的代理规则配置文件，这里我选择ACL4SSR Online默认版分组比较全(与Github同步)。</li>
+<li>根据需求勾选更多选项。<ul>
+<li>如需打游戏或者使用Microsoft Store应用，则需勾选下面的“启用UDP”；</li>
+<li>如果机场中有chacha20协议的SSR节点（目前仍不支持，会导致无法导入订阅），就需要勾选那个“过滤非法节点”；</li>
+<li><strong>Clash New Field</strong>是否勾选视客户端版本而定，参照下方：</li>
+</ul>
+</li>
+</ol>
+<p><strong>以下为Clash新参数支持情况，请根据版本确定是否勾选Clash New Field</strong>：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/Dreamacro/clash">clash内核</a>在<code>2020/08/16</code>release的<code>1.1.0</code>版本开始支持SSR。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/Fndroid/clash_for_windows_pkg">Windows版clash</a>在<code>2020/08/21</code>release的<code>0.11.5</code>版本中引入新内核，也就是从这个版本开始，就必须clash新参数。这个版本之前的Windows版clash使用新参数会无法导入订阅。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/yichengchen/clashX">Mac版clash</a>（clashx）在<code>2020/09/06</code>release的<code>1.30.2</code>版本开始使用新内核，和Windows版一样，从这个版本开始必须使用新参数，之前的版本必须不使用新参数且不支持SSR。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/vernesong/OpenClash">路由器版</a>的openclash使用的TUN内核（这玩意只有一个预览版）在<code>2020/07/25</code>的<code>v0.39.5-beta</code>版开始添加新参数支持，引入新内核。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/Kr328/ClashForAndroid">Android版clash</a>在<code>2020/09/03</code>release的<code>2.1.5</code>版开始支持新参数。可以从谷歌play商店直接安装（搜不到就是安卓版本不够）。</p>
+<blockquote>
+<p>注：<strong>Clash New Field</strong>选项是只有转换为Clash链接才生效，勾选表示使用新版的写法。新版clash不能兼容旧订阅，旧版clash不能兼容使用新参数的订阅。</p>
+</blockquote>
+<p>根据我自己的需求，这里我勾选了<code>Emoji</code>,<code>Clash New Field</code>,<code>UDP</code>.</p>
+<ol start="6">
+<li>点生成订阅链接，获得转码后的链接地址，下面是按照图内的地址转码后得到的结果：</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://pub-api-1.bianyuan.xyz/sub?target=clash&amp;url=https%3A%2F%2Fcate.com&amp;insert=false&amp;config=https%3A%2F%2Fraw.githubusercontent.com%2FACL4SSR%2FACL4SSR%2Fmaster%2FClash%2Fconfig%2FACL4SSR_Online.ini&amp;emoji=true&amp;list=false&amp;tfo=false&amp;scv=false&amp;fdn=false&amp;sort=false&amp;udp=true&amp;new_name=true</span><br></pre></td></tr></table></figure>
+
+<h3 id="调用参数"><a href="#调用参数" class="headerlink" title="调用参数"></a>调用参数</h3><p>可用参数远不止这些，介绍一下以上出现的可能必须需要修改的参数：</p>
+<ol>
+<li>scv：跳过证书检验；</li>
+</ol>
+<p><strong>注意</strong>：</p>
+<ol>
+<li>如果订阅支持tfo就把这项后面的false改成true，默认为false。</li>
+<li>有些机场订阅可能要<strong>开启跳过证书检验</strong>才能正常使用，如果无法使用，请尝试修改参数<code>scv=false</code>为<code>scv=true</code>。<strong>原理</strong>是因为部分机场用的中转提供的域名是不能通过tls认证的，需要关闭对证书验证才可以使用。</li>
+</ol>
+<p>每个API生成的链接<strong>显式调用的参数</strong>都有差异，如果参数不写，参数的<strong>默认配置</strong>（true&#x2F;false）与选择的后端有关，如不满足自身使用场景，请自行修改参数。</p>
+<p>参考<strong>官方文档</strong>：<a target="_blank" rel="noopener" href="https://github.com/tindy2013/subconverter/blob/master/README-cn.md">subconverter&#x2F;README-cn.md at master · tindy2013&#x2F;subconverter</a></p>
+<h4 id="调用参数说明"><a href="#调用参数说明" class="headerlink" title="调用参数说明"></a>调用参数说明</h4><table>
+<thead>
+<tr>
+<th>调用参数</th>
+<th>必要性</th>
+<th>示例</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>target</td>
+<td>必要</td>
+<td>surge&amp;ver&#x3D;4</td>
+<td>指想要生成的配置类型，详见上方 <a target="_blank" rel="noopener" href="https://github.com/tindy2013/subconverter/blob/master/README-cn.md#%E6%94%AF%E6%8C%81%E7%B1%BB%E5%9E%8B">支持类型</a> 中的参数</td>
+</tr>
+<tr>
+<td>url</td>
+<td>可选</td>
+<td>https%3A%2F%2F<a target="_blank" rel="noopener" href="http://www.xxx.com/">www.xxx.com</a></td>
+<td>指机场所提供的订阅链接或代理节点的分享链接，需要经过 <a target="_blank" rel="noopener" href="https://www.urlencoder.org/">URLEncode</a> 处理，<strong>可选的前提是在 <code>default_url</code> 中进行指定</strong>。也可以使用 data URI。可使用 <code>tag:xxx,https%3A%2F%2Fwww.xxx.com</code> 指定该订阅的所有节点归属于<code>xxx</code>分组，用于配置文件中的<code>!!GROUP=XXX</code> 匹配</td>
+</tr>
+<tr>
+<td>group</td>
+<td>可选</td>
+<td>MySS</td>
+<td>用于设置该订阅的组名，多用于 SSD&#x2F;SSR</td>
+</tr>
+<tr>
+<td>upload_path</td>
+<td>可选</td>
+<td>MySS.yaml</td>
+<td>用于将生成的订阅文件上传至 <code>Gist</code> 后的名称，需要经过 <a target="_blank" rel="noopener" href="https://www.urlencoder.org/">URLEncode</a> 处理</td>
+</tr>
+<tr>
+<td>include</td>
+<td>可选</td>
+<td>详见下文中 <code>include_remarks</code></td>
+<td>指仅保留匹配到的节点，支持正则匹配，需要经过 <a target="_blank" rel="noopener" href="https://www.urlencoder.org/">URLEncode</a> 处理，会覆盖配置文件里的设置</td>
+</tr>
+<tr>
+<td>exclude</td>
+<td>可选</td>
+<td>详见下文中 <code>exclude_remarks</code></td>
+<td>指排除匹配到的节点，支持正则匹配，需要经过 <a target="_blank" rel="noopener" href="https://www.urlencoder.org/">URLEncode</a> 处理，会覆盖配置文件里的设置</td>
+</tr>
+<tr>
+<td>config</td>
+<td>可选</td>
+<td>https%3A%2F%2F<a target="_blank" rel="noopener" href="http://www.xxx.com/">www.xxx.com</a></td>
+<td>指 外部配置 的地址 (包含分组和规则部分)，需要经过 <a target="_blank" rel="noopener" href="https://www.urlencoder.org/">URLEncode</a> 处理，详见 <a target="_blank" rel="noopener" href="https://github.com/tindy2013/subconverter/blob/master/README-cn.md#%E5%A4%96%E9%83%A8%E9%85%8D%E7%BD%AE">外部配置</a> ，当此参数不存在时使用 主程序目录中的配置文件</td>
+</tr>
+<tr>
+<td>dev_id</td>
+<td>可选</td>
+<td>92DSAFA</td>
+<td>用于设置 QuantumultX 的远程设备 ID, 以在某些版本上开启远程脚本</td>
+</tr>
+<tr>
+<td>filename</td>
+<td>可选</td>
+<td>MySS</td>
+<td>指定所生成订阅的文件名，可以在 Clash For Windows 等支持文件名的软件中显示出来</td>
+</tr>
+<tr>
+<td>interval</td>
+<td>可选</td>
+<td>43200</td>
+<td>用于设置托管配置更新间隔，确定配置将更新多长时间，单位为秒</td>
+</tr>
+<tr>
+<td>rename</td>
+<td>可选</td>
+<td>详见下文中 <code>rename</code></td>
+<td>用于自定义重命名，需要经过 <a target="_blank" rel="noopener" href="https://www.urlencoder.org/">URLEncode</a> 处理，会覆盖配置文件里的设置</td>
+</tr>
+<tr>
+<td>filter_script</td>
+<td>可选</td>
+<td>详见下文中 <code>filter_script</code></td>
+<td>用于自定义筛选节点的js代码，需要经过 <a target="_blank" rel="noopener" href="https://www.urlencoder.org/">URLEncode</a> 处理，会覆盖配置文件里的设置。出于安全考虑，链接需包含正确的 <code>token</code> 参数，才会应用该设置</td>
+</tr>
+<tr>
+<td>strict</td>
+<td>可选</td>
+<td>true &#x2F; false</td>
+<td>如果设置为 true，则 Surge 将在上述间隔后要求强制更新</td>
+</tr>
+<tr>
+<td>upload</td>
+<td>可选</td>
+<td>true &#x2F; false</td>
+<td>用于将生成的订阅文件上传至 <code>Gist</code>，需要填写<code>gistconf.ini</code>，默认为 false (即不上传) ,详见 <a target="_blank" rel="noopener" href="https://github.com/tindy2013/subconverter/blob/master/README-cn.md#%E8%87%AA%E5%8A%A8%E4%B8%8A%E4%BC%A0">自动上传</a></td>
+</tr>
+<tr>
+<td>emoji</td>
+<td>可选</td>
+<td>true &#x2F; false</td>
+<td>用于设置节点名称是否包含 Emoji，默认为 true</td>
+</tr>
+<tr>
+<td>add_emoji</td>
+<td>可选</td>
+<td>true &#x2F; false</td>
+<td>用于在节点名称前加入 Emoji，默认为 true</td>
+</tr>
+<tr>
+<td>remove_emoji</td>
+<td>可选</td>
+<td>true &#x2F; false</td>
+<td>用于设置是否删除节点名称中原有的 Emoji，默认为 true</td>
+</tr>
+<tr>
+<td>append_type</td>
+<td>可选</td>
+<td>true &#x2F; false</td>
+<td>用于在节点名称前插入节点类型，如 <code>[SS]</code>,<code>[SSR]</code>等</td>
+</tr>
+<tr>
+<td>tfo</td>
+<td>可选</td>
+<td>true &#x2F; false</td>
+<td>用于开启该订阅链接的 TCP Fast Open，默认为 false</td>
+</tr>
+<tr>
+<td>udp</td>
+<td>可选</td>
+<td>true &#x2F; false</td>
+<td>用于开启该订阅链接的 UDP，默认为 false</td>
+</tr>
+<tr>
+<td>list</td>
+<td>可选</td>
+<td>true &#x2F; false</td>
+<td>用于输出 Surge Node List 或者 Clash Proxy Provider 或者 Quantumult (X) 的节点订阅 或者 解码后的 SIP002</td>
+</tr>
+<tr>
+<td>sort</td>
+<td>可选</td>
+<td>true &#x2F; false</td>
+<td>用于对输出的节点或策略组按节点名进行再次排序，默认为 false</td>
+</tr>
+<tr>
+<td>sort_script</td>
+<td>可选</td>
+<td>详见下文 <code>sort_script</code></td>
+<td>用于自定义排序的js代码，需要经过 <a target="_blank" rel="noopener" href="https://www.urlencoder.org/">URLEncode</a> 处理，会覆盖配置文件里的设置。出于安全考虑，链接需包含正确的 <code>token</code> 参数，才会应用该设置</td>
+</tr>
+<tr>
+<td>script</td>
+<td>可选</td>
+<td>true &#x2F; false</td>
+<td>用于生成Clash Script，默认为 false</td>
+</tr>
+<tr>
+<td>insert</td>
+<td>可选</td>
+<td>true &#x2F; false</td>
+<td>用于设置是否将配置文件中的 <code>insert_url</code> 插入，默认为 true</td>
+</tr>
+<tr>
+<td>scv</td>
+<td>可选</td>
+<td>true &#x2F; false</td>
+<td>用于关闭 TLS 节点的证书检查，默认为 false</td>
+</tr>
+<tr>
+<td>fdn</td>
+<td>可选</td>
+<td>true &#x2F; false</td>
+<td>用于过滤目标类型不支持的节点，默认为 true</td>
+</tr>
+<tr>
+<td>expand</td>
+<td>可选</td>
+<td>true &#x2F; false</td>
+<td>用于在 API 端处理或转换 Surge, QuantumultX, Clash 的规则列表，即是否将规则全文置入订阅中，默认为 true，设置为 false 则不会将规则全文写进订阅</td>
+</tr>
+<tr>
+<td>append_info</td>
+<td>可选</td>
+<td>true &#x2F; false</td>
+<td>用于输出包含流量或到期信息的节点, 默认为 true，设置为 false 则取消输出</td>
+</tr>
+<tr>
+<td>prepend</td>
+<td>可选</td>
+<td>true &#x2F; false</td>
+<td>用于设置插入 <code>insert_url</code> 时是否插入到所有节点前面，默认为 true</td>
+</tr>
+<tr>
+<td>classic</td>
+<td>可选</td>
+<td>true &#x2F; false</td>
+<td>用于设置是否生成 Clash classical rule-provider</td>
+</tr>
+<tr>
+<td>tls13</td>
+<td>可选</td>
+<td>true &#x2F; false</td>
+<td>用于设置是否为节点增加tls1.3开启参数</td>
+</tr>
+<tr>
+<td>new_name</td>
+<td>可选</td>
+<td>true &#x2F; false</td>
+<td>如果设置为 true，则将启用 Clash 的新组名称 (proxies, proxy-groups, rules)</td>
+</tr>
+</tbody></table>
+<p>根据我自身的使用情况，我选择的参数配置为true的有：<strong>emoij，udp，expand，scv，clash新字段名</strong>。（许多后端默认开启expand：展开规则全文到订阅，因此可以不写expand参数）。</p>
+<p>最终得到的链接导入客户端即可。</p>
+<h2 id="其他客户端订阅链接的转换"><a href="#其他客户端订阅链接的转换" class="headerlink" title="其他客户端订阅链接的转换"></a>其他客户端订阅链接的转换</h2><p>只有Clash由于内核更新导致的新旧版无法兼容而有了<code>Clash New Field</code>选项，因此其他客户端的链接转换无需考虑是否勾选<code>Clash New Field</code>。</p>
+<p>其他订阅链接的转换都是按照如上操作只需更换目标客户端即可。</p>
+<hr>
+<p>参考文章：</p>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://github.com/tindy2013/subconverter/blob/master/README-cn.md">subconverter&#x2F;README-cn.md at master · tindy2013&#x2F;subconverter</a></li>
+</ol>
+</div><div class="article-licensing box"><div class="licensing-title"><p>Clash-API一键订阅链接转换</p><p><a href="http://icarus.xinsong.xyz/2023/01/12/工具使用/Clash-API一键订阅链接转换/">http://icarus.xinsong.xyz/2023/01/12/工具使用/Clash-API一键订阅链接转换/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>NcPhoton</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>2023-01-12</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>2023-01-13</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/clash/">clash</a></div><div class="notification is-danger">You need to set <code>install_url</code> to use ShareThis. Please set it in <code>_config.yml</code>.</div></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">Like this article? Support the author with</h3><div class="buttons is-centered"><a class="button donate" href="/" target="_blank" rel="noopener" data-type="afdian"><span class="icon is-small"><i class="fas fa-charging-station"></i></span><span>Afdian.net</span></a><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>Alipay</span><span class="qrcode"><img src="/" alt="Alipay"></span></a><a class="button donate" href="/" target="_blank" rel="noopener" data-type="buymeacoffee"><span class="icon is-small"><i class="fas fa-coffee"></i></span><span>Buy me a coffee</span></a><a class="button donate" href="/" target="_blank" rel="noopener" data-type="patreon"><span class="icon is-small"><i class="fab fa-patreon"></i></span><span>Patreon</span></a><div class="notification is-danger">You forgot to set the <code>business</code> or <code>currency_code</code> for Paypal. Please set it in <code>_config.yml</code>.</div><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>Wechat</span><span class="qrcode"><img src="/" alt="Wechat"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2023/01/12/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/Cloudflare%E5%9B%9E%E6%BA%90%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">Cloudflare回源对象存储</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2023/01/12/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/%E8%85%BE%E8%AE%AF%E4%BA%91COS+Picgo%E6%90%AD%E5%BB%BA%E5%9B%BE%E5%BA%8A/"><span class="level-item">腾讯云COS+Picgo搭建图床</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">Comments</h3><div class="notification is-danger">You forgot to set the <code>shortname</code> for Disqus. Please set it in <code>_config.yml</code>.</div></div></div></div><!--!--><div class="column column-right is-4-tablet is-4-desktop is-4-widescreen  order-3 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">Catalogue</h3><ul class="menu-list"><li><a class="level is-mobile" href="#简介"><span class="level-left"><span class="level-item">1</span><span class="level-item">简介</span></span></a></li><li><a class="level is-mobile" href="#转码托管-机场订阅和策略组"><span class="level-left"><span class="level-item">2</span><span class="level-item">转码托管 - 机场订阅和策略组</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#转码托管机场链接"><span class="level-left"><span class="level-item">2.1</span><span class="level-item">转码托管机场链接</span></span></a></li><li><a class="level is-mobile" href="#调用参数"><span class="level-left"><span class="level-item">2.2</span><span class="level-item">调用参数</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#调用参数说明"><span class="level-left"><span class="level-item">2.2.1</span><span class="level-item">调用参数说明</span></span></a></li></ul></li></ul></li><li><a class="level is-mobile" href="#其他客户端订阅链接的转换"><span class="level-left"><span class="level-item">3</span><span class="level-item">其他客户端订阅链接的转换</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.svg" alt="Nico&#039;s Blog" height="28"></a><p class="is-size-7"><span>&copy; 2023 NcPhoton</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "This website uses cookies to improve your experience.",
+          dismiss: "Got it!",
+          allow: "Allow cookies",
+          deny: "Decline",
+          link: "Learn more",
+          policy: "Cookie Policy",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><script src="/live2d-widget/autoload.js"></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script></body></html>

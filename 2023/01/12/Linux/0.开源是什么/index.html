@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>开源是什么 - Nico&#039;s Blog</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Nico&#039;s Blog"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Nico&#039;s Blog"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="开源是什么？开源方式是在开源社区内进行思考和协作的一种形式。 这一理念基于知识自由和核心原则：透明、协作、交付、包容和社区。 社区的思想交流和软件开发推动了以下行业的创新、科学和技术进步：教育、政府、法律、医疗保健和制造业。 这场运动为全球社区创造了一种通过源代码协作、共享和协助实现 个人及团体目标的方式。 开源的历史就是互联网的历史早在 20 世纪 50 年代和 60 年代，开发早期互联网技术和"><meta property="og:type" content="blog"><meta property="og:title" content="开源是什么"><meta property="og:url" content="http://icarus.xinsong.xyz/2023/01/12/Linux/0.%E5%BC%80%E6%BA%90%E6%98%AF%E4%BB%80%E4%B9%88/"><meta property="og:site_name" content="Nico&#039;s Blog"><meta property="og:description" content="开源是什么？开源方式是在开源社区内进行思考和协作的一种形式。 这一理念基于知识自由和核心原则：透明、协作、交付、包容和社区。 社区的思想交流和软件开发推动了以下行业的创新、科学和技术进步：教育、政府、法律、医疗保健和制造业。 这场运动为全球社区创造了一种通过源代码协作、共享和协助实现 个人及团体目标的方式。 开源的历史就是互联网的历史早在 20 世纪 50 年代和 60 年代，开发早期互联网技术和"><meta property="og:locale" content="en_US"><meta property="og:image" content="http://icarus.xinsong.xyz/img/og_image.png"><meta property="article:published_time" content="2023-01-12T14:19:01.000Z"><meta property="article:modified_time" content="2023-01-13T03:37:45.140Z"><meta property="article:author" content="NcPhoton"><meta property="article:tag" content="linux"><meta property="article:tag" content="开源"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://icarus.xinsong.xyz/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://icarus.xinsong.xyz/2023/01/12/Linux/0.%E5%BC%80%E6%BA%90%E6%98%AF%E4%BB%80%E4%B9%88/"},"headline":"开源是什么","image":["http://icarus.xinsong.xyz/img/og_image.png"],"datePublished":"2023-01-12T14:19:01.000Z","dateModified":"2023-01-13T03:37:45.140Z","author":{"@type":"Person","name":"NcPhoton"},"publisher":{"@type":"Organization","name":"Nico's Blog","logo":{"@type":"ImageObject","url":"http://icarus.xinsong.xyz/img/logo.svg"}},"description":"开源是什么？开源方式是在开源社区内进行思考和协作的一种形式。 这一理念基于知识自由和核心原则：透明、协作、交付、包容和社区。 社区的思想交流和软件开发推动了以下行业的创新、科学和技术进步：教育、政府、法律、医疗保健和制造业。 这场运动为全球社区创造了一种通过源代码协作、共享和协助实现 个人及团体目标的方式。 开源的历史就是互联网的历史早在 20 世纪 50 年代和 60 年代，开发早期互联网技术和"}</script><link rel="canonical" href="http://icarus.xinsong.xyz/2023/01/12/Linux/0.%E5%BC%80%E6%BA%90%E6%98%AF%E4%BB%80%E4%B9%88/"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.svg" alt="Nico&#039;s Blog" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2023-01-12T14:19:01.000Z" title="2023/1/12 22:19:01">2023-01-12</time></span><span class="level-item">Updated&nbsp;<time dateTime="2023-01-13T03:37:45.140Z" title="2023/1/13 11:37:45">2023-01-13</time></span><span class="level-item"><a class="link-muted" href="/categories/Linux/">Linux</a></span><span class="level-item">17 minutes read (About 2618 words)</span></div></div><h1 class="title is-3 is-size-4-mobile">开源是什么</h1><div class="content"><h3 id="开源是什么？"><a href="#开源是什么？" class="headerlink" title="开源是什么？"></a>开源是什么？</h3><p>开源方式是在开源社区内进行思考和协作的一种形式。 这一理念基于知识自由和核心原则：透明、协作、交付、包容和社区。 社区的思想交流和软件开发推动了以下行业的创新、科学和技术进步：教育、政府、法律、医疗保健和制造业。 这场运动为全球社区创造了一种通过源代码协作、共享和协助实现 个人及团体目标的方式。</p>
+<h3 id="开源的历史就是互联网的历史"><a href="#开源的历史就是互联网的历史" class="headerlink" title="开源的历史就是互联网的历史"></a>开源的历史就是互联网的历史</h3><p>早在 20 世纪 50 年代和 60 年代，开发早期互联网技术和电信网络协议的研究人员就十分倚仗开放的协作式研究环境。现代互联网的根基—阿帕网（ARPANET）十分推崇同行评审和开放反馈流程。用户组互相共享源代码，相互扶持，构建创新。而论坛则能够促进对话，并为开放通信与协作制定标准。到 20 世纪 90 年代早期互联网诞生之时，协作、同行评审、通信和开放性的价值就已写入了它的底蕴之中。</p>
+<span id="more"></span>
+
+<h3 id="开源开发模式的工作原理？"><a href="#开源开发模式的工作原理？" class="headerlink" title="开源开发模式的工作原理？"></a>开源开发模式的工作原理？</h3><p>开源开发模式是开源社区项目用于开发开源软件的过程。然后，软件以开源许可证发行，因此任何人都可以查看或修改源代码。 </p>
+<p>许多开源项目托管在 <a target="_blank" rel="noopener" href="https://github.com/explore">GitHub</a> 上，您可以在此访问存储库或参加社区项目。常用开源项目包括 <a target="_blank" rel="noopener" href="https://www.redhat.com/zh/topics/linux">Linux®</a>、Ansible 和 Kubernetes。 </p>
+<p>红帽使用开源软件<a target="_blank" rel="noopener" href="https://www.redhat.com/zh/about/development-model">开发模式</a>创建企业开源产品和解决方案。红帽开发人员积极参与了数百个跨 IT 堆栈的开源项目。</p>
+<p>红帽以社区构建的开源软件为起点，这些软件能够部分或完全满足客户的需求。红帽依托这些开源项目，强化安全防护，修补漏洞，以及添加新的企业功能。然后将这些改进回馈给最初的项目，造福整个社区。</p>
+<p>客户在使用红帽软件时，会提供反馈，提交错误报告，并在需求发生变化时，请求获得其他功能。客户的反馈也指引着红帽的发展方向。</p>
+<h3 id="Linux-与开源"><a href="#Linux-与开源" class="headerlink" title="Linux 与开源"></a>Linux 与开源</h3><p>Linux 是一款基于 GNU 通用公共许可证（GPL）发布的免费开源操作系统（OS）。Linux 也成为全球范围内规模最大的开源软件项目。</p>
+<p>Linux 操作系统基于 Unix 的原则和设计创建，作为一个免费的开源系统，代替 MINIX 操作系统。</p>
+<p>由于 Linux 是基于限制软件用途的开源许可证发布的，只要符合相应的许可条件，任何人都可以运行、研究、修改和重新分发源代码，甚至还可以销售修改后代码的副本。</p>
+<h3 id="自由软件、闭源软件和开源软件之间的区别是什么？"><a href="#自由软件、闭源软件和开源软件之间的区别是什么？" class="headerlink" title="自由软件、闭源软件和开源软件之间的区别是什么？"></a>自由软件、闭源软件和开源软件之间的区别是什么？</h3><p><strong>开源软件</strong>是协作式软件，依靠社区生产和同行评审来相互使用、更改和共享源代码。 开发人员分享洞察、构想和代码，共同和单独创建更多创新的软件解决方案 这种可扩展且灵活的软件可确保任何拥有源代码 的人都能将其修改、增强和重新分发，从而提高可复用性和可访问性。 开源软件基于对等生产和大规模协作的基本原则，从而为 最终用户创造更可持续的软件开发体验。  </p>
+<p><strong>闭源软件</strong> (CSS) 是不向公众分发的专有软件。 这类软件进行了加密，因此仅创建该代码的原始作者有权合法复制、修改、更新和编辑源代码。 闭源软件会限制最终用户对应用可以执行的操作，防止用户修改、共享、复制或重新发布源代码。</p>
+<p>在很长一段时间里，开源软件都被贴上了”自由软件”的标签。1983 年，Richard Stallman 通过 <a target="_blank" rel="noopener" href="https://www.gnu.org/gnu/thegnuproject.en.html">GNU 计划</a>正式发起自由软件运动。自由软件运动强调用户的自由权利：自由查看源代码、自由修改、自由再分发，让用户能够自由获取源代码，并且自由地使用。</p>
+<p>自由软件旗帜鲜明地反对专有软件或”闭源”软件。闭源软件的源代码则有着重重防护。只有源代码所有者才拥有该代码的合法访问权。更改和复制闭源代码是违法行为，用户只能付费按既定方式使用软件，无法修改另作他用，也无法与社区共享。</p>
+<p>但是，”自由软件（free software）”的名称造成了大量困惑。自由软件只表示您可以按照自己的方式自由使用，但不一定意味着您就能免费拥有它。社区曾经对此的解释是：”它指的是言论自由的自由，而不是免费啤酒的免费”。<a target="_blank" rel="noopener" href="https://opensource.com/article/18/2/coining-term-open-source-software">Christine Peterson 是”开源”一词的发明者，</a>为了解决这一问题，她曾试图用‘开源’来取代‘自由软件’：”早期称呼‘自由软件’不适用，并不是因为含有政治意义，而是会误导新手去过多关注于价格。所以我们需要一个关注于关键的源代码，而且不会让新用户混淆概念的术语。”</p>
+<p>Peterson 向一个工作组提出用”开源”一词来取代”自由软件”，该工作组的任务，是将开源软件实践引入更广阔的市场。工作组希望全世界了解，如果软件共享，如果软件具有协作性、开放性且可修改，软件就会更加完善。这样，软件可以发挥更多、更好的用途，可以更灵活，成本可以更低，寿命可以更长，也没有供应商锁定。</p>
+<p>Eric Raymond 是该工作组的成员之一，1997 年，他在影响广泛的<a target="_blank" rel="noopener" href="http://www.unterstein.net/su/docs/CathBaz.pdf">《大教堂与市集》</a>一文中发表了大致相同的观点。1998 年，部分出于对该文章的回应，Netscape Communications Corporation 开源了 Mozilla 项目，将源代码作为自由软件发布。该代码的开源形式后来成为了 Mozilla Firefox 和 Thunderbird 的基础。</p>
+<p>Netscape 对开源软件的支持，也为社区增加了更多压力，不得不思考如何重点关注自由软件运动的实际业务应用。而这也加深了开源和自由软件之间的分歧：”开源”成了一个描述自由软件的方法、生产和业务层面的词。而”自由软件”则仍是一个话语符号，根植于用户自由的概念，强调着这些问题的哲学意涵。</p>
+<p>1998 年初，<a target="_blank" rel="noopener" href="https://opensource.org/docs/osd">开放源代码促进会</a>（OSI）成立， 规范了开源一词，并为其赋予行业范围内的常见定义。从 20 世纪 90 年代末到 21 世纪初期，企业仍对开源运动持谨慎和怀疑态度，但如今，该运动已从软件生产的边缘逐渐转而成为今天的行业标准。</p>
+<h3 id="开源的价值是什么？"><a href="#开源的价值是什么？" class="headerlink" title="开源的价值是什么？"></a>开源的价值是什么？</h3><p>人们弃专有而选择开源的原因有很多，但最常见的原因包括：</p>
+<ul>
+<li><strong>同行评审：</strong>由于源代码可自由访问，而且开源社区非常活跃，因此同行程序员会积极检查和改进开源代码。它就如同充满活力和生机的代码，而不是固步自封、停滞不前。</li>
+<li><strong>透明性：</strong>想要准确了解哪些类型的数据移动到哪里，或代码中发生了哪些类型的变化？开源允许您自行检查和跟踪，不必依赖供应商承诺。</li>
+<li><strong>可靠性：</strong>专有代码只靠单个作者或控制该代码的公司来更新、修复和保持正常工作。开源代码的存在时间可以超越其原作者，因为活跃的开源社区会不断进行更新。开放标准和同行评审可以确保开源代码经常得到适当的测试。</li>
+<li><strong>灵活性：</strong>由于开源代码注重修改，因此您可以使用它来解决您的业务或社区面临的独特问题。您不再只能用一种特定方式使用代码，您可以依托社区帮助和同行评审帮助您实施新解决方案。</li>
+<li><strong>更低成本：</strong>因为开源，所以代码本身是免费的，当您使用红帽等公司时，您只用为支持、安全强化和管理互操作性帮助等服务买单。</li>
+<li><strong>无供应商锁定：</strong>赋予用户自由，意味着您可以随时随地使用开源代码，用于任何目的。</li>
+<li><strong>开放式协作：</strong>活跃的开源社区，让您不再囿于方寸天地，而是能获得超越兴趣小组或者一个公司的帮助、资源和观点。</li>
+</ul>
+<p>参考文章：</p>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://www.redhat.com/zh/topics/open-source/what-is-open-source#%E8%87%AA%E7%94%B1%E8%BD%AF%E4%BB%B6%E3%80%81%E9%97%AD%E6%BA%90%E8%BD%AF%E4%BB%B6%E5%92%8C%E5%BC%80%E6%BA%90%E8%BD%AF%E4%BB%B6">全面解析：什么是开源？开源的意义是什么？| 红帽</a></li>
+</ol>
+</div><div class="article-licensing box"><div class="licensing-title"><p>开源是什么</p><p><a href="http://icarus.xinsong.xyz/2023/01/12/Linux/0.开源是什么/">http://icarus.xinsong.xyz/2023/01/12/Linux/0.开源是什么/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>NcPhoton</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>2023-01-12</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>2023-01-13</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/linux/">linux</a><a class="link-muted mr-2" rel="tag" href="/tags/%E5%BC%80%E6%BA%90/">开源</a></div><div class="notification is-danger">You need to set <code>install_url</code> to use ShareThis. Please set it in <code>_config.yml</code>.</div></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">Like this article? Support the author with</h3><div class="buttons is-centered"><a class="button donate" href="/" target="_blank" rel="noopener" data-type="afdian"><span class="icon is-small"><i class="fas fa-charging-station"></i></span><span>Afdian.net</span></a><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>Alipay</span><span class="qrcode"><img src="/" alt="Alipay"></span></a><a class="button donate" href="/" target="_blank" rel="noopener" data-type="buymeacoffee"><span class="icon is-small"><i class="fas fa-coffee"></i></span><span>Buy me a coffee</span></a><a class="button donate" href="/" target="_blank" rel="noopener" data-type="patreon"><span class="icon is-small"><i class="fab fa-patreon"></i></span><span>Patreon</span></a><div class="notification is-danger">You forgot to set the <code>business</code> or <code>currency_code</code> for Paypal. Please set it in <code>_config.yml</code>.</div><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>Wechat</span><span class="qrcode"><img src="/" alt="Wechat"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2023/01/12/Linux/1.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">操作系统</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2023/01/12/C++/14.stl/"><span class="level-item">C++ STL</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">Comments</h3><div class="notification is-danger">You forgot to set the <code>shortname</code> for Disqus. Please set it in <code>_config.yml</code>.</div></div></div></div><!--!--><div class="column column-right is-4-tablet is-4-desktop is-4-widescreen  order-3 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">Catalogue</h3><ul class="menu-list"><li><a class="level is-mobile" href="#开源是什么？"><span class="level-left"><span class="level-item">1</span><span class="level-item">开源是什么？</span></span></a></li><li><a class="level is-mobile" href="#开源的历史就是互联网的历史"><span class="level-left"><span class="level-item">2</span><span class="level-item">开源的历史就是互联网的历史</span></span></a></li><li><a class="level is-mobile" href="#开源开发模式的工作原理？"><span class="level-left"><span class="level-item">3</span><span class="level-item">开源开发模式的工作原理？</span></span></a></li><li><a class="level is-mobile" href="#Linux-与开源"><span class="level-left"><span class="level-item">4</span><span class="level-item">Linux 与开源</span></span></a></li><li><a class="level is-mobile" href="#自由软件、闭源软件和开源软件之间的区别是什么？"><span class="level-left"><span class="level-item">5</span><span class="level-item">自由软件、闭源软件和开源软件之间的区别是什么？</span></span></a></li><li><a class="level is-mobile" href="#开源的价值是什么？"><span class="level-left"><span class="level-item">6</span><span class="level-item">开源的价值是什么？</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.svg" alt="Nico&#039;s Blog" height="28"></a><p class="is-size-7"><span>&copy; 2023 NcPhoton</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "This website uses cookies to improve your experience.",
+          dismiss: "Got it!",
+          allow: "Allow cookies",
+          deny: "Decline",
+          link: "Learn more",
+          policy: "Cookie Policy",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><script src="/live2d-widget/autoload.js"></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script></body></html>

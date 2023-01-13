@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>C语言文件操作 - Nico&#039;s Blog</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Nico&#039;s Blog"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Nico&#039;s Blog"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="为什么使用文件内存是带电存储的，也就是说一旦断电，数据都会销毁，但是硬盘是可以不带电存储的，无论是否通电，只要未损坏，我们的数据就可以一致得以保存。 我们前面学习结构体时，写了通讯录的程序，当通讯录运行起来的时候，可以给通讯录中增加、删除数据，此时数据是存放在内存中，当程序退出的时候，通讯录中的数据自然就不存在了，等下次运行通讯录程序的时候，数据又得重新录入，如果使用这样的通讯录就很难受。 我们在"><meta property="og:type" content="blog"><meta property="og:title" content="C语言文件操作"><meta property="og:url" content="http://icarus.xinsong.xyz/2023/01/12/C/17.%E3%80%90C%E8%AF%AD%E8%A8%80%E8%BF%9B%E9%98%B6%E3%80%91%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/"><meta property="og:site_name" content="Nico&#039;s Blog"><meta property="og:description" content="为什么使用文件内存是带电存储的，也就是说一旦断电，数据都会销毁，但是硬盘是可以不带电存储的，无论是否通电，只要未损坏，我们的数据就可以一致得以保存。 我们前面学习结构体时，写了通讯录的程序，当通讯录运行起来的时候，可以给通讯录中增加、删除数据，此时数据是存放在内存中，当程序退出的时候，通讯录中的数据自然就不存在了，等下次运行通讯录程序的时候，数据又得重新录入，如果使用这样的通讯录就很难受。 我们在"><meta property="og:locale" content="en_US"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021612762.png"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021612422.png"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021612741.png"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021612184.png"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021612888.png"><meta property="article:published_time" content="2023-01-12T13:35:20.000Z"><meta property="article:modified_time" content="2023-01-13T03:36:00.132Z"><meta property="article:author" content="NcPhoton"><meta property="article:tag" content="c"><meta property="article:tag" content="文件操作"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021612762.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://icarus.xinsong.xyz/2023/01/12/C/17.%E3%80%90C%E8%AF%AD%E8%A8%80%E8%BF%9B%E9%98%B6%E3%80%91%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/"},"headline":"C语言文件操作","image":["https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021612762.png","https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021612422.png","https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021612741.png","https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021612184.png","https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021612888.png"],"datePublished":"2023-01-12T13:35:20.000Z","dateModified":"2023-01-13T03:36:00.132Z","author":{"@type":"Person","name":"NcPhoton"},"publisher":{"@type":"Organization","name":"Nico's Blog","logo":{"@type":"ImageObject","url":"http://icarus.xinsong.xyz/img/logo.svg"}},"description":"为什么使用文件内存是带电存储的，也就是说一旦断电，数据都会销毁，但是硬盘是可以不带电存储的，无论是否通电，只要未损坏，我们的数据就可以一致得以保存。 我们前面学习结构体时，写了通讯录的程序，当通讯录运行起来的时候，可以给通讯录中增加、删除数据，此时数据是存放在内存中，当程序退出的时候，通讯录中的数据自然就不存在了，等下次运行通讯录程序的时候，数据又得重新录入，如果使用这样的通讯录就很难受。 我们在"}</script><link rel="canonical" href="http://icarus.xinsong.xyz/2023/01/12/C/17.%E3%80%90C%E8%AF%AD%E8%A8%80%E8%BF%9B%E9%98%B6%E3%80%91%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.svg" alt="Nico&#039;s Blog" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2023-01-12T13:35:20.000Z" title="2023/1/12 21:35:20">2023-01-12</time></span><span class="level-item">Updated&nbsp;<time dateTime="2023-01-13T03:36:00.132Z" title="2023/1/13 11:36:00">2023-01-13</time></span><span class="level-item"><a class="link-muted" href="/categories/C%E8%AF%AD%E8%A8%80/">C语言</a></span><span class="level-item">23 minutes read (About 3501 words)</span></div></div><h1 class="title is-3 is-size-4-mobile">C语言文件操作</h1><div class="content"><h3 id="为什么使用文件"><a href="#为什么使用文件" class="headerlink" title="为什么使用文件"></a>为什么使用文件</h3><p>内存是带电存储的，也就是说一旦断电，数据都会销毁，但是硬盘是可以不带电存储的，无论是否通电，只要未损坏，我们的数据就可以一致得以保存。</p>
+<p>我们前面学习结构体时，写了通讯录的程序，当通讯录运行起来的时候，可以给通讯录中增加、删除数据，此时数据是存放在内存中，当程序退出的时候，通讯录中的数据自然就不存在了，等下次运行通讯录程序的时候，数据又得重新录入，如果使用这样的通讯录就很难受。</p>
+<p>我们在想既然是通讯录就应该把信息记录下来，只有我们自己选择删除数据的时候，数据才不复存在。这就涉及到了数据持久化的问题，我们一般数据持久化的方法有，把数据存放在磁盘文件、存放到数据库等方式。使用文件我们可以将数据直接存放在电脑的硬盘上，做到了数据的持久化。</p>
+<h4 id="程序文件"><a href="#程序文件" class="headerlink" title="程序文件"></a>程序文件</h4><blockquote>
+<p>包括源程序文件（后缀为.c）,目标文件（windows环境后缀为.obj）,可执行程序（windows环境后缀为.exe）。</p>
+</blockquote>
+<h4 id="数据文件"><a href="#数据文件" class="headerlink" title="数据文件"></a>数据文件</h4><p>本章讨论的是数据文件。</p>
+<p>在以前各章所处理数据的输入输出都是以终端为对象的，即从终端的键盘输入数据，运行结果显示到显示器上。</p>
+<p>其实有时候我们会把信息输出到磁盘上，当需要的时候再从磁盘上把数据读取到内存中使用，这里处理的就是磁盘上文件。</p>
+<span id="more"></span>
+
+<h4 id="文件名"><a href="#文件名" class="headerlink" title="文件名"></a>文件名</h4><p>一个文件要有一个唯一的文件标识，以便用户识别和引用。</p>
+<p>文件名包含3部分：文件路径+文件名主干+文件后缀</p>
+<p>例如： <code>c:\code\test.txt</code></p>
+<p>为了方便起见，文件标识常被称为文件名。 	</p>
+<h3 id="文件的打开和关闭"><a href="#文件的打开和关闭" class="headerlink" title="文件的打开和关闭"></a>文件的打开和关闭</h3><h4 id="文件指针"><a href="#文件指针" class="headerlink" title="文件指针"></a>文件指针</h4><p>缓冲文件系统中，关键的概念是<strong>“文件类型指针”</strong>，简称“<strong>文件指针</strong>”。</p>
+<p>每个被使用的文件都在内存中开辟了一个相应的文件信息区，用来存放文件的相关信息（如文件的名字，文件状态及文件当前的位置等）。这些信息是保存在一个结构体变量中的。该结构体类型是有系统声明的，取名<strong>FILE.</strong></p>
+<p>一般都是通过一个FILE的指针来维护这个FILE结构体的变量，这样用起来更加方便。</p>
+<p>例如，VS2013编译环境提供的 <code>stdio.h</code> 头文件中有以下的文件类型申明：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> _<span class="title">iobuf</span> &#123;</span></span><br><span class="line">    <span class="type">char</span> *_ptr;</span><br><span class="line">    <span class="type">int</span>  _cnt;</span><br><span class="line">    <span class="type">char</span> *_base;</span><br><span class="line">    <span class="type">int</span>  _flag;    </span><br><span class="line">    <span class="type">int</span>  _file;</span><br><span class="line">    <span class="type">int</span>  _charbuf;</span><br><span class="line">    <span class="type">int</span>  _bufsiz;</span><br><span class="line">    <span class="type">char</span> *_tmpfname;</span><br><span class="line">   &#125;;</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">iobuf</span> <span class="title">FILE</span>;</span></span><br></pre></td></tr></table></figure>
+
+<p>对于不同的编译器FILE类型包含的内容不完全一样，但大都相似。</p>
+<p>每当打开一个文件的时候，系统会根据文件的情况自动创建一个FILE结构的变量，并填充其中的信息，使用者不必关心细节。</p>
+<p>一般都是通过一个FILE的指针来维护这个FILE结构的变量，这样使用起来更加方便。</p>
+<p>下面我们可以创建一个FILE*的指针变量:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FILE* pf;<span class="comment">//指向文件信息区</span></span><br></pre></td></tr></table></figure>
+
+<p>定义pf是一个指向FILE类型数据的指针变量。可以使pf指向某个文件的文件信息区（是一个结构体变量）。通过该文件信息区中的信息就能够访问该文件。<strong>也就是说，通过文件指针变量能够找到与它关联的文件。</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021612762.png" alt="image-20220518224311019"></p>
+<h4 id="文件的打开和关闭-1"><a href="#文件的打开和关闭-1" class="headerlink" title="文件的打开和关闭"></a>文件的打开和关闭</h4><p>文件在读写之前应该先<strong>打开文件</strong>，在使用结束之后应该<strong>关闭文件</strong>。</p>
+<p>在编写程序的时候，在打开文件的同时，都会返回一个FILE*的指针变量指向该文件，也相当于建立了指针和文件的关系。</p>
+<p>ANSIC 规定使用<code>fopen</code>函数来打开文件，<code>fclose</code>来关闭文件</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//打开文件</span></span><br><span class="line">FILE * <span class="title function_">fopen</span> <span class="params">( <span class="type">const</span> <span class="type">char</span> * filename, <span class="type">const</span> <span class="type">char</span> * mode )</span>;</span><br><span class="line"><span class="comment">//若打开失败，则返回NULL</span></span><br><span class="line"><span class="comment">//关闭文件</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">fclose</span> <span class="params">( FILE * stream )</span>;</span><br></pre></td></tr></table></figure>
+
+<p>打开方式有如下几种：</p>
+<table>
+<thead>
+<tr>
+<th>文件使用方式</th>
+<th align="left">含义</th>
+<th>如果指定文件不存在</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>“r”（只读）</strong></td>
+<td align="left">为了输入数据，打开一个已经存在的文本文件</td>
+<td>出错</td>
+</tr>
+<tr>
+<td><strong>“w”（只写）</strong></td>
+<td align="left">为了输出数据，打开一个文本文件</td>
+<td>建立一个新的文件</td>
+</tr>
+<tr>
+<td><strong>“a”（追加）</strong></td>
+<td align="left">向文本文件尾添加数据</td>
+<td>建立一个新的文件</td>
+</tr>
+<tr>
+<td>“rb”（只读）</td>
+<td align="left">为了输入数据，打开一个二进制文件</td>
+<td>出错</td>
+</tr>
+<tr>
+<td>“wb”（只写）</td>
+<td align="left">为了输出数据，打开一个二进制文件</td>
+<td>建立一个新的文件</td>
+</tr>
+<tr>
+<td>“ab”（追加）</td>
+<td align="left">向一个二进制文件尾添加数据</td>
+<td>出错</td>
+</tr>
+<tr>
+<td>“r+”（读写）</td>
+<td align="left">为了读和写，打开一个文本文件</td>
+<td>出错</td>
+</tr>
+<tr>
+<td>“w+”（读写）</td>
+<td align="left">为了读和写，建议一个新的文件</td>
+<td>建立一个新的文件</td>
+</tr>
+<tr>
+<td>“a+”（读写）</td>
+<td align="left">打开一个文件，在文件尾进行读写</td>
+<td>建立一个新的文件</td>
+</tr>
+<tr>
+<td>“rb+”（读写）</td>
+<td align="left">为了读和写打开一个二进制文件</td>
+<td>出错</td>
+</tr>
+<tr>
+<td>“wb+”（读写）</td>
+<td align="left">为了读和写，新建一个新的二进制文件</td>
+<td>建立一个新的文件</td>
+</tr>
+<tr>
+<td>“ab+”（读写）</td>
+<td align="left">打开一个二进制文件，在文件尾进行读和写</td>
+<td>建立一个新的文件</td>
+</tr>
+</tbody></table>
+<p>例子：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span> <span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">     FILE * pFile;</span><br><span class="line">     <span class="comment">//打开文件</span></span><br><span class="line">     pFile = fopen (<span class="string">&quot;myfile.txt&quot;</span>,<span class="string">&quot;w&quot;</span>);</span><br><span class="line">     <span class="comment">//文件操作</span></span><br><span class="line">     <span class="keyword">if</span> (pFile!=<span class="literal">NULL</span>)<span class="comment">//打开成功</span></span><br><span class="line">    &#123;</span><br><span class="line">          <span class="built_in">fputs</span> (<span class="string">&quot;fopen example&quot;</span>,pFile);<span class="comment">//写入数据</span></span><br><span class="line">          <span class="comment">//关闭文件</span></span><br><span class="line">          fclose (pFile);</span><br><span class="line">    &#125;</span><br><span class="line">     <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="文件的顺序读写"><a href="#文件的顺序读写" class="headerlink" title="文件的顺序读写"></a>文件的顺序读写</h3><table>
+<thead>
+<tr>
+<th>功能</th>
+<th align="center">函数名</th>
+<th align="center">适用于</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>字符输入函数</td>
+<td align="center">fgetc</td>
+<td align="center">所有输入流</td>
+</tr>
+<tr>
+<td>字符输出函数</td>
+<td align="center">fputc</td>
+<td align="center">所有输出流</td>
+</tr>
+<tr>
+<td>文本行输出函数</td>
+<td align="center">fgets</td>
+<td align="center">所有输入流</td>
+</tr>
+<tr>
+<td>文本行输出函数</td>
+<td align="center">fputs</td>
+<td align="center">所有输出流</td>
+</tr>
+<tr>
+<td>格式化输入函数</td>
+<td align="center">fscanf</td>
+<td align="center">所有输入流</td>
+</tr>
+<tr>
+<td>格式化输出函数</td>
+<td align="center">fprintf</td>
+<td align="center">所有输出流</td>
+</tr>
+<tr>
+<td>二进制输入</td>
+<td align="center">fread</td>
+<td align="center">文件</td>
+</tr>
+<tr>
+<td>二进制输出</td>
+<td align="center">fwrite</td>
+<td align="center">文件</td>
+</tr>
+</tbody></table>
+<p>程序的输出流：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021612422.png" alt="image-20220518224334249"></p>
+<p>函数原型：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">fgetc</span> <span class="params">( FILE * stream )</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">fputc</span> <span class="params">( <span class="type">int</span> character, FILE * stream )</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">char</span> * <span class="title function_">fgets</span> <span class="params">( <span class="type">char</span> * str, <span class="type">int</span> num, FILE * stream )</span>;</span><br><span class="line"><span class="comment">//num：要复制到 str 中的最大字符数（包括终止空字符）</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">fputs</span> <span class="params">( <span class="type">const</span> <span class="type">char</span> * str, FILE * stream )</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">fscanf</span> <span class="params">( FILE * stream, <span class="type">const</span> <span class="type">char</span> * format, ... )</span>;</span><br><span class="line"><span class="comment">//使用方法和scanf相似，只不过是从文件读取，而不是标准输入流</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">fprintf</span> <span class="params">( FILE * stream, <span class="type">const</span> <span class="type">char</span> * format, ... )</span>;</span><br><span class="line"><span class="comment">//使用方法和printf相似，只不过是输出到文件，而不是标准输出流</span></span><br><span class="line"></span><br><span class="line"><span class="type">size_t</span> <span class="title function_">fwrite</span> <span class="params">( <span class="type">const</span> <span class="type">void</span> * ptr, <span class="type">size_t</span> size, <span class="type">size_t</span> count, FILE * stream )</span>;</span><br><span class="line"><span class="comment">//ptr指向要被读数组的指针，返回成功写入的元素总数</span></span><br><span class="line"></span><br><span class="line"><span class="type">size_t</span> <span class="title function_">fread</span> <span class="params">( <span class="type">void</span> * ptr, <span class="type">size_t</span> size, <span class="type">size_t</span> count, FILE * stream )</span>;</span><br><span class="line"><span class="comment">//ptr指向要被写的数组的指针，返回成功读取的元素总数</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="文件的随机读写"><a href="#文件的随机读写" class="headerlink" title="文件的随机读写"></a>文件的随机读写</h3><h4 id="fssek"><a href="#fssek" class="headerlink" title="fssek"></a>fssek</h4><blockquote>
+<p>根据文件指针的位置和偏移量来定位文件指针。</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">fseek</span> <span class="params">( FILE * stream, <span class="type">long</span> <span class="type">int</span> offset, <span class="type">int</span> origin )</span>;</span><br></pre></td></tr></table></figure>
+
+<p>例子：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span> <span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">  FILE * pFile;</span><br><span class="line">  pFile = fopen ( <span class="string">&quot;example.txt&quot;</span> , <span class="string">&quot;wb&quot;</span> );</span><br><span class="line">  <span class="built_in">fputs</span> ( <span class="string">&quot;This is an apple.&quot;</span> , pFile );</span><br><span class="line">  fseek ( pFile , <span class="number">9</span> , SEEK_SET );</span><br><span class="line">  <span class="built_in">fputs</span> ( <span class="string">&quot; sam&quot;</span> , pFile );</span><br><span class="line">  fclose ( pFile );</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021612741.png" alt="image-20220518224342816"></p>
+<p>参数origin是指定文件指针当前偏移量。</p>
+<p>注意：文件打开方式为追加时，使用此函数无效，无论如何都从文件尾部开始追加。</p>
+<h4 id="ftell"><a href="#ftell" class="headerlink" title="ftell"></a>ftell</h4><blockquote>
+<p>返回文件指针相对于起始位置的偏移量</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">long</span> <span class="type">int</span> <span class="title function_">ftell</span> <span class="params">( FILE * stream )</span>;</span><br></pre></td></tr></table></figure>
+
+<p>例子：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    FILE* pFile;</span><br><span class="line">    <span class="type">long</span> size;</span><br><span class="line">    pFile = fopen(<span class="string">&quot;example.txt&quot;</span>, <span class="string">&quot;a&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span> (pFile == <span class="literal">NULL</span>) perror(<span class="string">&quot;Error opening file&quot;</span>);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        fseek(pFile, <span class="number">2</span>, SEEK_END); </span><br><span class="line">        <span class="built_in">fputs</span>(<span class="string">&quot;hello&quot;</span>, pFile);</span><br><span class="line">        size = ftell(pFile);</span><br><span class="line">        fclose(pFile);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Size of myfile.txt: %ld bytes.\n&quot;</span>, size);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>牢记：返回当前文件指针相对于文件开始的偏移量,每读取一个字节就向后偏移一位。</strong></p>
+<h4 id="rewind"><a href="#rewind" class="headerlink" title="rewind"></a>rewind</h4><blockquote>
+<p>让文件指针的位置回到文件的起始位置</p>
+</blockquote>
+<p>例子：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* rewind example */</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span> <span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="type">int</span> n;</span><br><span class="line">  FILE * pFile;</span><br><span class="line">  <span class="type">char</span> buffer [<span class="number">27</span>];</span><br><span class="line"></span><br><span class="line">  pFile = fopen (<span class="string">&quot;myfile.txt&quot;</span>,<span class="string">&quot;w+&quot;</span>);</span><br><span class="line">  <span class="keyword">for</span> ( n=<span class="string">&#x27;A&#x27;</span> ; n&lt;=<span class="string">&#x27;Z&#x27;</span> ; n++)</span><br><span class="line">    fputc ( n, pFile);</span><br><span class="line">  rewind (pFile);<span class="comment">//使文件指针回到文件起始位置</span></span><br><span class="line">  fread (buffer,<span class="number">1</span>,<span class="number">26</span>,pFile);</span><br><span class="line">  fclose (pFile);</span><br><span class="line">  buffer[<span class="number">26</span>]=<span class="string">&#x27;\0&#x27;</span>;</span><br><span class="line">  <span class="built_in">puts</span> (buffer);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="文本文件和二进制文件"><a href="#文本文件和二进制文件" class="headerlink" title="文本文件和二进制文件"></a>文本文件和二进制文件</h3><p>根据数据的组织形式，数据文件被称为<strong>文本文件</strong>或者<strong>二进制文件</strong>。</p>
+<p>数据在内存中以二进制的形式存储，如果不加转换的输出到外存，<strong>就是二进制文件</strong>。</p>
+<p>如果要求在外存上以ASCII码的形式存储，则需要在存储前转换。以ASCII字符的形式存储的文件就是文本文件。一个数据在内存中是怎么存储的呢？</p>
+<p>字符一律以ASCII形式存储，数值型数据既可以用ASCII形式存储，也可以使用二进制形式存储。如有整数10000，如果以ASCII码的形式输出到磁盘，则磁盘中占用5个字节（每个字符一个字节），而二进制形式输出，则在磁盘上只占4个字节（VS2013测试）。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021612184.png" alt="image-20220518224351966"></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> a = <span class="number">10000</span>;</span><br><span class="line">    FILE* pf = fopen(<span class="string">&quot;test.txt&quot;</span>, <span class="string">&quot;wb&quot;</span>);</span><br><span class="line">    fwrite(&amp;a, <span class="number">4</span>, <span class="number">1</span>, pf);<span class="comment">//二进制的形式写到文件中</span></span><br><span class="line">    fclose(pf);</span><br><span class="line">    pf = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="文件读取结束的判定"><a href="#文件读取结束的判定" class="headerlink" title="文件读取结束的判定"></a>文件读取结束的判定</h3><h4 id="feof"><a href="#feof" class="headerlink" title="feof"></a>feof</h4><p><strong>牢记：在文件读取过程中，不能用feof函数的返回值直接用来判断文件的是否结束。而是应用于当文件读取结束的时候，判断是读取失败结束，还是遇到文件尾结束。</strong></p>
+<ol>
+<li>文本文件读取是否结束，判断返回值是否为 EOF （ <code>fgetc</code> ），或者 NULL （ <code>fgets</code> ）</li>
+</ol>
+<p>  例如：<br>  <code>fgetc</code> 判断是否为 EOF ，正常读取时，返回读到的ASCII码值<br>  <code>fgets</code> 判断返回值是否为 NULL ，正常读取时，返回存放字符串空间的起始地址。</p>
+<ol start="2">
+<li><p>二进制文件的读取结束判断，判断返回值是否小于实际要读的个数。</p>
+<p> 例如：<br> <code>fread</code>判断返回值是否小于实际要读的个数，如果发现读取到的完整的元素个数小于指定的个数，那么这就是最后一次读取了。</p>
+</li>
+</ol>
+<p>正确的使用：</p>
+<p>文本文件：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> c; <span class="comment">// 注意：int，非char，要求处理EOF</span></span><br><span class="line">    FILE* fp = fopen(<span class="string">&quot;test.txt&quot;</span>, <span class="string">&quot;r&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span> (!fp) </span><br><span class="line">    &#123;</span><br><span class="line">        perror(<span class="string">&quot;File opening failed&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> EXIT_FAILURE;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//fgetc 当读取失败的时候或者遇到文件结束的时候，都会返回EOF</span></span><br><span class="line">    <span class="keyword">while</span> ((c = fgetc(fp)) != EOF) <span class="comment">// 标准C I/O读取文件循环</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">putchar</span>(c);</span><br><span class="line">    &#125;<span class="comment">//判断是什么原因结束的</span></span><br><span class="line">    <span class="keyword">if</span> (ferror(fp))</span><br><span class="line">        <span class="built_in">puts</span>(<span class="string">&quot;I/O error when reading&quot;</span>);</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (feof(fp))</span><br><span class="line">        <span class="built_in">puts</span>(<span class="string">&quot;End of file reached successfully&quot;</span>);</span><br><span class="line">    fclose(fp);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>feof</code>如果是文件到了文件结束标志，那么返回非零值，否则返回0。</p>
+<p>二进制文件：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">enum</span> &#123;</span> SIZE = <span class="number">5</span> &#125;;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">double</span> a[SIZE] = &#123; <span class="number">1.</span>,<span class="number">2.</span>,<span class="number">3.</span>,<span class="number">4.</span>,<span class="number">5.</span> &#125;;</span><br><span class="line">    FILE* fp = fopen(<span class="string">&quot;test.bin&quot;</span>, <span class="string">&quot;wb&quot;</span>); <span class="comment">// 必须用二进制模式</span></span><br><span class="line">    fwrite(a, <span class="keyword">sizeof</span> * a, SIZE, fp); <span class="comment">// 写 double 的数组</span></span><br><span class="line">    fclose(fp);</span><br><span class="line">    <span class="type">double</span> b[SIZE];</span><br><span class="line">    fp = fopen(<span class="string">&quot;test.bin&quot;</span>, <span class="string">&quot;rb&quot;</span>);</span><br><span class="line">    <span class="type">size_t</span> ret_code = fread(b, <span class="keyword">sizeof</span> * b, SIZE, fp); <span class="comment">// 读 double 的数组</span></span><br><span class="line">    <span class="keyword">if</span> (ret_code == SIZE) &#123;</span><br><span class="line">        <span class="built_in">puts</span>(<span class="string">&quot;Array read successfully, contents: &quot;</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> n = <span class="number">0</span>; n &lt; SIZE; ++n) <span class="built_in">printf</span>(<span class="string">&quot;%f &quot;</span>, b[n]);</span><br><span class="line">        <span class="built_in">putchar</span>(<span class="string">&#x27;\n&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123; <span class="comment">// error handling</span></span><br><span class="line">        <span class="keyword">if</span> (feof(fp))</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;Error reading test.bin: unexpected end of file\n&quot;</span>);</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (ferror(fp)) &#123;</span><br><span class="line">            perror(<span class="string">&quot;Error reading test.bin&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    fclose(fp);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="ferror"><a href="#ferror" class="headerlink" title="ferror"></a>ferror</h4><ol>
+<li>文件读取失败，返回非零。</li>
+<li>如果已经读取完毕，返回0。</li>
+</ol>
+<h3 id="文件缓冲区"><a href="#文件缓冲区" class="headerlink" title="文件缓冲区"></a>文件缓冲区</h3><p>ANSIC 标准采用“<strong>缓冲文件系统</strong>”处理的数据文件的，所谓缓冲文件系统是指系统自动地在内存中为程序中每一个正在使用的文件开辟一块“<strong>文件缓冲区</strong>”。从内存向磁盘输出数据会先送到内存中的缓冲区，装满缓冲区后才一起送到磁盘上。如果从磁盘向计算机读入数据，则从磁盘文件中读取数据输入到内存缓冲区（充满缓冲区），然后再从缓冲区逐个地将数据送到程序数据区（程序变量等）。缓冲区的大小根据C编译系统决定的。</p>
+<img src="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021612888.png" alt="image-20220518224420824" style="zoom:80%;" />
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    FILE* pf = fopen(<span class="string">&quot;test.txt&quot;</span>, <span class="string">&quot;w&quot;</span>);</span><br><span class="line">    <span class="built_in">fputs</span>(<span class="string">&quot;abcdef&quot;</span>, pf);<span class="comment">//先将代码放在输出缓冲区</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;睡眠10秒-已经写数据了，打开test.txt文件，发现文件没有内容\n&quot;</span>);</span><br><span class="line">    Sleep(<span class="number">10000</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;刷新缓冲区\n&quot;</span>);</span><br><span class="line">    fflush(pf);<span class="comment">//刷新缓冲区时，才将输出缓冲区的数据写到文件（磁盘）</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;再睡眠10秒-此时，再次打开test.txt文件，文件有内容了\n&quot;</span>);</span><br><span class="line">    Sleep(<span class="number">10000</span>);</span><br><span class="line">    fclose(pf);</span><br><span class="line">    <span class="comment">//注：fclose在关闭文件的时候，也会刷新缓冲区</span></span><br><span class="line">    pf = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>结论：因为有缓冲区的存在，C语言在操作文件的时候，需要做刷新缓冲区或者在文件操作结束的时候关闭文件。</strong></p>
+<p>这和我们平时写文件时，如果关闭时没有点保存是一个原理，文件打开的时候，实际上还没有将数据写入到文件中，而是在缓冲区暂存，而保存操作，就相当于是一次<code>fflush</code>用于刷新缓冲区，将数据真正写入文件。</p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>C语言文件操作</p><p><a href="http://icarus.xinsong.xyz/2023/01/12/C/17.【C语言进阶】文件操作/">http://icarus.xinsong.xyz/2023/01/12/C/17.【C语言进阶】文件操作/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>NcPhoton</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>2023-01-12</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>2023-01-13</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/c/">c</a><a class="link-muted mr-2" rel="tag" href="/tags/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/">文件操作</a></div><div class="notification is-danger">You need to set <code>install_url</code> to use ShareThis. Please set it in <code>_config.yml</code>.</div></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">Like this article? Support the author with</h3><div class="buttons is-centered"><a class="button donate" href="/" target="_blank" rel="noopener" data-type="afdian"><span class="icon is-small"><i class="fas fa-charging-station"></i></span><span>Afdian.net</span></a><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>Alipay</span><span class="qrcode"><img src="/" alt="Alipay"></span></a><a class="button donate" href="/" target="_blank" rel="noopener" data-type="buymeacoffee"><span class="icon is-small"><i class="fas fa-coffee"></i></span><span>Buy me a coffee</span></a><a class="button donate" href="/" target="_blank" rel="noopener" data-type="patreon"><span class="icon is-small"><i class="fab fa-patreon"></i></span><span>Patreon</span></a><div class="notification is-danger">You forgot to set the <code>business</code> or <code>currency_code</code> for Paypal. Please set it in <code>_config.yml</code>.</div><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>Wechat</span><span class="qrcode"><img src="/" alt="Wechat"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2023/01/12/C/18.%E3%80%90C%E8%AF%AD%E8%A8%80%E8%BF%9B%E9%98%B6%E3%80%91%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%BC%96%E8%AF%91/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">C语言程序的编译</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2023/01/12/C/16.%E3%80%90C%E8%AF%AD%E8%A8%80%E8%BF%9B%E9%98%B6%E3%80%91%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/"><span class="level-item">C语言动态内存管理</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">Comments</h3><div class="notification is-danger">You forgot to set the <code>shortname</code> for Disqus. Please set it in <code>_config.yml</code>.</div></div></div></div><!--!--><div class="column column-right is-4-tablet is-4-desktop is-4-widescreen  order-3 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">Catalogue</h3><ul class="menu-list"><li><a class="level is-mobile" href="#为什么使用文件"><span class="level-left"><span class="level-item">1</span><span class="level-item">为什么使用文件</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#程序文件"><span class="level-left"><span class="level-item">1.1</span><span class="level-item">程序文件</span></span></a></li><li><a class="level is-mobile" href="#数据文件"><span class="level-left"><span class="level-item">1.2</span><span class="level-item">数据文件</span></span></a></li><li><a class="level is-mobile" href="#文件名"><span class="level-left"><span class="level-item">1.3</span><span class="level-item">文件名</span></span></a></li></ul></li><li><a class="level is-mobile" href="#文件的打开和关闭"><span class="level-left"><span class="level-item">2</span><span class="level-item">文件的打开和关闭</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#文件指针"><span class="level-left"><span class="level-item">2.1</span><span class="level-item">文件指针</span></span></a></li><li><a class="level is-mobile" href="#文件的打开和关闭-1"><span class="level-left"><span class="level-item">2.2</span><span class="level-item">文件的打开和关闭</span></span></a></li></ul></li><li><a class="level is-mobile" href="#文件的顺序读写"><span class="level-left"><span class="level-item">3</span><span class="level-item">文件的顺序读写</span></span></a></li><li><a class="level is-mobile" href="#文件的随机读写"><span class="level-left"><span class="level-item">4</span><span class="level-item">文件的随机读写</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#fssek"><span class="level-left"><span class="level-item">4.1</span><span class="level-item">fssek</span></span></a></li><li><a class="level is-mobile" href="#ftell"><span class="level-left"><span class="level-item">4.2</span><span class="level-item">ftell</span></span></a></li><li><a class="level is-mobile" href="#rewind"><span class="level-left"><span class="level-item">4.3</span><span class="level-item">rewind</span></span></a></li></ul></li><li><a class="level is-mobile" href="#文本文件和二进制文件"><span class="level-left"><span class="level-item">5</span><span class="level-item">文本文件和二进制文件</span></span></a></li><li><a class="level is-mobile" href="#文件读取结束的判定"><span class="level-left"><span class="level-item">6</span><span class="level-item">文件读取结束的判定</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#feof"><span class="level-left"><span class="level-item">6.1</span><span class="level-item">feof</span></span></a></li><li><a class="level is-mobile" href="#ferror"><span class="level-left"><span class="level-item">6.2</span><span class="level-item">ferror</span></span></a></li></ul></li><li><a class="level is-mobile" href="#文件缓冲区"><span class="level-left"><span class="level-item">7</span><span class="level-item">文件缓冲区</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.svg" alt="Nico&#039;s Blog" height="28"></a><p class="is-size-7"><span>&copy; 2023 NcPhoton</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "This website uses cookies to improve your experience.",
+          dismiss: "Got it!",
+          allow: "Allow cookies",
+          deny: "Decline",
+          link: "Learn more",
+          policy: "Cookie Policy",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><script src="/live2d-widget/autoload.js"></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script></body></html>

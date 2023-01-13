@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>C语言动态内存管理 - Nico&#039;s Blog</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Nico&#039;s Blog"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Nico&#039;s Blog"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="为什么存在动态内存分配栈区上的内存开辟 12int val &amp;#x3D; 20;&amp;#x2F;&amp;#x2F;在栈空间上开辟四个字节char arr[10] &amp;#x3D; &amp;amp;#123;0&amp;amp;#125;;&amp;#x2F;&amp;#x2F;在栈空间上开辟10个字节的连续空间  这样直接在函数体中开辟内存的方式有它的特点  开辟内存的大小是固定的。 数组在申请空间是，需要指定数组大小。 出了函数作用域变量就失效了。  但是对于空间的需求，不仅仅是上述的情况。有时候我们需要的空间大"><meta property="og:type" content="blog"><meta property="og:title" content="C语言动态内存管理"><meta property="og:url" content="http://icarus.xinsong.xyz/2023/01/12/C/16.%E3%80%90C%E8%AF%AD%E8%A8%80%E8%BF%9B%E9%98%B6%E3%80%91%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/"><meta property="og:site_name" content="Nico&#039;s Blog"><meta property="og:description" content="为什么存在动态内存分配栈区上的内存开辟 12int val &amp;#x3D; 20;&amp;#x2F;&amp;#x2F;在栈空间上开辟四个字节char arr[10] &amp;#x3D; &amp;amp;#123;0&amp;amp;#125;;&amp;#x2F;&amp;#x2F;在栈空间上开辟10个字节的连续空间  这样直接在函数体中开辟内存的方式有它的特点  开辟内存的大小是固定的。 数组在申请空间是，需要指定数组大小。 出了函数作用域变量就失效了。  但是对于空间的需求，不仅仅是上述的情况。有时候我们需要的空间大"><meta property="og:locale" content="en_US"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021611991.png"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021611575.png"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021611134.png"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021611465.png"><meta property="article:published_time" content="2023-01-12T13:34:46.000Z"><meta property="article:modified_time" content="2023-01-13T03:35:55.825Z"><meta property="article:author" content="NcPhoton"><meta property="article:tag" content="c"><meta property="article:tag" content="内存管理"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021611991.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://icarus.xinsong.xyz/2023/01/12/C/16.%E3%80%90C%E8%AF%AD%E8%A8%80%E8%BF%9B%E9%98%B6%E3%80%91%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/"},"headline":"C语言动态内存管理","image":["https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021611991.png","https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021611575.png","https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021611134.png","https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021611465.png"],"datePublished":"2023-01-12T13:34:46.000Z","dateModified":"2023-01-13T03:35:55.825Z","author":{"@type":"Person","name":"NcPhoton"},"publisher":{"@type":"Organization","name":"Nico's Blog","logo":{"@type":"ImageObject","url":"http://icarus.xinsong.xyz/img/logo.svg"}},"description":"为什么存在动态内存分配栈区上的内存开辟 12int val &#x3D; 20;&#x2F;&#x2F;在栈空间上开辟四个字节char arr[10] &#x3D; &amp;#123;0&amp;#125;;&#x2F;&#x2F;在栈空间上开辟10个字节的连续空间  这样直接在函数体中开辟内存的方式有它的特点  开辟内存的大小是固定的。 数组在申请空间是，需要指定数组大小。 出了函数作用域变量就失效了。  但是对于空间的需求，不仅仅是上述的情况。有时候我们需要的空间大"}</script><link rel="canonical" href="http://icarus.xinsong.xyz/2023/01/12/C/16.%E3%80%90C%E8%AF%AD%E8%A8%80%E8%BF%9B%E9%98%B6%E3%80%91%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.svg" alt="Nico&#039;s Blog" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2023-01-12T13:34:46.000Z" title="2023/1/12 21:34:46">2023-01-12</time></span><span class="level-item">Updated&nbsp;<time dateTime="2023-01-13T03:35:55.825Z" title="2023/1/13 11:35:55">2023-01-13</time></span><span class="level-item"><a class="link-muted" href="/categories/C%E8%AF%AD%E8%A8%80/">C语言</a></span><span class="level-item">20 minutes read (About 2935 words)</span></div></div><h1 class="title is-3 is-size-4-mobile">C语言动态内存管理</h1><div class="content"><h3 id="为什么存在动态内存分配"><a href="#为什么存在动态内存分配" class="headerlink" title="为什么存在动态内存分配"></a>为什么存在动态内存分配</h3><p>栈区上的内存开辟</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> val = <span class="number">20</span>;<span class="comment">//在栈空间上开辟四个字节</span></span><br><span class="line"><span class="type">char</span> arr[<span class="number">10</span>] = &#123;<span class="number">0</span>&#125;;<span class="comment">//在栈空间上开辟10个字节的连续空间</span></span><br></pre></td></tr></table></figure>
+
+<p>这样直接在函数体中开辟内存的方式有它的特点</p>
+<ol>
+<li>开辟内存的大小是固定的。</li>
+<li>数组在申请空间是，需要指定数组大小。</li>
+<li>出了函数作用域变量就失效了。</li>
+</ol>
+<p>但是对于空间的需求，不仅仅是上述的情况。有时候我们需要的空间大小在程序运行的时候才能知道，那数组的编译时开辟空间的方式就不能满足了。这时候就只能试试动态存开辟了。</p>
+<span id="more"></span>
+
+<h3 id="动态内存函数"><a href="#动态内存函数" class="headerlink" title="动态内存函数"></a>动态内存函数</h3><h4 id="malloc-和-free"><a href="#malloc-和-free" class="headerlink" title="malloc 和 free "></a><a target="_blank" rel="noopener" href="https://www.cplusplus.com/reference/cstdlib/malloc/?kw=malloc">malloc </a>和 <a target="_blank" rel="noopener" href="https://www.cplusplus.com/reference/cstdlib/free/?kw=free">free </a></h4><p>C语言提供了一个动态内存开辟的函数：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span>* <span class="title function_">malloc</span> <span class="params">(<span class="type">size_t</span> size)</span>;</span><br></pre></td></tr></table></figure>
+
+<p>这个函数向内存申请一块连续可用的空间，并返回指向这块空间的指针。</p>
+<ul>
+<li>如果开辟成功，则返回一个指向开辟好空间的指针。</li>
+<li>如果开辟失败，则返回一个NULL指针，因此malloc的返回值一定要做检查。</li>
+<li>返回值的类型是 void* ，所以malloc函数并不知道开辟空间的类型，具体在使用的时候使用者自己来决定。</li>
+<li>如果参数 size 为0，malloc的行为是标准是未定义的，取决于编译器。</li>
+</ul>
+<p>既然是动态内存开辟，那么有开辟内存就一定有释放内存。</p>
+<p>C语言提供了另一个函数free，专门用来做动态内存的释放和回收。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">free</span> <span class="params">(<span class="type">void</span>* ptr)</span>;</span><br></pre></td></tr></table></figure>
+
+<p>free函数用来释放动态开辟的内存。</p>
+<ul>
+<li>如果参数 <code>ptr</code> 指向的空间不是动态开辟的，那free函数的行为是未定义的。</li>
+<li>如果参数 <code>ptr</code> 是NULL指针，则函数什么事都不做。</li>
+<li>函数执行后，<code>ptr</code>仍指向该地址。</li>
+</ul>
+<p>想要使用这两个函数，我们需要包含头文件 <code>stdlib.h</code></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//代码1</span></span><br><span class="line">    <span class="type">int</span> num = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;num);</span><br><span class="line">    <span class="type">int</span> arr[num] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">    <span class="comment">//代码2</span></span><br><span class="line">    <span class="type">int</span>* ptr = <span class="literal">NULL</span>;</span><br><span class="line">    ptr = (<span class="type">int</span>*)<span class="built_in">malloc</span>(num*<span class="keyword">sizeof</span>(<span class="type">int</span>));</span><br><span class="line">    <span class="keyword">if</span>(<span class="literal">NULL</span> != ptr)<span class="comment">//判断ptr指针是否为空</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> i = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;num; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            *(ptr+i) = <span class="number">0</span>；</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">free</span>(ptr);<span class="comment">//释放ptr所指向的动态内存</span></span><br><span class="line">    ptr = <span class="literal">NULL</span>;<span class="comment">//是否有必要？</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用方式与数组很相似。</p>
+<p>如果<code>ptr</code>不置空，会有什么问题吗？</p>
+<p>自然你是不会犯错的，但一个工程那么源文件，假如你在已经释放过这边空间了，但又没有及时指控，<code>ptr</code>却仍然指向原来的地址，好比你邻居有了你家的门钥匙，这可不合理合法，因此最好释放内存后，将指向该空间的指针都及时置空。</p>
+<h4 id="calloc"><a href="#calloc" class="headerlink" title="calloc "></a><a target="_blank" rel="noopener" href="https://www.cplusplus.com/reference/cstdlib/calloc/?kw=calloc">calloc </a></h4><p>C语言还提供了一个函数 <code>calloc</code>，它也是用来动态内存分配的。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span>* <span class="title function_">calloc</span> <span class="params">(<span class="type">size_t</span> num, <span class="type">size_t</span> size)</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>函数的功能是为 num 个大小为 size 的元素开辟一块空间，并且把空间的每个字节初始化为0。</li>
+<li>与函数 malloc 的区别只在于 <code>calloc</code> 会在返回地址之前把申请的空间的每个字节初始化为全0。</li>
+</ul>
+<p>与malloc相比它显然多了一个功能，不过实在用的很少，完全可以使用<code>malloc + memset</code>两个函数代替，不过有还是比没有好的。</p>
+<p>来个例子：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span>* ret = (<span class="type">int</span>*)<span class="built_in">calloc</span>(<span class="number">10</span>, <span class="keyword">sizeof</span>(<span class="type">int</span>));</span><br><span class="line">    <span class="keyword">if</span> (ret)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">free</span>(ret);</span><br><span class="line">    ret = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021611991.png" alt="image-20220518224131313"></p>
+<p>通过内存窗口看到这里四十个字节的16进制全部都成为了0，那么free又会发生什么？</p>
+<img src="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021611575.png" alt="image-20220518224138372" style="zoom:80%;" />
+
+<p>free后这里的数据又都变成了随机值。</p>
+<p>如果需要将开辟的内存初始化为0，那么使用<code>calloc</code>会很方便。</p>
+<h4 id="realloc"><a href="#realloc" class="headerlink" title="realloc "></a><a target="_blank" rel="noopener" href="https://www.cplusplus.com/reference/cstdlib/realloc/?kw=realloc">realloc </a></h4><p>试想这样一种场景，假如我们申请了40个byte，但是现在却不够用了，那么只依靠<code>malloc</code>和<code>calloc</code>函数，我们怎么做？难道是另起炉灶，再重新开辟一块空间，这样做显然太笨重了，因此C语言还提供了我们用来动态管理内存空间的函数<code>realloc</code>。</p>
+<ul>
+<li><code>realloc</code>函数的出现让动态内存管理更加灵活。</li>
+<li>有时会我们发现过去申请的空间太小了，有时候我们又会觉得申请的空间过大了，那为了合理的时候内存，我们一定会对内存的大小做灵活的调整。那<code>realloc</code> 函数就可以做到对动态开辟内存大小的调整。</li>
+</ul>
+<p>函数原型：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span>* <span class="title function_">realloc</span> <span class="params">(<span class="type">void</span>* ptr, <span class="type">size_t</span> size)</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>ptr</code>是要调整的内存的地址</li>
+<li>size是调整后的字节数</li>
+<li>返回值为调整内存后的首地址</li>
+<li>这个函数调整原内存空间大小的基础上，还会将原来内存中的数据移动到新的空间。</li>
+<li><code>realloc</code>在调整内存空间的是存在两种情况：<ul>
+<li>原有空间后有充足的空间</li>
+<li>原有空间后没有充足的空间</li>
+</ul>
+</li>
+</ul>
+<p>会出现这两种情况的原因是动态开辟的内存空间是随机的，即可能会形成一块空间上，断断续续的被我们所使用。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021611134.png" alt="image-20220518224145267"></p>
+<p><strong>情况1</strong></p>
+<p>当是情况1 的时候，原有空间之后没有足够多的空间时，扩展的方法是：在堆空间上另找一个合适大小的连续空间来使用。这样函数返回的是一个新的内存地址。</p>
+<p><strong>情况2</strong></p>
+<p>当是情况2的时候，要扩展内存就直接原有内存之后直接追加空间，原来空间的数据不发生变化。</p>
+<p>由于上述的两种情况，<code>realloc</code>函数的使用就要注意一些。</p>
+<p>这是我们有内存增大需求的情况，如果是减小呢？</p>
+<ul>
+<li><code>malloc</code>在缩小内存时，将后面多余的空间free掉。</li>
+<li><code>realloc</code>找不到合适的空间时会返回NULL。</li>
+<li>如果<code>ptr</code>为NULL，那么它的功能和<code>malloc</code>一样。</li>
+</ul>
+<p>所以记得对返回的地址进行判空操作。</p>
+<h3 id="常见的动态内存错误"><a href="#常见的动态内存错误" class="headerlink" title="常见的动态内存错误"></a>常见的动态内存错误</h3><h4 id="对空指针的解引用操作"><a href="#对空指针的解引用操作" class="headerlink" title="对空指针的解引用操作"></a>对空指针的解引用操作</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">test</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> *p = (<span class="type">int</span> *)<span class="built_in">malloc</span>(INT_MAX/<span class="number">4</span>);</span><br><span class="line">    *p = <span class="number">20</span>;<span class="comment">//如果p的值是NULL，就会有问题</span></span><br><span class="line">    <span class="built_in">free</span>(p);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>解决方法：对于返回的地址要判空。</p>
+<h4 id="对动态开辟空间的越界访问"><a href="#对动态开辟空间的越界访问" class="headerlink" title="对动态开辟空间的越界访问"></a>对动态开辟空间的越界访问</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">test</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> *p = (<span class="type">int</span> *)<span class="built_in">malloc</span>(<span class="number">10</span>*<span class="keyword">sizeof</span>(<span class="type">int</span>));</span><br><span class="line">    <span class="keyword">if</span>(<span class="literal">NULL</span> == p)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">exit</span>(EXIT_FAILURE);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;=<span class="number">10</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        *(p+i) = i;<span class="comment">//当i是10的时候越界访问</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">free</span>(p);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="对非动态开辟内存使用free释放"><a href="#对非动态开辟内存使用free释放" class="headerlink" title="对非动态开辟内存使用free释放"></a>对非动态开辟内存使用free释放</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">test</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> a = <span class="number">10</span>;</span><br><span class="line">    <span class="type">int</span> *p = &amp;a;</span><br><span class="line">    <span class="built_in">free</span>(p);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>p指向栈区而非堆区，free不能释放不是动态内存开辟的空间。</p>
+<h4 id="使用free释放一块动态开辟内存的一部分"><a href="#使用free释放一块动态开辟内存的一部分" class="headerlink" title="使用free释放一块动态开辟内存的一部分"></a>使用free释放一块动态开辟内存的一部分</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">test</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> *p = (<span class="type">int</span> *)<span class="built_in">malloc</span>(<span class="number">100</span>);</span><br><span class="line">    p++;</span><br><span class="line">    <span class="built_in">free</span>(p);<span class="comment">//p不再指向动态内存的起始位置</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>会造成内存泄漏。</p>
+<h4 id="对同一块内存空间多次释放"><a href="#对同一块内存空间多次释放" class="headerlink" title="对同一块内存空间多次释放"></a>对同一块内存空间多次释放</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">test</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> *p = (<span class="type">int</span> *)<span class="built_in">malloc</span>(<span class="number">100</span>);</span><br><span class="line">    <span class="built_in">free</span>(p);</span><br><span class="line">    <span class="built_in">free</span>(p);<span class="comment">//重复释放</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>重复释放会导致第二次释放出现问题，释放已经不属于我们的内存空间显然不合适。</p>
+<h4 id="动态开辟的空间未释放"><a href="#动态开辟的空间未释放" class="headerlink" title="动态开辟的空间未释放"></a>动态开辟的空间未释放</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">test</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> *p = (<span class="type">int</span> *)<span class="built_in">malloc</span>(<span class="number">100</span>);</span><br><span class="line">    <span class="keyword">if</span>(<span class="literal">NULL</span> != p)</span><br><span class="line">    &#123;</span><br><span class="line">        *p = <span class="number">20</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    test();</span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>忘记释放不再使用的动态开辟的空间会造成内存泄漏</strong></p>
+<p>动态开辟的内存一定要释放，且对于某一组内存操作函数，由谁开辟的，结束后，就由谁释放。</p>
+<p>例如：链表的初始化需要动态申请内存空间，那么我们在使用完链表后，在销毁链表的函数中就应释放掉这些内存。</p>
+<p>动态开辟的空间一定要释放，并且正确释放 ，多次的内存泄露会导致内存空间被浪费，导致卡顿，直至完全卡死。</p>
+<h3 id="C-x2F-C-程序的内存开辟"><a href="#C-x2F-C-程序的内存开辟" class="headerlink" title="C&#x2F;C++程序的内存开辟"></a>C&#x2F;C++程序的内存开辟</h3><img src="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021611465.png" alt="image-20220518224158827" style="zoom:80%;" />
+
+<p><strong>C&#x2F;C++程序内存分配的几个区域：</strong></p>
+<blockquote>
+<ol>
+<li>栈区（stack）：在执行函数时，函数内局部变量的存储单元都可以在栈上创建，函数执行结束时这些存储单元自动被释放。栈内存分配运算内置于处理器的指令集中，效率很高，但是分配的内存容量有限。 栈区主要存放运行函数而分配的局部变量、函数参数、返回数据、返回地址等。</li>
+<li>堆区（heap）：一般由程序员分配释放， 若程序员不释放，程序结束时可能由OS回收 。分配方式类似于链表。</li>
+<li>数据段（静态区）（static）存放全局变量、静态数据。程序结束后由系统释放。</li>
+<li>代码段：存放函数体（类成员函数和全局函数）的二进制代码。</li>
+</ol>
+</blockquote>
+<p>有了这幅图，我们就可以更好的理解在《C语言初识》中讲的static关键字修饰局部变量的例子了。</p>
+<blockquote>
+<p>实际上普通的局部变量是在栈区分配空间的，栈区的特点是在上面创建的变量出了作用域就销毁。</p>
+<p>但是被static修饰的变量存放在数据段（静态区），数据段的特点是在上面创建的变量，直到程序结束才销毁，所以生命周期变长。</p>
+</blockquote>
+<h3 id="柔性数组"><a href="#柔性数组" class="headerlink" title="柔性数组"></a>柔性数组</h3><blockquote>
+<p>也许你从来没有听说过柔性数组（flexible array）这个概念，但是它确实是存在的。</p>
+<p>C99 中，结构中的最后一个元素允许是未知大小的数组，这就叫做『柔性数组』成员。</p>
+</blockquote>
+<p>例如：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">st_type</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">    <span class="type">int</span> a[<span class="number">0</span>];<span class="comment">//柔性数组成员</span></span><br><span class="line">&#125;type_a;</span><br></pre></td></tr></table></figure>
+
+<p>有些编译器会报错无法编译可以改成：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">st_type</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">    <span class="type">int</span> a[];<span class="comment">//柔性数组成员</span></span><br><span class="line">&#125;type_a;</span><br></pre></td></tr></table></figure>
+
+<h4 id="柔性数组的特点"><a href="#柔性数组的特点" class="headerlink" title="柔性数组的特点"></a>柔性数组的特点</h4><ul>
+<li>结构中的柔性数组成员前面必须至少一个其他成员。</li>
+<li>sizeof 返回的这种结构大小不包括柔性数组的内存。</li>
+<li>包含柔性数组成员的结构用malloc ()函数进行内存的动态分配，并且分配的内存应该大于结构的大小，以适应柔性数组的预期大小。</li>
+</ul>
+<p>例如：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//code1</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">st_type</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">    <span class="type">int</span> a[<span class="number">0</span>];<span class="comment">//柔性数组成员</span></span><br><span class="line">&#125;type_a;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, <span class="keyword">sizeof</span>(type_a));<span class="comment">//输出的是4</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="柔性数组的使用"><a href="#柔性数组的使用" class="headerlink" title="柔性数组的使用"></a>柔性数组的使用</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//代码1</span></span><br><span class="line"><span class="type">int</span> i = <span class="number">0</span>;</span><br><span class="line">type_a *p = (type_a*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(type_a)+<span class="number">100</span>*<span class="keyword">sizeof</span>(<span class="type">int</span>));</span><br><span class="line"><span class="comment">//业务处理</span></span><br><span class="line">p-&gt;i = <span class="number">100</span>;</span><br><span class="line"><span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;<span class="number">100</span>; i++)</span><br><span class="line">&#123;</span><br><span class="line">    p-&gt;a[i] = i;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">free</span>(p);</span><br></pre></td></tr></table></figure>
+
+<p>这样柔性数组成员a，相当于获得了100个整型元素的连续空间。</p>
+<h4 id="柔性数组的优势"><a href="#柔性数组的优势" class="headerlink" title="柔性数组的优势"></a>柔性数组的优势</h4><p>我们完全可以使用一个在结构体中引入一个指针成员，达到相似的效果。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//代码2</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">st_type</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">    <span class="type">int</span> *p_a;</span><br><span class="line">&#125;type_a;</span><br><span class="line">type_a *p = (type_a *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(type_a));</span><br><span class="line">p-&gt;i = <span class="number">100</span>;</span><br><span class="line">p-&gt;p_a = (<span class="type">int</span> *)<span class="built_in">malloc</span>(p-&gt;i*<span class="keyword">sizeof</span>(<span class="type">int</span>));</span><br><span class="line"><span class="comment">//业务处理</span></span><br><span class="line"><span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;<span class="number">100</span>; i++)</span><br><span class="line">&#123;</span><br><span class="line">    p-&gt;p_a[i] = i;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//释放空间</span></span><br><span class="line"><span class="built_in">free</span>(p-&gt;p_a);</span><br><span class="line">p-&gt;p_a = <span class="literal">NULL</span>;</span><br><span class="line"><span class="built_in">free</span>(p);</span><br><span class="line">p = <span class="literal">NULL</span>;</span><br></pre></td></tr></table></figure>
+
+<p>这两段代码可以完成相同的功能。</p>
+<p>但是使用柔性数组有什么好处呢？</p>
+<p><strong>第一个好处是：方便内存释放</strong></p>
+<blockquote>
+<p>如果我们的代码是在一个给别人用的函数中，你在里面做了二次内存分配，并把整个结构体返回给用户。用户调用free可以释放结构体，但是用户并不知道这个结构体内的成员也需要free，所以你不能指望用户来发现这个事。所以，如果我们把结构体的内存以及其成员要的内存一次性分配好了，并返回给用户一个结构体指针，用户做一次free就可以把所有的内存也给释放掉。</p>
+</blockquote>
+<p><strong>第二个好处是：这样有利于访问速度.</strong></p>
+<blockquote>
+<p>连续的内存有益于提高访问速度，也有益于减少内存碎片。（其实，我个人觉得也没多高了，反正你跑不了要用做偏移量的加法来寻址）</p>
+</blockquote>
+<p>阅读：<a target="_blank" rel="noopener" href="https://coolshell.cn/articles/11377.html">C语言结构体里的成员数组和指针 | 酷 壳 - CoolShell</a></p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>C语言动态内存管理</p><p><a href="http://icarus.xinsong.xyz/2023/01/12/C/16.【C语言进阶】动态内存管理/">http://icarus.xinsong.xyz/2023/01/12/C/16.【C语言进阶】动态内存管理/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>NcPhoton</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>2023-01-12</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>2023-01-13</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/c/">c</a><a class="link-muted mr-2" rel="tag" href="/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">内存管理</a></div><div class="notification is-danger">You need to set <code>install_url</code> to use ShareThis. Please set it in <code>_config.yml</code>.</div></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">Like this article? Support the author with</h3><div class="buttons is-centered"><a class="button donate" href="/" target="_blank" rel="noopener" data-type="afdian"><span class="icon is-small"><i class="fas fa-charging-station"></i></span><span>Afdian.net</span></a><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>Alipay</span><span class="qrcode"><img src="/" alt="Alipay"></span></a><a class="button donate" href="/" target="_blank" rel="noopener" data-type="buymeacoffee"><span class="icon is-small"><i class="fas fa-coffee"></i></span><span>Buy me a coffee</span></a><a class="button donate" href="/" target="_blank" rel="noopener" data-type="patreon"><span class="icon is-small"><i class="fab fa-patreon"></i></span><span>Patreon</span></a><div class="notification is-danger">You forgot to set the <code>business</code> or <code>currency_code</code> for Paypal. Please set it in <code>_config.yml</code>.</div><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>Wechat</span><span class="qrcode"><img src="/" alt="Wechat"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2023/01/12/C/17.%E3%80%90C%E8%AF%AD%E8%A8%80%E8%BF%9B%E9%98%B6%E3%80%91%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">C语言文件操作</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2023/01/12/C/15.%E3%80%90C%E8%AF%AD%E8%A8%80%E8%BF%9B%E9%98%B6%E3%80%91%E8%87%AA%E5%AE%9A%E4%B9%89%E7%B1%BB%E5%9E%8B/"><span class="level-item">C语言自定义类型</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">Comments</h3><div class="notification is-danger">You forgot to set the <code>shortname</code> for Disqus. Please set it in <code>_config.yml</code>.</div></div></div></div><!--!--><div class="column column-right is-4-tablet is-4-desktop is-4-widescreen  order-3 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">Catalogue</h3><ul class="menu-list"><li><a class="level is-mobile" href="#为什么存在动态内存分配"><span class="level-left"><span class="level-item">1</span><span class="level-item">为什么存在动态内存分配</span></span></a></li><li><a class="level is-mobile" href="#动态内存函数"><span class="level-left"><span class="level-item">2</span><span class="level-item">动态内存函数</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#malloc-和-free"><span class="level-left"><span class="level-item">2.1</span><span class="level-item">malloc 和 free </span></span></a></li><li><a class="level is-mobile" href="#calloc"><span class="level-left"><span class="level-item">2.2</span><span class="level-item">calloc </span></span></a></li><li><a class="level is-mobile" href="#realloc"><span class="level-left"><span class="level-item">2.3</span><span class="level-item">realloc </span></span></a></li></ul></li><li><a class="level is-mobile" href="#常见的动态内存错误"><span class="level-left"><span class="level-item">3</span><span class="level-item">常见的动态内存错误</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#对空指针的解引用操作"><span class="level-left"><span class="level-item">3.1</span><span class="level-item">对空指针的解引用操作</span></span></a></li><li><a class="level is-mobile" href="#对动态开辟空间的越界访问"><span class="level-left"><span class="level-item">3.2</span><span class="level-item">对动态开辟空间的越界访问</span></span></a></li><li><a class="level is-mobile" href="#对非动态开辟内存使用free释放"><span class="level-left"><span class="level-item">3.3</span><span class="level-item">对非动态开辟内存使用free释放</span></span></a></li><li><a class="level is-mobile" href="#使用free释放一块动态开辟内存的一部分"><span class="level-left"><span class="level-item">3.4</span><span class="level-item">使用free释放一块动态开辟内存的一部分</span></span></a></li><li><a class="level is-mobile" href="#对同一块内存空间多次释放"><span class="level-left"><span class="level-item">3.5</span><span class="level-item">对同一块内存空间多次释放</span></span></a></li><li><a class="level is-mobile" href="#动态开辟的空间未释放"><span class="level-left"><span class="level-item">3.6</span><span class="level-item">动态开辟的空间未释放</span></span></a></li></ul></li><li><a class="level is-mobile" href="#C-x2F-C-程序的内存开辟"><span class="level-left"><span class="level-item">4</span><span class="level-item">C/C++程序的内存开辟</span></span></a></li><li><a class="level is-mobile" href="#柔性数组"><span class="level-left"><span class="level-item">5</span><span class="level-item">柔性数组</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#柔性数组的特点"><span class="level-left"><span class="level-item">5.1</span><span class="level-item">柔性数组的特点</span></span></a></li><li><a class="level is-mobile" href="#柔性数组的使用"><span class="level-left"><span class="level-item">5.2</span><span class="level-item">柔性数组的使用</span></span></a></li><li><a class="level is-mobile" href="#柔性数组的优势"><span class="level-left"><span class="level-item">5.3</span><span class="level-item">柔性数组的优势</span></span></a></li></ul></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.svg" alt="Nico&#039;s Blog" height="28"></a><p class="is-size-7"><span>&copy; 2023 NcPhoton</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "This website uses cookies to improve your experience.",
+          dismiss: "Got it!",
+          allow: "Allow cookies",
+          deny: "Decline",
+          link: "Learn more",
+          policy: "Cookie Policy",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><script src="/live2d-widget/autoload.js"></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script></body></html>

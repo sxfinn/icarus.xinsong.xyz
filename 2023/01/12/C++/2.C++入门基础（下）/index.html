@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>C++入门基础下 - Nico&#039;s Blog</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Nico&#039;s Blog"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Nico&#039;s Blog"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="内联函数C++中函数的使用我们已经比较清楚了，与C语言中函数的使用大多相同，主要是增加了重载的特性，对C语言的函数的一些缺陷做了一些补充。 那么对于一些比较简单却又经常使用的功能，我们在C语言中常常使用宏来替换，宏呢与函数相比没有栈帧的开辟，类型的检查，没有传参，仅仅是做一个替换，非常适合功能简单却使用频繁的应用场景，但是宏正因为如此，也就具有了不安全、无法调试的缺陷，那么C++中如何处理这样地缺"><meta property="og:type" content="blog"><meta property="og:title" content="C++入门基础下"><meta property="og:url" content="http://icarus.xinsong.xyz/2023/01/12/C++/2.C++%E5%85%A5%E9%97%A8%E5%9F%BA%E7%A1%80%EF%BC%88%E4%B8%8B%EF%BC%89/"><meta property="og:site_name" content="Nico&#039;s Blog"><meta property="og:description" content="内联函数C++中函数的使用我们已经比较清楚了，与C语言中函数的使用大多相同，主要是增加了重载的特性，对C语言的函数的一些缺陷做了一些补充。 那么对于一些比较简单却又经常使用的功能，我们在C语言中常常使用宏来替换，宏呢与函数相比没有栈帧的开辟，类型的检查，没有传参，仅仅是做一个替换，非常适合功能简单却使用频繁的应用场景，但是宏正因为如此，也就具有了不安全、无法调试的缺陷，那么C++中如何处理这样地缺"><meta property="og:locale" content="en_US"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021712159.png"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021619156.png"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021619935.png"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021619013.png"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021619574.png"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021619851.png"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021620632.png"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021620087.png"><meta property="article:published_time" content="2023-01-12T14:01:30.000Z"><meta property="article:modified_time" content="2023-01-13T03:36:27.588Z"><meta property="article:author" content="NcPhoton"><meta property="article:tag" content="cpp"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021712159.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://icarus.xinsong.xyz/2023/01/12/C++/2.C++%E5%85%A5%E9%97%A8%E5%9F%BA%E7%A1%80%EF%BC%88%E4%B8%8B%EF%BC%89/"},"headline":"C++入门基础下","image":["https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021712159.png","https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021619156.png","https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021619935.png","https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021619013.png","https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021619574.png","https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021619851.png","https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021620632.png","https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021620087.png"],"datePublished":"2023-01-12T14:01:30.000Z","dateModified":"2023-01-13T03:36:27.588Z","author":{"@type":"Person","name":"NcPhoton"},"publisher":{"@type":"Organization","name":"Nico's Blog","logo":{"@type":"ImageObject","url":"http://icarus.xinsong.xyz/img/logo.svg"}},"description":"内联函数C++中函数的使用我们已经比较清楚了，与C语言中函数的使用大多相同，主要是增加了重载的特性，对C语言的函数的一些缺陷做了一些补充。 那么对于一些比较简单却又经常使用的功能，我们在C语言中常常使用宏来替换，宏呢与函数相比没有栈帧的开辟，类型的检查，没有传参，仅仅是做一个替换，非常适合功能简单却使用频繁的应用场景，但是宏正因为如此，也就具有了不安全、无法调试的缺陷，那么C++中如何处理这样地缺"}</script><link rel="canonical" href="http://icarus.xinsong.xyz/2023/01/12/C++/2.C++%E5%85%A5%E9%97%A8%E5%9F%BA%E7%A1%80%EF%BC%88%E4%B8%8B%EF%BC%89/"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.svg" alt="Nico&#039;s Blog" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2023-01-12T14:01:30.000Z" title="2023/1/12 22:01:30">2023-01-12</time></span><span class="level-item">Updated&nbsp;<time dateTime="2023-01-13T03:36:27.588Z" title="2023/1/13 11:36:27">2023-01-13</time></span><span class="level-item"><a class="link-muted" href="/categories/Cpp/">Cpp</a></span><span class="level-item">42 minutes read (About 6284 words)</span></div></div><h1 class="title is-3 is-size-4-mobile">C++入门基础下</h1><div class="content"><h2 id="内联函数"><a href="#内联函数" class="headerlink" title="内联函数"></a>内联函数</h2><p>C++中函数的使用我们已经比较清楚了，与C语言中函数的使用大多相同，主要是增加了重载的特性，对C语言的函数的一些缺陷做了一些补充。</p>
+<p>那么对于一些比较简单却又经常使用的功能，我们在C语言中常常使用宏来替换，宏呢与函数相比没有栈帧的开辟，类型的检查，没有传参，仅仅是做一个替换，非常适合功能简单却使用频繁的应用场景，但是宏正因为如此，也就具有了不安全、无法调试的缺陷，那么C++中如何处理这样地缺陷呢？</p>
+<p>内联函数应运而生它既继承了宏的优点也继承了函数的优点，即既没有开辟栈帧的开销，又可以去调试，并且有类型的检查。</p>
+<p>内联函数和宏很类似，而区别在于，宏是由预处理器对宏进行替代，而内联函数是通过编译器控制来实现的。而且内联函数是真正的函数，只是在需要用到的时候，内联函数像宏一样的展开，所以取消了函数的参数压栈，减少了调用的开销。你可以像调用函数一样来调用内联函数，而不必担心会产生 处理宏的一些问题。</p>
+<span id="more"></span>
+
+<h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><blockquote>
+<p> 以inline修饰的函数叫做内联函数，编译时C++编译器会在调用内联函数的地方展开，没有函数压栈的开销，内联函数提升程序运行的效率。</p>
+</blockquote>
+<p>函数是一个可以重复使用的代码块，CPU 会一条一条地挨着执行其中的代码。CPU 在执行主调函数代码时如果遇到了被调函数，主调函数就会暂停，CPU 转而执行被调函数的代码；被调函数执行完毕后再返回到主调函数，主调函数根据刚才的状态继续往下执行。</p>
+<p>我们得明白，函数调用是有时间和空间开销的。程序在执行一个函数之前需要做一些准备工作，要将实参、局部变量、返回地址以及若干寄存器都压入栈中，然后才能执行函数体中的代码；函数体中的代码执行完毕后还要清理现场，将之前压入栈中的数据都出栈，才能接着执行函数调用位置以后的代码。</p>
+<p>如果函数体代码比较多，需要较长的执行时间，那么函数调用机制占用的时间可以忽略；如果函数只有一两条语句，那么大部分的时间都会花费在函数调用机制上，这种时间开销就就不容忽视，要尽可能处理函数调用机制所用时间占比大的这种情况。</p>
+<p>为了消除函数调用的时空开销，C++ 提供一种提高效率的方法，即在编译时将函数调用处用函数体替换，类似于C语言中的宏展开。这种在函数调用处直接嵌入函数体的函数称为内联函数（Inline Function），又称内嵌函数或者内置函数。</p>
+<p>先来看看普通函数的调用过程：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021712159.png" alt="image-20221202171252067"></p>
+<p>调用函数时是使用call指令，去调用某地址上的函数。（<strong>注意：普通函数都是有地址的，可以用以区分内联函数</strong>）</p>
+<p>如果在上述<strong>函数的前面加上inline关键字</strong>将其改为内联函数，在编译期间编译器会用函数体替换函数的调用。</p>
+<p>不过我们通常在<strong>Debug模式</strong>下默认函数不会被当做内联，即使你加上了inline，都会被编译器忽略，只有在<strong>release模式</strong>下，inline才有可能会被采纳，至于为什么是有可能，编译器只会把你的inline关键字<strong>当做一个建议</strong>，至于编译器是否按照你所要求的去做，这就不一定了，因为这仅仅是一个建议，编译器会结合具体情况比如函数体指令的多少来判断到底是否当做内联函数。</p>
+<p>所以我们如何去观察一个函数是否被当做内联函数呢？</p>
+<p><strong>在release模式下</strong></p>
+<ol>
+<li><p>查看编译生成的汇编代码中是否存在call Add</p>
+</li>
+<li><p>监视器窗口查看Add函数是否有地址；</p>
+</li>
+</ol>
+<p><strong>在debug模式下</strong>需要对编译器进行设置，否则不会展开，因为在debug模式下，编译器默认不会对代码进行优化，内联函数其实算一种优化方式。</p>
+<ol>
+<li>在项目—&gt;属性中找到 C&#x2F;C++选项—&gt;常规</li>
+</ol>
+<p>​	将调试信息格式改为程序数据库(&#x2F;Zi)</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021619156.png" alt="image-20220518230156248"></p>
+<ol start="2">
+<li><p>在C&#x2F;C++选项中找到优化</p>
+<p>将内联函数扩展选择—&gt;只适用于__inline(Ob1)</p>
+</li>
+</ol>
+<p>​	<img src="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021619935.png" alt="image-20220518230203570"></p>
+<ol start="3">
+<li>重新生成可执行文件即可</li>
+</ol>
+<p>完成后，我们便可以在debug模式下查看到内联函数的展开</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021619013.png" alt="image-20220518230211186"></p>
+<p>这里并没有call Add函数，而是函数体的展开（当然不仅仅是简单的展开，还会涉及一些其他指令，不做深入讨论）。</p>
+<h3 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h3><ul>
+<li><strong>inline是一种空间换时间</strong>的做法 ，节省了开辟栈帧的时间开销；</li>
+</ul>
+<p>​		与调用普通函数相比不需要去<strong>开辟栈帧空间</strong>，节省了时间，相当于<strong>inline函数体</strong>所有指令都在当前栈内被执行；</p>
+<ul>
+<li><strong>inline对于编译器仅仅是一个建议</strong>，编译器会自动优化，如果定义为inline的函数体内有循环&#x2F;递归等，编译器优化会自动忽略内联。</li>
+</ul>
+<p>​		不仅是以上两种情况，函数体内的指令一旦较多，编译器就会自动忽略，如下：</p>
+<p>​		函数体指令较复杂：</p>
+<p>​		<img src="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021619574.png" alt="image-20220518230219852"></p>
+<p>​		函数体指令较简单：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021619851.png" alt="image-20220518230227047"></p>
+<ul>
+<li>inline函数不建议<strong>声明和定义分离</strong>，分离会<strong>导致链接错误</strong>。因为inlinn函数被展开，也就不会有函数地址，自然不用提去链接了。</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//func.h文件</span></span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span> once</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">f</span><span class="params">(<span class="type">int</span> i)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//func.cpp文件</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&quot;test.h&quot;</span></span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">f</span><span class="params">(<span class="type">int</span> i)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;func&quot;</span> &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//main.cpp文件</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&quot;test.h&quot;</span></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">f</span>(<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>报错：error LNK2019: 无法解析的外部符号 “void __cdecl f(int)” (?f@@YAXH@Z)，函数 main 中引用了该符号。</p>
+</blockquote>
+<p>如果想要一个函数成为内联，但是类的定义和类实例化的地方在不同的源文件（声明定义分离），那么最好是将此函数定义在类中。</p>
+<p>对于内联函数，其工作原理是：</p>
+<p>对于任何内联函数，编译器在符号表里放入函数的声明（包括名字、参数类型、返回值类型）。如果编译器没有发现内联函数存在错误，那么该函数的代码也被放入符号表里。在调用一个内联函数时，编译器首先检查调用是否正确（进行类型安全检查，或者进行自动类型转换，当然对所有的函数都一样）。如果正确，内联函数的代码就会直接替换函数调用，于是省去了函数调用的开销。</p>
+<p>各个文件是分离编译的，在func.c中由于声明了f函数是内联的，并且函数体也很简短，因此编译器遵循了我们的建议，使其成为一个内联函数，由于没有函数地址，自然无法被除本源文件以外的地方调用；也可以说内联函数在符号表不会有合并这一步操作，仅仅存在于本源文件中。</p>
+<h3 id="内联函数的缺点"><a href="#内联函数的缺点" class="headerlink" title="内联函数的缺点"></a>内联函数的缺点</h3><p>难道内联函数就没有缺点吗，当然有！不然还要函数做什么？内联函数随着一次次的调用展开，会造成代码膨胀的问题，通俗讲就是生成的可执行文件会变大，这是我们不愿意看到的（有谁愿意看着自己的电脑硬盘被榨干呢？）</p>
+<p>可以大致从几个方面看：</p>
+<ul>
+<li><strong>编译后的程序会存在多份相同的函数指令拷贝，这些函数拷贝编译后都是二进制的指令，如果被声明为内联函数的函数体非常大，那么编译后的程序体积也将会变得很大。</strong></li>
+<li><strong>可执行程序在运行前要先载入内存，程序的执行就是一步步去内存取指令然后交给CPU执行的过程，可以试想可执行文件大，那么其指令也就越多，载入内存后消耗的空间也越大。</strong></li>
+</ul>
+<p>​		很好理解，普通的函数都有一个地址，每当我们需要使用这个函数时，直接通过函数名访问地址，然后就是建立栈帧的过程，在新栈帧中执行相应函数指令。          </p>
+<p>​		内联函数没有它的地址，我们需要调用这个函数时，只能临时拷贝一份，再执行相应指令。                                                                                                         </p>
+<p>​		举一个例子就是，普通函数就是一个坚信好 “记性不如烂笔头的乖学生”，老师讲一个重要的、多次使用的知识点时，他就记在笔记本上，需要了就拿出来看看就会了。内联函数也是一个爱记笔记的学生，不过它丢三落四的，刚记下笔记笔记本就丢了，每次需要时，就只能又去问老师再记下来，慢慢的他写过的笔记本就很多了，不过他自己还浑然不知。</p>
+<p>​		他们两个同学的笔记本都是一个作用，就是记录下这个知识，但是随着使用次数的增加，这位有收拾的同学只需要一个笔记本就能终生受用，而这位丢三落四的同学则会随着记了又丢，丢了又记的过程产生很多个笔记本，内联函数也是同样的道理。</p>
+<p>那么它们的过程实际区别如下：</p>
+<p>​		在程序载入过程中，两个函数体内容相同的普通函数和内联函数，普通函数的函数指令只向内存中载入了一次，之后每次调用此函数都只需要一条指令，直接访问其函数地址并取指令。</p>
+<p>​		内联函数不会载入内存，没有函数地址。在编译后这些调用内联函数的语句都会被展开为内联函数的指令（做了一些特殊处理，并不是完全复制的函数体指令），由于编译后内联函数展开部分就只是一条条的指令，这些指令都会被载入内存，可以看到这里调用了多少次，内联就展开了多少次，展开的指令都会被载入内存，可以等效于调用了几次就将内联函数的指令载入了几次到内存。</p>
+<p>那么也就得出差异，普通函数只需要载入内存一次，而内敛函数是调用了几次就会载入内存几次。</p>
+<ul>
+<li><strong>如果内联函数调用次数很多，调用结束后由于调用所产生的内存消耗并不会被释放（普通函数调用结束后栈帧会销毁）</strong></li>
+</ul>
+<p>​		如图：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021620632.png" alt="image-20220518230235573"></p>
+<p>总体来说，如果除去开辟栈帧的花销，<strong>内联函数和普通函数的所执行的指令数、时间几乎是相同的</strong>，重点在于如何把控执行一个函数时，<strong>它开辟的栈帧的消耗占整个函数调用的比重</strong>，如何把控这个比重，决定了我们是否建议一个函数为内联。</p>
+<p>我们来写个程序验证一下，并从指令的角度来看：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">func</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;func&quot;</span> &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;    </span><br><span class="line">    <span class="built_in">func</span>();</span><br><span class="line">    <span class="built_in">func</span>();</span><br><span class="line">    <span class="built_in">func</span>();</span><br><span class="line">    <span class="built_in">func</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>来看看内联函数的汇编指令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">    func();</span><br><span class="line">00007FF6AA4D1522  lea         rdx,[string &quot;func&quot; (07FF6AA4DAE64h)]  </span><br><span class="line">00007FF6AA4D1529  mov         rcx,qword ptr [__imp_std::cout (07FF6AA4E0198h)]  </span><br><span class="line">00007FF6AA4D1530  call        std::operator&lt;&lt;&lt;std::char_traits&lt;char&gt; &gt; (07FF6AA4D1046h)  </span><br><span class="line">00007FF6AA4D1535  lea         rdx,[std::endl&lt;char,std::char_traits&lt;char&gt; &gt; (07FF6AA4D1014h)]  </span><br><span class="line">00007FF6AA4D153C  mov         rcx,rax  </span><br><span class="line">00007FF6AA4D153F  call        qword ptr [__imp_std::basic_ostream&lt;char,std::char_traits&lt;char&gt; &gt;::operator&lt;&lt; (07FF6AA4E01B0h)]  </span><br><span class="line">    func();</span><br><span class="line">00007FF6AA4D1545  lea         rdx,[string &quot;func&quot; (07FF6AA4DAE64h)]  </span><br><span class="line">00007FF6AA4D154C  mov         rcx,qword ptr [__imp_std::cout (07FF6AA4E0198h)]  </span><br><span class="line">00007FF6AA4D1553  call        std::operator&lt;&lt;&lt;std::char_traits&lt;char&gt; &gt; (07FF6AA4D1046h)  </span><br><span class="line">00007FF6AA4D1558  lea         rdx,[std::endl&lt;char,std::char_traits&lt;char&gt; &gt; (07FF6AA4D1014h)]  </span><br><span class="line">00007FF6AA4D155F  mov         rcx,rax  </span><br><span class="line">00007FF6AA4D1562  call        qword ptr [__imp_std::basic_ostream&lt;char,std::char_traits&lt;char&gt; &gt;::operator&lt;&lt; (07FF6AA4E01B0h)]  </span><br><span class="line">    func();</span><br><span class="line">00007FF6AA4D1568  lea         rdx,[string &quot;func&quot; (07FF6AA4DAE64h)]  </span><br><span class="line">00007FF6AA4D156F  mov         rcx,qword ptr [__imp_std::cout (07FF6AA4E0198h)]  </span><br><span class="line">00007FF6AA4D1576  call        std::operator&lt;&lt;&lt;std::char_traits&lt;char&gt; &gt; (07FF6AA4D1046h)  </span><br><span class="line">00007FF6AA4D157B  lea         rdx,[std::endl&lt;char,std::char_traits&lt;char&gt; &gt; (07FF6AA4D1014h)]  </span><br><span class="line">00007FF6AA4D1582  mov         rcx,rax  </span><br><span class="line">00007FF6AA4D1585  call        qword ptr [__imp_std::basic_ostream&lt;char,std::char_traits&lt;char&gt; &gt;::operator&lt;&lt; (07FF6AA4E01B0h)]  </span><br><span class="line">    func();</span><br><span class="line">00007FF6AA4D158B  lea         rdx,[string &quot;func&quot; (07FF6AA4DAE64h)]  </span><br><span class="line">00007FF6AA4D1592  mov         rcx,qword ptr [__imp_std::cout (07FF6AA4E0198h)]  </span><br><span class="line">00007FF6AA4D1599  call        std::operator&lt;&lt;&lt;std::char_traits&lt;char&gt; &gt; (07FF6AA4D1046h)  </span><br><span class="line">00007FF6AA4D159E  lea         rdx,[std::endl&lt;char,std::char_traits&lt;char&gt; &gt; (07FF6AA4D1014h)]  </span><br><span class="line">00007FF6AA4D15A5  mov         rcx,rax  </span><br><span class="line">00007FF6AA4D15A8  call        qword ptr [__imp_std::basic_ostream&lt;char,std::char_traits&lt;char&gt; &gt;::operator&lt;&lt; (07FF6AA4E01B0h)]  </span><br></pre></td></tr></table></figure>
+
+<p>接着我们取消内联再来看看：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">    func();</span><br><span class="line">00007FF679261572  call        func (07FF679261285h)  </span><br><span class="line">    func();</span><br><span class="line">00007FF679261577  call        func (07FF679261285h)  </span><br><span class="line">    func();</span><br><span class="line">00007FF67926157C  call        func (07FF679261285h)  </span><br><span class="line">    func();</span><br><span class="line">00007FF679261581  call        func (07FF679261285h)  </span><br></pre></td></tr></table></figure>
+
+<p>差别还是蛮大的，这些指令都会在运行时载入内存，造成代码膨胀。</p>
+<h3 id="一些其他不足"><a href="#一些其他不足" class="headerlink" title="一些其他不足"></a>一些其他不足</h3><ul>
+<li>通常，编译器比程序设计者更清楚对于一个特定的函数是否合适进行内联扩展；一些情况下，对于程序员指定的某些内联函数，编译器可能更倾向于不使用内联甚至根本无法完成内联。</li>
+<li>对于一些开发中的函数，它们可能从原来的不适合内联扩展变得适合或者倒过来。尽管内联函数或者非内联函数的转换易于宏的转换，但增加的维护开支还是使得它的优点显得更不突出了。</li>
+<li>对于基于C的编译系统，内联函数的使用可能大大增加编译时间，因为每个调用该函数的地方都需要替换成函数体，代码量的增加也同时带来了潜在的编译时间的增加。</li>
+</ul>
+<p><strong>判断是否设置为内联</strong>：一般只将那些短小的、频繁调用的函数声明为内联函数。</p>
+<p>最后需要说明的是，对函数作 inline 声明只是程序员对编译器<strong>提出的一个建议</strong>，而不是强制性的，并非一经指定为 inline 编译器就必须这样做。编译器有自己的判断能力，它会根据具体情况决定是否这样做。</p>
+<h2 id="auto关键字"><a href="#auto关键字" class="headerlink" title="auto关键字"></a>auto关键字</h2><p>auto为自动的意思，C语言中貌似也有提到过（自动变量什么的，记不清了几乎没使用过），那么在C++中auto有什么作用、应用于哪些场景呢？</p>
+<h3 id="auto简介"><a href="#auto简介" class="headerlink" title="auto简介"></a>auto简介</h3><blockquote>
+<p>在早期C&#x2F;C++中auto的含义是：使用<strong>auto修饰的变量，是具有自动存储器的局部变量</strong>，但遗憾的是一直没有人去使用它，大家可思考下为什么？</p>
+<p>C++11中，标准委员会赋予了auto全新的含义即：<strong>auto不再是一个存储类型指示符，而是作为一个新的类型指示符来指示编译器，auto声明的变量必须由编译器在编译时期推导而得。</strong></p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">auto</span> a = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">auto</span> b = <span class="number">2.0</span>;</span><br><span class="line">    <span class="keyword">auto</span> c = <span class="number">2.0f</span>;</span><br><span class="line">    <span class="keyword">auto</span> d = <span class="string">&#x27;w&#x27;</span>;</span><br><span class="line">    cout &lt;&lt; <span class="built_in">typeid</span>(a).<span class="built_in">name</span>() &lt;&lt; endl;</span><br><span class="line">    cout &lt;&lt; <span class="built_in">typeid</span>(b).<span class="built_in">name</span>() &lt;&lt; endl;</span><br><span class="line">    cout &lt;&lt; <span class="built_in">typeid</span>(c).<span class="built_in">name</span>() &lt;&lt; endl;</span><br><span class="line">    cout &lt;&lt; <span class="built_in">typeid</span>(d).<span class="built_in">name</span>() &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//auto e;无法通过编译。</span></span><br></pre></td></tr></table></figure>
+
+<p>既然是编译期间自动推导类型，那么就说明一定得初始化咯。</p>
+<p><strong>使用auto定义变量时必须对其进行初始化</strong>，在编译阶段编译器需要根据初始化表达式来推导auto的实际类型。因此auto并非是一种“类型”的声明，而是一个<strong>类型声明时的“占位符”</strong>，编译器在编译期会将auto替换为变量实际的类型。</p>
+<h3 id="详细使用规则"><a href="#详细使用规则" class="headerlink" title="详细使用规则"></a>详细使用规则</h3><p>既然是占位符则说明auto可以是任何类型，而不一定是对其进行初始化数据的类型。</p>
+<ol>
+<li><strong>auto和指针结合起来使用</strong></li>
+</ol>
+<p>​		用auto声明指针类型时，用auto和auto*没有任何区别，但是auto对于引用的声明必须加上&amp;；</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> a = <span class="number">10</span>;</span><br><span class="line">    <span class="keyword">auto</span> p1 = &amp;a;<span class="comment">//auto在编译时会被替换为int*</span></span><br><span class="line">    <span class="keyword">auto</span>* p2 = &amp;a;<span class="comment">//auto在编译时会被替换为int</span></span><br><span class="line">    <span class="type">int</span>&amp; ref = a;</span><br><span class="line">    <span class="keyword">auto</span> ref1 = ref;<span class="comment">//ref是a的别名，因此推导出是int类型</span></span><br><span class="line">    ref1 = <span class="number">12</span>;<span class="comment">//a并不会改变</span></span><br><span class="line">    cout &lt;&lt; a &lt;&lt; endl;</span><br><span class="line">    cout &lt;&lt; <span class="built_in">typeid</span>(a).<span class="built_in">name</span>() &lt;&lt; endl;</span><br><span class="line">    cout &lt;&lt; <span class="built_in">typeid</span>(ref).<span class="built_in">name</span>() &lt;&lt; endl;</span><br><span class="line">    cout &lt;&lt; <span class="built_in">typeid</span>(p1).<span class="built_in">name</span>() &lt;&lt; endl;</span><br><span class="line">    cout &lt;&lt; <span class="built_in">typeid</span>(p2).<span class="built_in">name</span>() &lt;&lt; endl;</span><br><span class="line">    cout &lt;&lt; <span class="built_in">typeid</span>(ref1).<span class="built_in">name</span>() &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><strong>同一行定义多个变量</strong></li>
+</ol>
+<p>​		<strong>在同一行定义多个变量时，这些变量的类型必须相同，否则编译器会报错，因为编译器实际只对第一个类型进行推导，然后替换为auto，并用该类型定义其他变量。</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">auto</span> a = <span class="number">1</span>, b = <span class="number">1.0</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>在声明符列表中，“auto”必须始终推导为同一类型</p>
+</blockquote>
+<p>这样看auto好像还挺万能的，那么auto能适用于所以场景吗？</p>
+<h3 id="auto不能推导类型的场景"><a href="#auto不能推导类型的场景" class="headerlink" title="auto不能推导类型的场景"></a>auto不能推导类型的场景</h3><ul>
+<li>不能作为函数的形参</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 此处代码编译失败，auto不能作为形参类型，因为编译器无法对a和b的实际类型进行推导</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">Add</span><span class="params">(<span class="keyword">auto</span> a, <span class="keyword">auto</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>error C3533: 参数不能为包含“auto”的类型</p>
+</blockquote>
+<p>函数在编译时是需要形参类型来确定修饰后函数名的，所以形参类型要先确定。</p>
+<p>这种显然是不可行的，如果可以直接使用auto推导，那么就没后面的模板什么事了。</p>
+<p><strong>注：返回值是可以用auto的。</strong></p>
+<ul>
+<li>不能用来直接声明数组</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">auto</span> arr[] = &#123; <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span> &#125;;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>error C3318: “auto []”: 数组不能具有其中包含“auto”的元素类型</p>
+<p>error C3535: 无法推导“auto []”的类型(依据“initializer list”)</p>
+</blockquote>
+<ul>
+<li>为了避免与C++98中的auto发生混淆，C++11只保留了auto作为类型指示符的用法</li>
+<li>auto为了在实际中最常见的优势用法就是跟以后会讲到的C++11提供的新式for循环，还有lambda表达式等<br>进行配合使用</li>
+</ul>
+<h2 id="基于范围的for循环"><a href="#基于范围的for循环" class="headerlink" title="基于范围的for循环"></a>基于范围的for循环</h2><p>for循环是我们非常熟悉的，用法也比较单一，通常在知道循环次数的情况下使用，那么什么是范围for呢？</p>
+<h3 id="范围for的语法"><a href="#范围for的语法" class="headerlink" title="范围for的语法"></a>范围for的语法</h3><p>C++98中如果我们要遍历一个数组通常是下面这种方式：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">TestFor</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> array[] = &#123; <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span> &#125;;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="built_in">sizeof</span>(array) / <span class="built_in">sizeof</span>(array[<span class="number">0</span>]); ++i)</span><br><span class="line">        array[i] *= <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span>* p = array; p &lt; array + <span class="built_in">sizeof</span>(array) / <span class="built_in">sizeof</span>(array[<span class="number">0</span>]); ++p)</span><br><span class="line">        cout &lt;&lt; *p &lt;&lt; endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>对于一个<strong>范围已知</strong>的集合而言，由我们来说明循环的范围显然是多余的，有时候不注意还会出错。因此C++11中引入了基于范围的for循环。<strong>for循环后的括号由冒号“:”分为两部分：第一部分是范围内用于迭代的变量，第二部分则表示被迭代的范围。</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">TestFor</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> array[] = &#123; <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span> &#125;;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span>&amp; e : array)</span><br><span class="line">        e *= <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> e : array)</span><br><span class="line">        cout &lt;&lt; e &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>循环体内就和普通的循环一样了，我们可以使用<strong>break跳出循环</strong>，也可以使用<strong>continue结束本次循环</strong>，只不过是编译器帮助我们确定迭代的范围而已。</p>
+<h3 id="范围for的使用条件"><a href="#范围for的使用条件" class="headerlink" title="范围for的使用条件"></a>范围for的使用条件</h3><ol>
+<li><strong>for循环迭代的范围是确定的</strong></li>
+</ol>
+<blockquote>
+<p>对于数组而言，迭代的范围就是从第一个元素到最后一个元素；</p>
+<p>对于类而言，应该提供begin以及end的方法，循环的范围就是从begin到end；</p>
+</blockquote>
+<p>也就是说我么给for的应该是一组数据集合，例如数组，链表等等…</p>
+<p>看看一下代码是否有问题：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">TestFor</span><span class="params">(<span class="type">int</span> array[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span>&amp; e : array)</span><br><span class="line">        cout &lt;&lt; e &lt;&lt; endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>“begin”: 未找到匹配的重载函数</p>
+</blockquote>
+<p>显然是有问题的，数组名作为形参，其本质上是一个指针，指针是一组数据的集合吗？？显然不是。</p>
+<ol start="2">
+<li><strong>迭代的对象的迭代器要实现++和&#x3D;&#x3D;的操作。(关于迭代器这个问题，以后会讲，现在大家了解一下就可以了)</strong></li>
+</ol>
+<p>​		可以先简单说说迭代器，迭代器就是一个封装后的指针，通过这个封装后的指针我们可以通过地址找到数据的存储位置。为什么要封装呢？因为对于原生指针我们执行++操作，它是在相邻的位置移动，这样对于链表等数据结构是无法正确访问的，可如果我们对++操作符进行重载，就可以让它根据他的存储特性去移动指针了！</p>
+<h3 id="新的指针空值nullptr-C-11"><a href="#新的指针空值nullptr-C-11" class="headerlink" title="新的指针空值nullptr C++11"></a>新的指针空值nullptr C++11</h3><p>从学习C语言之初，我们就说要养成一个好习惯——声明一个变量时给一个合适的初值，否则可能会出现不可预料的错误，比如未初始化的指针。如果当前指针没有明确的指向，那么可以给其赋值为空；</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span>* p = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="type">int</span>* p1 = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这两者其实是一样的，NULL其实是一个宏，即是0值；</p>
+<p>在传统C头文件里(stddef.h)中，可以看到如下代码：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifndef</span> NULL</span></span><br><span class="line"><span class="meta">#<span class="keyword">ifdef</span> __cplusplus</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> NULL 0</span></span><br><span class="line"><span class="meta">#<span class="keyword">else</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> NULL ((void *)0)</span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+
+<p>可以看到，NULL可能被定义为字面常量0，或者被定义为无类型指针(void*)的常量。不论采取何种定义，在使用空值的指针时，都不可避免的会遇到一些麻烦，比如：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">func</span><span class="params">(<span class="type">int</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;f(int)&quot;</span> &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">func</span><span class="params">(<span class="type">int</span>*)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;f(int*)&quot;</span> &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">func</span>(<span class="number">0</span>);</span><br><span class="line">    <span class="built_in">func</span>(<span class="literal">NULL</span>);</span><br><span class="line">    <span class="built_in">func</span>((<span class="type">int</span>*)<span class="literal">NULL</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们的本意是让<code>func(NULL)</code>去调用<code>void func(int*)</code>的，但却出现了问题，由于NULL被定义成0，而0默认被当做一个整型，因此与程序的初衷相悖。</p>
+<blockquote>
+<p>在C++98中，字面常量0既可以是一个整形数字，也可以是无类型的指针(void*)常量，但是编译器默认情况下将其看成是一个整形常量，如果要将其按照指针方式来使用，必须对其进行强转(void *)0。</p>
+</blockquote>
+<p>因此在C++程序中我们更倾向使用nullptr而不是NULL，来看看nullptr是什么。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span>* p = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="type">int</span>* p1 = <span class="number">0</span>;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; <span class="built_in">typeid</span>(<span class="literal">NULL</span>).<span class="built_in">name</span>() &lt;&lt; endl;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; <span class="built_in">typeid</span>(<span class="literal">nullptr</span>).<span class="built_in">name</span>() &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021620087.png" alt="image-20220518230248775"></p>
+<p><strong>注意：</strong></p>
+<ol>
+<li><p><strong>在使用nullptr表示指针空值时，不需要包含头文件，因为nullptr是C++11作为新关键字引入的。</strong></p>
+</li>
+<li><p><em><em>在C++11中，sizeof(nullptr) 与 sizeof((void</em>)0)所占的字节数相同。</em>*</p>
+</li>
+<li><p><strong>为了提高代码的健壮性（适用于更多场景），在后续表示指针空值时建议最好使用nullptr。</strong></p>
+</li>
+</ol>
+</div><div class="article-licensing box"><div class="licensing-title"><p>C++入门基础下</p><p><a href="http://icarus.xinsong.xyz/2023/01/12/C++/2.C++入门基础（下）/">http://icarus.xinsong.xyz/2023/01/12/C++/2.C++入门基础（下）/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>NcPhoton</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>2023-01-12</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>2023-01-13</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/cpp/">cpp</a></div><div class="notification is-danger">You need to set <code>install_url</code> to use ShareThis. Please set it in <code>_config.yml</code>.</div></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">Like this article? Support the author with</h3><div class="buttons is-centered"><a class="button donate" href="/" target="_blank" rel="noopener" data-type="afdian"><span class="icon is-small"><i class="fas fa-charging-station"></i></span><span>Afdian.net</span></a><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>Alipay</span><span class="qrcode"><img src="/" alt="Alipay"></span></a><a class="button donate" href="/" target="_blank" rel="noopener" data-type="buymeacoffee"><span class="icon is-small"><i class="fas fa-coffee"></i></span><span>Buy me a coffee</span></a><a class="button donate" href="/" target="_blank" rel="noopener" data-type="patreon"><span class="icon is-small"><i class="fab fa-patreon"></i></span><span>Patreon</span></a><div class="notification is-danger">You forgot to set the <code>business</code> or <code>currency_code</code> for Paypal. Please set it in <code>_config.yml</code>.</div><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>Wechat</span><span class="qrcode"><img src="/" alt="Wechat"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2023/01/12/C++/3.C++%E5%92%8CC%E7%9A%84%E6%B7%B7%E5%90%88%E7%BC%96%E8%AF%91/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">C++和C的混合编译</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2023/01/12/C++/1.C++%E5%85%A5%E9%97%A8%E5%9F%BA%E7%A1%80%EF%BC%88%E4%B8%8A%EF%BC%89/"><span class="level-item">C++入门基础上</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">Comments</h3><div class="notification is-danger">You forgot to set the <code>shortname</code> for Disqus. Please set it in <code>_config.yml</code>.</div></div></div></div><!--!--><div class="column column-right is-4-tablet is-4-desktop is-4-widescreen  order-3 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">Catalogue</h3><ul class="menu-list"><li><a class="level is-mobile" href="#内联函数"><span class="level-left"><span class="level-item">1</span><span class="level-item">内联函数</span></span></a></li><li><a class="level is-mobile" href="#概念"><span class="level-left"><span class="level-item">2</span><span class="level-item">概念</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#特性"><span class="level-left"><span class="level-item">2.1</span><span class="level-item">特性</span></span></a></li><li><a class="level is-mobile" href="#内联函数的缺点"><span class="level-left"><span class="level-item">2.2</span><span class="level-item">内联函数的缺点</span></span></a></li><li><a class="level is-mobile" href="#一些其他不足"><span class="level-left"><span class="level-item">2.3</span><span class="level-item">一些其他不足</span></span></a></li></ul></li><li><a class="level is-mobile" href="#auto关键字"><span class="level-left"><span class="level-item">3</span><span class="level-item">auto关键字</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#auto简介"><span class="level-left"><span class="level-item">3.1</span><span class="level-item">auto简介</span></span></a></li><li><a class="level is-mobile" href="#详细使用规则"><span class="level-left"><span class="level-item">3.2</span><span class="level-item">详细使用规则</span></span></a></li><li><a class="level is-mobile" href="#auto不能推导类型的场景"><span class="level-left"><span class="level-item">3.3</span><span class="level-item">auto不能推导类型的场景</span></span></a></li></ul></li><li><a class="level is-mobile" href="#基于范围的for循环"><span class="level-left"><span class="level-item">4</span><span class="level-item">基于范围的for循环</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#范围for的语法"><span class="level-left"><span class="level-item">4.1</span><span class="level-item">范围for的语法</span></span></a></li><li><a class="level is-mobile" href="#范围for的使用条件"><span class="level-left"><span class="level-item">4.2</span><span class="level-item">范围for的使用条件</span></span></a></li><li><a class="level is-mobile" href="#新的指针空值nullptr-C-11"><span class="level-left"><span class="level-item">4.3</span><span class="level-item">新的指针空值nullptr C++11</span></span></a></li></ul></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.svg" alt="Nico&#039;s Blog" height="28"></a><p class="is-size-7"><span>&copy; 2023 NcPhoton</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "This website uses cookies to improve your experience.",
+          dismiss: "Got it!",
+          allow: "Allow cookies",
+          deny: "Decline",
+          link: "Learn more",
+          policy: "Cookie Policy",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><script src="/live2d-widget/autoload.js"></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script></body></html>

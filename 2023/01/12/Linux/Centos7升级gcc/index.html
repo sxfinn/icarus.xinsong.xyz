@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>Centos升级gcc - Nico&#039;s Blog</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Nico&#039;s Blog"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Nico&#039;s Blog"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="不建议贸然升级，时间是比较久的并且容易出现一系列问题。 升级GCC版本到11.1GCC11终于发正式版了, 4月底官方终于发了11.1正式版. 对于我们来说, 项目实际使用基于C++17的协程已经有段时间, stackless在没有compiler额外生成代码Buff的加持下, Stack变量的人肉处理, 花括号对代码的隔离, 还是会导致一些额外的工作量, 便利性上不那么完美. 既然GCC11.1"><meta property="og:type" content="blog"><meta property="og:title" content="Centos升级gcc"><meta property="og:url" content="http://icarus.xinsong.xyz/2023/01/12/Linux/Centos7%E5%8D%87%E7%BA%A7gcc/"><meta property="og:site_name" content="Nico&#039;s Blog"><meta property="og:description" content="不建议贸然升级，时间是比较久的并且容易出现一系列问题。 升级GCC版本到11.1GCC11终于发正式版了, 4月底官方终于发了11.1正式版. 对于我们来说, 项目实际使用基于C++17的协程已经有段时间, stackless在没有compiler额外生成代码Buff的加持下, Stack变量的人肉处理, 花括号对代码的隔离, 还是会导致一些额外的工作量, 便利性上不那么完美. 既然GCC11.1"><meta property="og:locale" content="en_US"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021633395.png"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021633444.png"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021634422.png"><meta property="article:published_time" content="2023-01-12T15:34:46.000Z"><meta property="article:modified_time" content="2023-01-13T03:38:39.975Z"><meta property="article:author" content="NcPhoton"><meta property="article:tag" content="linux"><meta property="article:tag" content="gcc"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021633395.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://icarus.xinsong.xyz/2023/01/12/Linux/Centos7%E5%8D%87%E7%BA%A7gcc/"},"headline":"Centos升级gcc","image":["https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021633395.png","https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021633444.png","https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021634422.png"],"datePublished":"2023-01-12T15:34:46.000Z","dateModified":"2023-01-13T03:38:39.975Z","author":{"@type":"Person","name":"NcPhoton"},"publisher":{"@type":"Organization","name":"Nico's Blog","logo":{"@type":"ImageObject","url":"http://icarus.xinsong.xyz/img/logo.svg"}},"description":"不建议贸然升级，时间是比较久的并且容易出现一系列问题。 升级GCC版本到11.1GCC11终于发正式版了, 4月底官方终于发了11.1正式版. 对于我们来说, 项目实际使用基于C++17的协程已经有段时间, stackless在没有compiler额外生成代码Buff的加持下, Stack变量的人肉处理, 花括号对代码的隔离, 还是会导致一些额外的工作量, 便利性上不那么完美. 既然GCC11.1"}</script><link rel="canonical" href="http://icarus.xinsong.xyz/2023/01/12/Linux/Centos7%E5%8D%87%E7%BA%A7gcc/"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.svg" alt="Nico&#039;s Blog" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2023-01-12T15:34:46.000Z" title="2023/1/12 23:34:46">2023-01-12</time></span><span class="level-item">Updated&nbsp;<time dateTime="2023-01-13T03:38:39.975Z" title="2023/1/13 11:38:39">2023-01-13</time></span><span class="level-item"><a class="link-muted" href="/categories/Linux/">Linux</a></span><span class="level-item">8 minutes read (About 1210 words)</span></div></div><h1 class="title is-3 is-size-4-mobile">Centos升级gcc</h1><div class="content"><p>不建议贸然升级，时间是比较久的并且容易出现一系列问题。</p>
+<h2 id="升级GCC版本到11-1"><a href="#升级GCC版本到11-1" class="headerlink" title="升级GCC版本到11.1"></a>升级GCC版本到11.1</h2><p>GCC11终于发正式版了, 4月底官方终于发了11.1正式版. 对于我们来说, 项目实际使用基于C++17的协程已经有段时间, stackless在没有compiler额外生成代码Buff的加持下, Stack变量的人肉处理, 花括号对代码的隔离, 还是会导致一些额外的工作量, 便利性上不那么完美. 既然GCC11.1已经发了, 我们之前的GCC8.3也在正常工作中, 升级成本比我们想象的低, 那新版到来, 又能解决项目的一些实际痛点, 升级的动力自然就比较足了.</p>
+<h2 id="下载GCC11-1源码"><a href="#下载GCC11-1源码" class="headerlink" title="下载GCC11.1源码"></a>下载GCC11.1源码</h2><p>  GCC的源码仓库地址为: <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/gcc%E7%9A%84Git%E5%9C%B0%E5%9D%80">https://github.com/gcc-mirror/gcc</a> ,在浏览器打开这个网址后，不要急于下载，先选择gcc的版本，如下图所示：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021633395.png" alt="image-20220518215012621"></p>
+<span id="more"></span>
+
+<p>如上图所示找到GCC11.1,并点击 “releases&#x2F;gcc-11.1.0”完成仓库的切换,  然后直接在网页上下载zip包, 自行上传至服务器后解压.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unzip gcc-releases-gcc-11.1.0.zip</span><br></pre></td></tr></table></figure>
+
+<p>也可以通过直接git clone的方式来拉取对应的gcc源码, 进入自己的home目录执行如下命令:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone --branch releases/gcc-11.1.0 https://github.com/gcc-mirror/gcc.git</span><br></pre></td></tr></table></figure>
+
+<p>两种方式效果一样, 获取到源代码后, 将当前目录切换到GCC源码根目录, 进入下一步. 源码目录如下图所示:</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021633444.png" alt="image-20220518215022746"></p>
+<h2 id="安装依赖库"><a href="#安装依赖库" class="headerlink" title="安装依赖库"></a>安装依赖库</h2><p>  新的GCC源码内置了依赖库的获取脚本, GCC所依赖的mpfr, gmp, mpc, isl都可以使用内置脚本直接获取, 比老版本简单非常多,  在GCC目录下, 执行:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./contrib/download_prerequisites</span><br></pre></td></tr></table></figure>
+
+<p>此命名会自动下载GCC编译需要的几个依赖库. </p>
+<h2 id="配置和编译"><a href="#配置和编译" class="headerlink" title="配置和编译"></a>配置和编译</h2><p>  前文也提到了, 我们需要同时保留老版本的GCC, 所以配置项里需要指定安装的目录, 配置命令如下 :</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./configure --prefix=<span class="regexp">/usr/</span>local/gcc-<span class="number">11.1</span><span class="number">.0</span> --enable-bootstrap --enable-languages=c,c++ --enable-threads=posix --enable-checking=release --enable-multilib --<span class="keyword">with</span>-system-zlib</span><br></pre></td></tr></table></figure>
+
+<p>  我们仅会使用GCC做C与C++的编译, 所以此处语言也仅选择了这两者.    配置完成后, 我们进入编译安装阶段. 此处可以直接打开并行编译执行make命令, 比如笔者机器是2核的, 此处直接将并发数设置为4进行编译, 实测效果不错.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make -j4</span><br></pre></td></tr></table></figure>
+
+<p>  <strong>记得一定要root权限, 不然可能会因为权限不足安装失败.</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo -s</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+
+<p>  这时整个gcc的安装过程已经成功执行完成, 按如下方法测试GCC是否正确安装:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/gcc-11.1.0/bin/gcc --version</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021634422.png" alt="image-20220518215030007"></p>
+<p>得到上图的输出, 则GCC11.1已经成功安装.</p>
+<h2 id="CMake中的使用-ABI兼容问题"><a href="#CMake中的使用-ABI兼容问题" class="headerlink" title="CMake中的使用, ABI兼容问题"></a>CMake中的使用, ABI兼容问题</h2><p>  请参考 <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/345928428">升级GCC到8.3</a> 中的相关部分.</p>
+<h2 id="LD-LIBRARY-PATH的问题"><a href="#LD-LIBRARY-PATH的问题" class="headerlink" title="LD_LIBRARY_PATH的问题"></a>LD_LIBRARY_PATH的问题</h2><p>  如果代码没有全部切换到11.1, 那我们还需要额外的一步操作才能让gcc11.1编译出的程序正常的运行:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="variable constant_">LD_LIBRARY_PATH</span>=<span class="attr">$LD_LIBRARY_PATH</span>:<span class="regexp">/usr/</span>local/gcc-<span class="number">11.1</span><span class="number">.0</span>/lib64</span><br></pre></td></tr></table></figure>
+
+<p>可以直接将本行追加到<del>&#x2F;.bashrc, 避免每次都单独写shell脚本追加该项. 注意更改</del>&#x2F;.bashrc后记得重新连接终端, 让修改生效. 如果同时也添加了gcc-8.3.0, 注意gcc-11.1.0的export要在8.3.0之前, 否则还是会报LD相关的问题.</p>
+<h2 id="GDB的问题"><a href="#GDB的问题" class="headerlink" title="GDB的问题"></a>GDB的问题</h2><p>GCC11.1开始, 要求使用支持C++11的编译器进行编译, 可能是由于这个改变, 生成的App可以正常运行, 但不能挂接GDB, 表现是用GDB启动生成的App就直接Crash, 报Segment Fault.</p>
+<p>  我们需要升级GDB到较新的版本,  就能解决该问题(具体出错的原因没有细查).  升级方法很简单:</p>
+<p>  到GNU官网下载比较新的GDB源码包并解压并编译安装, 笔者使用的shell是:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">wget <span class="attr">http</span>:<span class="comment">//ftp.gnu.org/gnu/gdb/gdb-10.2.tar.gz</span></span><br><span class="line">tar -zxf gdb-<span class="number">10.2</span>.<span class="property">tar</span>.<span class="property">gz</span></span><br><span class="line">cd gdb-<span class="number">10.2</span></span><br><span class="line">./configure</span><br><span class="line">make -j4</span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
+
+<p>默认安装的路径是&#x2F;usr&#x2F;local&#x2F;bin, 并不会覆盖老的GDB(老的在&#x2F;usr&#x2F;bin&#x2F;下), 所以使用VSCode或者自行运行的时候, 需要正确指定一下GDB的版本, 检查GDB的版本</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>  至此我们已经完成了GCC11.1的安装和相关环境的适配, 就笔者项目而言, 近期主要会用到的特性如下:</p>
+<ol>
+<li>C++20的coroutine</li>
+<li>concept(预计可以比较好的简化反射相关的代码) </li>
+<li>modules</li>
+</ol>
+<hr>
+<p>参考文章：</p>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1894845">升级GCC版本到11.1 - 云+社区 - 腾讯云</a></li>
+</ol>
+</div><div class="article-licensing box"><div class="licensing-title"><p>Centos升级gcc</p><p><a href="http://icarus.xinsong.xyz/2023/01/12/Linux/Centos7升级gcc/">http://icarus.xinsong.xyz/2023/01/12/Linux/Centos7升级gcc/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>NcPhoton</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>2023-01-12</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>2023-01-13</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/linux/">linux</a><a class="link-muted mr-2" rel="tag" href="/tags/gcc/">gcc</a></div><div class="notification is-danger">You need to set <code>install_url</code> to use ShareThis. Please set it in <code>_config.yml</code>.</div></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">Like this article? Support the author with</h3><div class="buttons is-centered"><a class="button donate" href="/" target="_blank" rel="noopener" data-type="afdian"><span class="icon is-small"><i class="fas fa-charging-station"></i></span><span>Afdian.net</span></a><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>Alipay</span><span class="qrcode"><img src="/" alt="Alipay"></span></a><a class="button donate" href="/" target="_blank" rel="noopener" data-type="buymeacoffee"><span class="icon is-small"><i class="fas fa-coffee"></i></span><span>Buy me a coffee</span></a><a class="button donate" href="/" target="_blank" rel="noopener" data-type="patreon"><span class="icon is-small"><i class="fab fa-patreon"></i></span><span>Patreon</span></a><div class="notification is-danger">You forgot to set the <code>business</code> or <code>currency_code</code> for Paypal. Please set it in <code>_config.yml</code>.</div><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>Wechat</span><span class="qrcode"><img src="/" alt="Wechat"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2023/01/12/Linux/Linux%E6%9B%B4%E6%8D%A2%E9%95%9C%E5%83%8F%E6%BA%90/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">Linux更换镜像源</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2023/01/12/Linux/Centos7%E6%9B%B4%E6%96%B0yum%E6%BA%90/"><span class="level-item">Centos更新yum源</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">Comments</h3><div class="notification is-danger">You forgot to set the <code>shortname</code> for Disqus. Please set it in <code>_config.yml</code>.</div></div></div></div><!--!--><div class="column column-right is-4-tablet is-4-desktop is-4-widescreen  order-3 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">Catalogue</h3><ul class="menu-list"><li><a class="level is-mobile" href="#升级GCC版本到11-1"><span class="level-left"><span class="level-item">1</span><span class="level-item">升级GCC版本到11.1</span></span></a></li><li><a class="level is-mobile" href="#下载GCC11-1源码"><span class="level-left"><span class="level-item">2</span><span class="level-item">下载GCC11.1源码</span></span></a></li><li><a class="level is-mobile" href="#安装依赖库"><span class="level-left"><span class="level-item">3</span><span class="level-item">安装依赖库</span></span></a></li><li><a class="level is-mobile" href="#配置和编译"><span class="level-left"><span class="level-item">4</span><span class="level-item">配置和编译</span></span></a></li><li><a class="level is-mobile" href="#CMake中的使用-ABI兼容问题"><span class="level-left"><span class="level-item">5</span><span class="level-item">CMake中的使用, ABI兼容问题</span></span></a></li><li><a class="level is-mobile" href="#LD-LIBRARY-PATH的问题"><span class="level-left"><span class="level-item">6</span><span class="level-item">LD_LIBRARY_PATH的问题</span></span></a></li><li><a class="level is-mobile" href="#GDB的问题"><span class="level-left"><span class="level-item">7</span><span class="level-item">GDB的问题</span></span></a></li><li><a class="level is-mobile" href="#小结"><span class="level-left"><span class="level-item">8</span><span class="level-item">小结</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.svg" alt="Nico&#039;s Blog" height="28"></a><p class="is-size-7"><span>&copy; 2023 NcPhoton</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "This website uses cookies to improve your experience.",
+          dismiss: "Got it!",
+          allow: "Allow cookies",
+          deny: "Decline",
+          link: "Learn more",
+          policy: "Cookie Policy",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><script src="/live2d-widget/autoload.js"></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script></body></html>

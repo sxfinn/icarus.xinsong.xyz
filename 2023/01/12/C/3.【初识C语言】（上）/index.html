@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>初识C语言上 - Nico&#039;s Blog</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Nico&#039;s Blog"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Nico&#039;s Blog"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="💦选择与循环无论在生活中还是工作中，我们不可避免的要做出选择甚至日复一日地重复某件事情。  “人是铁饭是钢，一顿不吃饿得慌”，确实，我们每天都要重复做的一件事，那就是吃饭。 今天吃什么呢？干锅还是汤锅？这时，我们总是要做出一个选择。  思考：我们在生活中解决问题时，似乎总是离不开选择和循环，那么计算机解决一个问题是不是也是如此呢？ 下面开始介绍。"><meta property="og:type" content="blog"><meta property="og:title" content="初识C语言上"><meta property="og:url" content="http://icarus.xinsong.xyz/2023/01/12/C/3.%E3%80%90%E5%88%9D%E8%AF%86C%E8%AF%AD%E8%A8%80%E3%80%91%EF%BC%88%E4%B8%8A%EF%BC%89/"><meta property="og:site_name" content="Nico&#039;s Blog"><meta property="og:description" content="💦选择与循环无论在生活中还是工作中，我们不可避免的要做出选择甚至日复一日地重复某件事情。  “人是铁饭是钢，一顿不吃饿得慌”，确实，我们每天都要重复做的一件事，那就是吃饭。 今天吃什么呢？干锅还是汤锅？这时，我们总是要做出一个选择。  思考：我们在生活中解决问题时，似乎总是离不开选择和循环，那么计算机解决一个问题是不是也是如此呢？ 下面开始介绍。"><meta property="og:locale" content="en_US"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021547794.png"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021548338.png"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021548680.png"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021548586.png"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021548492.png"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021548635.png"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021549023.png"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021549747.png"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021549453.png"><meta property="article:published_time" content="2023-01-12T13:22:57.000Z"><meta property="article:modified_time" content="2023-01-13T03:34:53.327Z"><meta property="article:author" content="NcPhoton"><meta property="article:tag" content="c"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021547794.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://icarus.xinsong.xyz/2023/01/12/C/3.%E3%80%90%E5%88%9D%E8%AF%86C%E8%AF%AD%E8%A8%80%E3%80%91%EF%BC%88%E4%B8%8A%EF%BC%89/"},"headline":"初识C语言上","image":["https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021547794.png","https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021548338.png","https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021548680.png","https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021548586.png","https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021548492.png","https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021548635.png","https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021549023.png","https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021549747.png","https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021549453.png"],"datePublished":"2023-01-12T13:22:57.000Z","dateModified":"2023-01-13T03:34:53.327Z","author":{"@type":"Person","name":"NcPhoton"},"publisher":{"@type":"Organization","name":"Nico's Blog","logo":{"@type":"ImageObject","url":"http://icarus.xinsong.xyz/img/logo.svg"}},"description":"💦选择与循环无论在生活中还是工作中，我们不可避免的要做出选择甚至日复一日地重复某件事情。  “人是铁饭是钢，一顿不吃饿得慌”，确实，我们每天都要重复做的一件事，那就是吃饭。 今天吃什么呢？干锅还是汤锅？这时，我们总是要做出一个选择。  思考：我们在生活中解决问题时，似乎总是离不开选择和循环，那么计算机解决一个问题是不是也是如此呢？ 下面开始介绍。"}</script><link rel="canonical" href="http://icarus.xinsong.xyz/2023/01/12/C/3.%E3%80%90%E5%88%9D%E8%AF%86C%E8%AF%AD%E8%A8%80%E3%80%91%EF%BC%88%E4%B8%8A%EF%BC%89/"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.svg" alt="Nico&#039;s Blog" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2023-01-12T13:22:57.000Z" title="2023/1/12 21:22:57">2023-01-12</time></span><span class="level-item">Updated&nbsp;<time dateTime="2023-01-13T03:34:53.327Z" title="2023/1/13 11:34:53">2023-01-13</time></span><span class="level-item"><a class="link-muted" href="/categories/C%E8%AF%AD%E8%A8%80/">C语言</a></span><span class="level-item">15 minutes read (About 2306 words)</span></div></div><h1 class="title is-3 is-size-4-mobile">初识C语言上</h1><div class="content"><h2 id="💦选择与循环"><a href="#💦选择与循环" class="headerlink" title="💦选择与循环"></a>💦选择与循环</h2><p>无论在生活中还是工作中，我们不可避免的要做出选择甚至日复一日地重复某件事情。</p>
+<blockquote>
+<p>“人是铁饭是钢，一顿不吃饿得慌”，确实，我们每天都要重复做的一件事，那就是吃饭。</p>
+<p>今天吃什么呢？干锅还是汤锅？这时，我们总是要做出一个选择。</p>
+</blockquote>
+<p><strong>思考：我们在生活中解决问题时，似乎总是离不开选择和循环，那么计算机解决一个问题是不是也是如此呢？</strong></p>
+<p>下面开始介绍。</p>
+<span id="more"></span>
+
+<h4 id="选择语句"><a href="#选择语句" class="headerlink" title="选择语句"></a>选择语句</h4><p>这与我们生活中很相似！</p>
+<p>接着我们来代码实现：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">select</span>    //枚举关键</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    Play_game,<span class="comment">//枚举出可能的情况，其实这里</span></span><br><span class="line">    Study_hard,<span class="comment">//可有可无的，感受更直观	</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> My_Choice = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;你会努力学习编程吗?请选择-&gt;(1.Study_hard or 0.Play_game)\n&quot;</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;请输入&quot;</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;My_Choice);</span><br><span class="line">    <span class="keyword">if</span> (My_Choice)  <span class="comment">//选择语句</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;成为大牛，走向人生巅峰！&quot;</span>);</span><br><span class="line">    <span class="keyword">else</span>  <span class="comment">//选择语句</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;碌碌无为&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>接着我们来做出我们的选择吧！</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021547794.png" alt="image-20220518223129630"></p>
+<p>这里可以看到我选择了<code>1.Study hard</code>,这里就在屏幕上打印出了：</p>
+<p>  <strong>成为大牛，走向人生巅峰！</strong></p>
+<p>我们再回到选择语句：</p>
+<p>if(judge)<br>    {true};<br>else<br>    {false};</p>
+<p>在if后面的（）里，如果判断为真，则执行true，否则执行false。</p>
+<p><strong>牢记：选择语句的条件判断中，0为假，非0为真！</strong></p>
+<h4 id="循环语句"><a href="#循环语句" class="headerlink" title="循环语句"></a>循环语句</h4><p>有些事必须一直做，比如我们日复一日地吃饭。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021548338.png" alt="image-20220518223136233"></p>
+<p>那么C语言如何实现循环呢？</p>
+<p>循环有三种：</p>
+<ul>
+<li>while语句</li>
+<li>for语句</li>
+<li>do while语句</li>
+</ul>
+<p>这里我们先只看while语句</p>
+<p>while语句相应的代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;开始学习！\n&quot;</span>);</span><br><span class="line">    <span class="type">int</span> study_time = <span class="number">0</span>;<span class="comment">//学习天数</span></span><br><span class="line">    <span class="keyword">while</span> (study_time &lt; <span class="number">5000</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        study_time++;<span class="comment">//重复学习</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(study_time&gt;=<span class="number">5000</span>)</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;已经闭关5000天，拿到好offer&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> <strong>小结：while后面的（）里的条件如果为真（非0）就进入循环体，为假（0）就结束循环。</strong></p>
+<hr>
+<h2 id="💦函数"><a href="#💦函数" class="headerlink" title="💦函数"></a>💦函数</h2><p>听到函数是不是很熟悉？但是此函数非彼函数。</p>
+<p><strong>C语言函数的定义：</strong></p>
+<blockquote>
+<p>dataType  functionName(){<br>&#x2F;&#x2F;body }</p>
+</blockquote>
+<ul>
+<li>dataType 是返回值类型，它可以是C语言中的任意数据类型，例如 int、float、char 等。</li>
+<li>functionName 是函数名，它是标识符的一种，命名规则和标识符相同。函数名后面的括号( )不能少。</li>
+<li>body 是函数体，它是函数需要执行的代码，是函数的主体部分。即使只有一个语句，函数体也要由{ }包围。</li>
+<li>如果有返回值，在函数体中使用 return 语句返回。return 出来的数据的类型要和 dataType 一样。</li>
+<li>（）里是函数的形式参数。</li>
+</ul>
+<p>来看个例子：</p>
+<p><strong>思考：如何利用C语言，实现一个计算两数之和的函数？</strong></p>
+<p>代码如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">ADD</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> x = <span class="number">0</span>;<span class="comment">//初始化</span></span><br><span class="line">    <span class="type">int</span> y = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;请输入x，y\n&quot;</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d %d&quot;</span>, &amp;x, &amp;y);<span class="comment">//输入x，y</span></span><br><span class="line">    <span class="type">int</span> sum = ADD(x, y);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;x+y=%d\n&quot;</span>, sum);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021548680.png" alt="image-20220518223145055"></p>
+<p>在我输入2 ，4后，可以看到2+4的结果被打印在了屏幕上。</p>
+<p><strong>总结：数据通过参数传递到函数内部进行处理，处理完成以后再通过返回值告知函数外部，并且可以简化代码，代码复用。</strong></p>
+<hr>
+<h2 id="💦数组"><a href="#💦数组" class="headerlink" title="💦数组"></a>💦数组</h2><p>创建一个变量我们可以对其赋值并使用，但如果我们想创建许多个类型相同的变量，该怎么做呢？</p>
+<p>如果还是一个一个地去创建，未免太过浪费时间。</p>
+<p><strong>思考：可不可以在内存中申请一块连续的空间，这块空间可以存放多个数据？</strong></p>
+<p>于是数组应运而生.</p>
+<blockquote>
+<p><strong>C语言中给了数组的定义：一组相同类型元素的集合</strong></p>
+</blockquote>
+<p><strong>数组的定义</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> arr[<span class="number">5</span>]=&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;;<span class="comment">//定义一个整型数组，最多放5个元素</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>数组的下标</strong></p>
+<blockquote>
+<p><strong>C语言规定：数组的每个元素都有一个下标，下标是从0开始的。</strong></p>
+</blockquote>
+<p>使用下标访问数组。</p>
+<p><strong>注意：下标是从0开始的。</strong></p>
+<p>比如：</p>
+<p><strong>数组的使用</strong></p>
+<blockquote>
+<p><strong>例：将数组arr的每一个元素打印在屏幕上。</strong></p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> i= <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> arr[<span class="number">5</span>] = &#123; <span class="number">4</span>,<span class="number">6</span>,<span class="number">8</span>,<span class="number">10</span>,<span class="number">12</span> &#125;;<span class="comment">//初始化数组</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">5</span>;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;a[%d]= %d\n&quot;</span>,i, arr[i]);<span class="comment">//打印元素</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021548586.png" alt="image-20220518223152659"></p>
+<p>利用循环，数组的每个元素的值就被打印在屏幕上了。</p>
+<hr>
+<h2 id="💦操作符"><a href="#💦操作符" class="headerlink" title="💦操作符"></a>💦操作符</h2><p>简单介绍，后面会着重讲</p>
+<h3 id="算术操作符"><a href="#算术操作符" class="headerlink" title="算术操作符"></a>算术操作符</h3><p>对两个数进行运算的符号（%是取余）</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+    -    *    /    %</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>例：1+2</p>
+</blockquote>
+<h3 id="移位操作符"><a href="#移位操作符" class="headerlink" title="移位操作符"></a>移位操作符</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;    &lt;&lt;</span><br></pre></td></tr></table></figure>
+
+<p> 移动的是二进制位</p>
+<blockquote>
+<p>例：将1左移一位得到多少？</p>
+</blockquote>
+<p>代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">char</span> a = <span class="number">1</span> &lt;&lt; <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, a);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021548492.png" alt="image-20220518223200441"></p>
+<p>结果为2，我们来分析分析：</p>
+<blockquote>
+<p>00000001    &#x2F;&#x2F;这是1的二进制</p>
+</blockquote>
+<p> 左移1位后：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021548635.png" alt="image-20220518223211804"></p>
+<p>最右边空出来一位补0<br>如下：</p>
+<blockquote>
+<p>00000010      &#x2F;&#x2F;将这个值赋值给a，也就是2</p>
+</blockquote>
+<h3 id="位操作符"><a href="#位操作符" class="headerlink" title="位操作符"></a>位操作符</h3><table>
+<thead>
+<tr>
+<th>位操作符</th>
+<th align="left">解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&amp;</td>
+<td align="left">按位与</td>
+</tr>
+<tr>
+<td>|</td>
+<td align="left">按位或</td>
+</tr>
+<tr>
+<td>^</td>
+<td align="left">按位异或</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>例：将3和5两个数按位与得到多少？</p>
+</blockquote>
+<p>代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">char</span> a = <span class="number">3</span>; <span class="comment">//赋值</span></span><br><span class="line">    <span class="type">char</span> b = <span class="number">5</span>;</span><br><span class="line">    <span class="type">char</span> c = a &amp; b;<span class="comment">//将3和5按位与的结构赋值给c</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;c=%d&quot;</span>, c);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021549023.png" alt="image-20220518223222459"></p>
+<p>c&#x3D;1<br>这是为什么呢？</p>
+<p>按照上面的规则分析：</p>
+<p>3的二进制：</p>
+<blockquote>
+<p>00000011</p>
+<p>5的二进制：</p>
+<p>00000101</p>
+</blockquote>
+<blockquote>
+<p><strong>按位与：对应二进制位置上的数字分别进行&amp;操作，然后按原位进行排列</strong></p>
+</blockquote>
+<p>(1  1)-&gt;1<br>(1  0)-&gt;0<br>(0  1)-&gt;0<br>(0  0)-&gt;0<br>就得到：</p>
+<blockquote>
+<p>00000001</p>
+</blockquote>
+<p>即为1.</p>
+<p>按位或和按位异或也是相似的方法。</p>
+<p><strong>总结：</strong></p>
+<ul>
+<li><strong>按位与：只要有一个0结果就为0，否则为1。</strong></li>
+<li><strong>按位或：只要有一个1结果就为1，否则为0。</strong></li>
+<li><strong>按位异或：相同为0，相异为1。</strong></li>
+</ul>
+<h3 id="赋值操作符"><a href="#赋值操作符" class="headerlink" title="赋值操作符"></a>赋值操作符</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">=  +=  -=  *=  /=  &amp;=  ^=  |=   &gt;&gt;=   &lt;&lt;= </span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>例：a+&#x3D;1是怎么运算的？</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> a = <span class="number">1</span>;</span><br><span class="line">    a += <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;a+=1后a=%d\n&quot;</span>, a);</span><br><span class="line">    a += <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;a+=1后a=%d\n&quot;</span>, a);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其实 <code>a+=1</code> 与 <code>a=a+1</code>是一样的，也就得到了上面的结果。</p>
+<p>其他的赋值运算符也都和+&#x3D;类似。</p>
+<h3 id="单目操作符"><a href="#单目操作符" class="headerlink" title="单目操作符"></a>单目操作符</h3><blockquote>
+<p>单目操作符：只有一个操作数。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th align="left">解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>!</td>
+<td align="left">逻辑反操作—&gt;采用逻辑运算</td>
+</tr>
+<tr>
+<td>-</td>
+<td align="left">负值</td>
+</tr>
+<tr>
+<td>+</td>
+<td align="left">正值</td>
+</tr>
+<tr>
+<td>&amp;</td>
+<td align="left">取地址</td>
+</tr>
+<tr>
+<td>sizeof</td>
+<td align="left">操作数的类型长度（不一定是数，也可以是类型)</td>
+</tr>
+<tr>
+<td>~</td>
+<td align="left">对一个数的二进制按位取反</td>
+</tr>
+<tr>
+<td>- -</td>
+<td align="left">前置、后置- -</td>
+</tr>
+<tr>
+<td>++</td>
+<td align="left">前置、后置++</td>
+</tr>
+<tr>
+<td>*</td>
+<td align="left">间接访问操作符（解引用操作符）</td>
+</tr>
+<tr>
+<td>(类型)</td>
+<td align="left">强制类型转换</td>
+</tr>
+</tbody></table>
+<h3 id="关系操作符"><a href="#关系操作符" class="headerlink" title="关系操作符"></a>关系操作符</h3><table>
+<thead>
+<tr>
+<th>符号</th>
+<th align="left">解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&gt;</td>
+<td align="left">比较大小</td>
+</tr>
+<tr>
+<td>&gt;&#x3D;</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td>&lt;</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td>&lt;&#x3D;</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td>!&#x3D;</td>
+<td align="left">判断是否相等</td>
+</tr>
+<tr>
+<td>&#x3D;&#x3D;</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td><strong>逻辑操作符</strong></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td>逻辑运算</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td><strong>运算符</strong></td>
+<td align="left"><strong>解释</strong></td>
+</tr>
+<tr>
+<td>&amp;&amp;</td>
+<td align="left">逻辑与</td>
+</tr>
+<tr>
+<td>| |</td>
+<td align="left">逻辑或</td>
+</tr>
+</tbody></table>
+<p><strong>牢记：进行逻辑运算时，只看真假。</strong></p>
+<p>我们知道非0为<font color=red>真</font>，0为<font color=green>假</font>。</p>
+<p>与高中数学一样，”与 “必须时两个都为真，结果为真；</p>
+<p>而 ”或“则只要其中一个为真，结果就为真。</p>
+<blockquote>
+<p>例：求1 &amp;&amp; 0  和  1 || 0的结果。</p>
+</blockquote>
+<p>代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> a = (<span class="number">1</span> &amp;&amp; <span class="number">0</span>);</span><br><span class="line">    <span class="type">int</span> b = (<span class="number">1</span> || <span class="number">0</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;a=%d,b=%d&quot;</span>, a, b);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021549747.png" alt="image-20220518223233668"></p>
+<p>与我们所想的完全一致。</p>
+<h3 id="条件操作符"><a href="#条件操作符" class="headerlink" title="条件操作符"></a>条件操作符</h3><blockquote>
+<p>exp1?exp2:exp3</p>
+<p>含义：如果exp1为真，则整个表达式结果为exp2，否则为exp3。（exp是表达式）</p>
+<p>例：max&#x3D;（a&gt;b?a:b)</p>
+</blockquote>
+<h3 id="逗号表达式"><a href="#逗号表达式" class="headerlink" title="逗号表达式"></a>逗号表达式</h3><blockquote>
+<p>例：exp1,exp2,exp3,…,expN</p>
+</blockquote>
+<p>逗号表达式也叫隔开表达式。</p>
+<p>（exp1,exp2,exp3,…,expN）这整个表达式的结果为最后一个exp，即expN。</p>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><ul>
+<li><strong>下标引用</strong><br>[ ]</li>
+</ul>
+<blockquote>
+<p>例：a[0]&#x3D;1;</p>
+</blockquote>
+<ul>
+<li><strong>函数调用</strong><br>()</li>
+</ul>
+<blockquote>
+<p>例：调用rand函数   rand();</p>
+</blockquote>
+<ul>
+<li><strong>结构体成员</strong><br><strong>.</strong><br>结构体变量名 <strong>.</strong> 成员名<br>-&gt;		<br> 结构体变量指针-&gt;成员名</li>
+</ul>
+<p>代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">book</span>        //创建一个结构体类型</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">int</span> price;</span><br><span class="line">    <span class="type">char</span> name[<span class="number">20</span>];</span><br><span class="line">    <span class="type">int</span> number;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">book</span> <span class="title">C</span> =</span> &#123; <span class="number">22</span>,<span class="string">&quot;C语言&quot;</span>,<span class="number">002233</span> &#125;;<span class="comment">//定义一个结构体变量 </span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">book</span>* <span class="title">pc</span> =</span> &amp;C;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;直接通过变量访问成员：\n&quot;</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot; price=%d\n&quot;</span>, C.price);<span class="comment">//通过.操作符访问变量成员</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot; name=%s\n&quot;</span>, C.name);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot; number=%d\n&quot;</span>, C.number);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;通过结构体变量的指针访问成员：\n&quot;</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot; price=%d\n&quot;</span>, pc-&gt;price);<span class="comment">//通过-&gt;操作符访问变量成员</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot; name=%s\n&quot;</span>, pc-&gt;name);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot; number=%d\n&quot;</span>, pc-&gt;number);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sxfinn/CDN/img/202212021549453.png" alt="image-20220518223241530"></p>
+<p>这里就简单介绍了两种访问方式，他们之间还是有一定差异，但最终的效果是一样的。</p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>初识C语言上</p><p><a href="http://icarus.xinsong.xyz/2023/01/12/C/3.【初识C语言】（上）/">http://icarus.xinsong.xyz/2023/01/12/C/3.【初识C语言】（上）/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>NcPhoton</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>2023-01-12</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>2023-01-13</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/c/">c</a></div><div class="notification is-danger">You need to set <code>install_url</code> to use ShareThis. Please set it in <code>_config.yml</code>.</div></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">Like this article? Support the author with</h3><div class="buttons is-centered"><a class="button donate" href="/" target="_blank" rel="noopener" data-type="afdian"><span class="icon is-small"><i class="fas fa-charging-station"></i></span><span>Afdian.net</span></a><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>Alipay</span><span class="qrcode"><img src="/" alt="Alipay"></span></a><a class="button donate" href="/" target="_blank" rel="noopener" data-type="buymeacoffee"><span class="icon is-small"><i class="fas fa-coffee"></i></span><span>Buy me a coffee</span></a><a class="button donate" href="/" target="_blank" rel="noopener" data-type="patreon"><span class="icon is-small"><i class="fab fa-patreon"></i></span><span>Patreon</span></a><div class="notification is-danger">You forgot to set the <code>business</code> or <code>currency_code</code> for Paypal. Please set it in <code>_config.yml</code>.</div><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>Wechat</span><span class="qrcode"><img src="/" alt="Wechat"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2023/01/12/C/4.%E3%80%90%E5%88%9D%E8%AF%86C%E8%AF%AD%E8%A8%80%E3%80%91%EF%BC%88%E4%B8%8B%EF%BC%89/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">初识C语言下</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2023/01/12/C/2.%E3%80%90%E5%88%9D%E8%AF%86C%E8%AF%AD%E8%A8%80%E3%80%91%E8%BD%AC%E4%B9%89%E5%AD%97%E7%AC%A6/"><span class="level-item">C语言转义字符</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">Comments</h3><div class="notification is-danger">You forgot to set the <code>shortname</code> for Disqus. Please set it in <code>_config.yml</code>.</div></div></div></div><!--!--><div class="column column-right is-4-tablet is-4-desktop is-4-widescreen  order-3 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">Catalogue</h3><ul class="menu-list"><li><a class="level is-mobile" href="#💦选择与循环"><span class="level-left"><span class="level-item">1</span><span class="level-item">💦选择与循环</span></span></a><ul class="menu-list"><ul class="menu-list"><li><a class="level is-mobile" href="#选择语句"><span class="level-left"><span class="level-item">1.1.1</span><span class="level-item">选择语句</span></span></a></li><li><a class="level is-mobile" href="#循环语句"><span class="level-left"><span class="level-item">1.1.2</span><span class="level-item">循环语句</span></span></a></li></ul></ul></li><li><a class="level is-mobile" href="#💦函数"><span class="level-left"><span class="level-item">2</span><span class="level-item">💦函数</span></span></a></li><li><a class="level is-mobile" href="#💦数组"><span class="level-left"><span class="level-item">3</span><span class="level-item">💦数组</span></span></a></li><li><a class="level is-mobile" href="#💦操作符"><span class="level-left"><span class="level-item">4</span><span class="level-item">💦操作符</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#算术操作符"><span class="level-left"><span class="level-item">4.1</span><span class="level-item">算术操作符</span></span></a></li><li><a class="level is-mobile" href="#移位操作符"><span class="level-left"><span class="level-item">4.2</span><span class="level-item">移位操作符</span></span></a></li><li><a class="level is-mobile" href="#位操作符"><span class="level-left"><span class="level-item">4.3</span><span class="level-item">位操作符</span></span></a></li><li><a class="level is-mobile" href="#赋值操作符"><span class="level-left"><span class="level-item">4.4</span><span class="level-item">赋值操作符</span></span></a></li><li><a class="level is-mobile" href="#单目操作符"><span class="level-left"><span class="level-item">4.5</span><span class="level-item">单目操作符</span></span></a></li><li><a class="level is-mobile" href="#关系操作符"><span class="level-left"><span class="level-item">4.6</span><span class="level-item">关系操作符</span></span></a></li><li><a class="level is-mobile" href="#条件操作符"><span class="level-left"><span class="level-item">4.7</span><span class="level-item">条件操作符</span></span></a></li><li><a class="level is-mobile" href="#逗号表达式"><span class="level-left"><span class="level-item">4.8</span><span class="level-item">逗号表达式</span></span></a></li><li><a class="level is-mobile" href="#其他"><span class="level-left"><span class="level-item">4.9</span><span class="level-item">其他</span></span></a></li></ul></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.svg" alt="Nico&#039;s Blog" height="28"></a><p class="is-size-7"><span>&copy; 2023 NcPhoton</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "This website uses cookies to improve your experience.",
+          dismiss: "Got it!",
+          allow: "Allow cookies",
+          deny: "Decline",
+          link: "Learn more",
+          policy: "Cookie Policy",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><script src="/live2d-widget/autoload.js"></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script></body></html>
